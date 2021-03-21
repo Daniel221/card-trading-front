@@ -1,0 +1,6 @@
+<div class="cardo" [style.background-image]="fromType(type)" (click)="hover($event)">
+    <div class="title" [style.background-color]="rgbaType(type)">{{title}}</div>
+    <img [src]="img"/>
+    <div class="desc" [style.background-color]="rgbaType(type)">{{description}}</div>
+    <!--img class="imgback" src="./cardbckg.png" alt=""-->
+</div>
