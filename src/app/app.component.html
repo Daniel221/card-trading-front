@@ -91,23 +91,21 @@
     alt="Angular Logo"
     src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg=="
   />
-  <span>Welcome</span>
+  <span>Card-trading</span>
     <div class="spacer"></div>
 </div>
 
+
 <div class="content" role="main">
-    <div *ngFor="let a of attributesKeys">
-      <app-form [(value)]="attributes[a].value" [type]="attributes[a].type"></app-form><br>
+  <div class="register-form container" >
+    <h1>Register</h1>
+    <div class="register-fields">
+    <div *ngFor="let a of attributesKeys" >
+      <app-register-form [(value)]="attributes[a].value" [type]="attributes[a].type" [label]="attributes[a].label"></app-register-form>
     </div>
-    <p *ngIf="attributes['password'].value!=attributes['password1'].value">Passwords not equal</p>
-    <button *ngIf="isFull" (click)="onSub()">Submit</button>
-    <div *ngFor="let u of users">
-      <div class="header"><h1>{{u.name.value}} {{u.lastname.value}}</h1></div>
-      <div class="body">
-        {{u.username.value}}<br>
-        {{u.color.value}}
-      </div>
+    <button class="btn btn-primary" (click)="createUser()">create user</button>
     </div>
+  </div>
     <div class="cardsss" [ngStyle]="{'grid-template-columns':genCols(nnn),'grid-template-rows':genRows()}"><!-- 'grid-template-columns': genCols(nnn) -->
       <div *ngFor="let c of cards">
         <app-card [id]="c.id" [title]="c.title" [description]="c.description" [img]="c.img" [type]="c.type"></app-card>
