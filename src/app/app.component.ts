@@ -13,15 +13,15 @@ export class AppComponent implements AfterContentInit {
 
   constructor(private http: HttpClient, private userService: UserService) { }
   title = 'adopt-me-front';
-  kks = ["name", "lastname", "password", "password1", "color"];
   attributes = {
     name: { value: '', label: 'Name' },
     lastname: { value: '', label: 'Last_Name' },
-    email: { value: '', label: 'email', type: 'email' },
+    email: { value: '', label: 'Email', type: 'email' },
     username: { value: '', label: 'Username' },
     password: { value: '', label: 'Password', type: 'password' },
     password1: { value: '', label: 'Confirm password', type: 'password' },
   }
+  matchingPassword = false;
   attributesKeys = Object.keys(this.attributes);
   isFull = false;
   users = [];
@@ -88,22 +88,30 @@ export class AppComponent implements AfterContentInit {
 
   ngAfterContentInit(): void {
     const { password, password1 } = this.attributes;
+    this.matchingPassword = password.value === password1.value;
     this.isFull = this.verifyAllFilled();
   }
 
-  onChange(prop: string, e: Event) {
+  onChange(property) {
     this.isFull = this.verifyAllFilled();
-    this[prop] = (<HTMLInputElement>e.target).value;
+    if (['Password', 'Confirm password'].includes(property)) {
+      this.verifyMatchingPasswords();
+      console.log(this.matchingPassword);
+    }
   }
 
   verifyAllFilled() {
-    return Object.keys(this.attributes).every((key) => this.attributes[key].value.length > 0)
+    return Object.keys(this.attributes).every((key) => {
+      this.attributes[key].value.length > 4;
+    })
   }
 
-  onSub() {
-    const { name: { value: name }, lastname: { value: lastname }, email: { value: email }, username: { value: username }, password: { value: password }, password1: { value: password1 } } = this.attributes;
-    this.users.push({ name: { value: name }, lastname: { value: lastname }, email: { value: email }, username: { value: username }, password: { value: password }, password1: { value: password1 } });
+  verifyMatchingPasswords() {
+    const { password, password1 } = this.attributes;
+    this.matchingPassword = password.value === password1.value;
   }
+
+
 
   nnn = 6;
   genCols(i) {
