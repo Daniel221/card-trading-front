@@ -32,6 +32,7 @@ export class AppComponent implements AfterContentInit {
 
   createUser() {
     console.log("posting user...");
+
     const user = {
       name: this.attributes.name.value,
       lastName: this.attributes.lastname.value,
@@ -93,6 +94,7 @@ export class AppComponent implements AfterContentInit {
   }
 
   onChange(property) {
+    console.log(this.isFull);
     this.isFull = this.verifyAllFilled();
     if (['Password', 'Confirm password'].includes(property)) {
       this.verifyMatchingPasswords();
@@ -101,17 +103,13 @@ export class AppComponent implements AfterContentInit {
   }
 
   verifyAllFilled() {
-    return Object.keys(this.attributes).every((key) => {
-      this.attributes[key].value.length > 4;
-    })
+    return Object.keys(this.attributes).every((key) => this.attributes[key].value.length > 4)
   }
 
   verifyMatchingPasswords() {
     const { password, password1 } = this.attributes;
     this.matchingPassword = password.value === password1.value;
   }
-
-
 
   nnn = 6;
   genCols(i) {
