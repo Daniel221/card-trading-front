@@ -101,9 +101,11 @@
     <h1>Register</h1>
     <div class="register-fields">
     <div *ngFor="let a of attributesKeys" >
-      <app-register-form [(value)]="attributes[a].value" [type]="attributes[a].type" [label]="attributes[a].label"></app-register-form>
+      <app-register-form [(value)]="attributes[a].value" [type]="attributes[a].type" [label]="attributes[a].label"
+      (isFilledChanged)="onChange($event)"></app-register-form>
     </div>
-    <button class="btn btn-primary" (click)="createUser()">create user</button>
+    <p *ngIf="!matchingPassword">passwords do not match</p>
+    <button class="btn btn-primary" (click)="createUser()" [ngStyle]="{'pointer-events':matchingPassword && isFull? 'auto' : 'none'}">create user</button>
     </div>
   </div>
     <div class="cardsss" [ngStyle]="{'grid-template-columns':genCols(nnn),'grid-template-rows':genRows()}"><!-- 'grid-template-columns': genCols(nnn) -->
