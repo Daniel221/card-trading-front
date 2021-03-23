@@ -1,0 +1,22 @@
+<button (click)="onLoginForm()">Iniciar sesion</button><br>
+
+<div *ngIf="displayLoginForm; then showLoginForm; else hideLoginForm" >
+</div>
+
+<ng-template #showLoginForm>
+    <p>Correo</p>
+    <input #email type="text" [value]="exampleEmail"> <br>
+
+    <p>Contraseña</p>
+    <input type="text" pass=""> <br>
+
+    <button (click)="onSubmit(email.value)">Submit</button>
+    <p>{{ status }}</p>
+    <div>
+        <button type="button" id='google-login'>Login with google</button>
+    </div>
+</ng-template>
+
+<ng-template #hideLoginForm>
+</ng-template>
+
