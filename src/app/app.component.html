@@ -110,7 +110,8 @@
       (isFilledChanged)="onChange($event)"></app-register-form>
     </div>
     <p *ngIf="!matchingPassword">passwords do not match</p>
-    <button class="btn btn-primary" (click)="createUser()" [ngStyle]="{'pointer-events':matchingPassword && isFull? 'auto' : 'none'}">create user</button>
+      <button class="btn btn-primary" (click)="createUser()" 
+      [ngStyle]="{'pointer-events':matchingPassword && isFull? 'auto' : 'none'}">create user</button>
     </div>
   </div>
     <div class="cardsss" [ngStyle]="{'grid-template-columns':genCols(nnn),'grid-template-rows':genRows()}"><!-- 'grid-template-columns': genCols(nnn) -->
