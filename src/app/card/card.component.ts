@@ -16,7 +16,7 @@ export class CardComponent {
   constructor() { }
 
   fromType(t){
-    return `url('./${t}.png')`;
+    return `url('../../assets/bgs/${t}.png')`;
   }
   rgbaType(t){
     return `rgba(${colors[t][0]},${colors[t][1]},${colors[t][2]}, 0.75)`;
