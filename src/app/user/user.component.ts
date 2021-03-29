@@ -9,11 +9,11 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class UserComponent implements AfterContentInit {
   user;
+  password='';
   attributes = {
     name: { value: '', label: 'Name' },
     lastname: { value: '', label: 'Last_Name' },
     username: { value: '', label: 'Username' },
-    //password: { value: '', label: 'Password', type: 'password' },
     img:{value:'',label:'Image url'}
   };
   attributesKeys = Object.keys(this.attributes);
@@ -30,9 +30,7 @@ export class UserComponent implements AfterContentInit {
   }
 
   createUser() {
-    const pass=prompt("Introduzca su contraseña actual para continuar.");
-    if(pass!=this.user.password){
-      console.log(pass,this.user.password);
+    if(this.password!=this.user.password){
       this.regMsg={msg:"Contraseña incorrecta.",class:'text-danger'};
       return;
     }
@@ -52,6 +50,10 @@ export class UserComponent implements AfterContentInit {
       console.log(error);
       this.regMsg={msg:"Error.",class:'text-danger'};
     })
+  }
+
+  onChanged(e){
+    this.password=e.target.value;
   }
 
 }
