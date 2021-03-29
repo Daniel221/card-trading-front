@@ -1,0 +1,26 @@
+<div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Registrarse</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="register-form container" >
+          <div class="register-fields">
+            <div *ngFor="let a of attributesKeys" >
+            <app-register-form [(value)]="attributes[a].value" [type]="attributes[a].type" [label]="attributes[a].label"
+            (isFilledChanged)="onChange($event)"></app-register-form>
+            </div>
+          </div>
+          <p *ngIf="!matchingPassword" class="text-danger">passwords do not match</p>
+          <div *ngIf="regMsg" [ngClass]="regMsg.class">{{regMsg.msg}}</div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button class="btn btn-primary" (click)="createUser()" [ngStyle]="{'pointer-events':matchingPassword && isFull? 'auto' : 'none'}">Registrarse</button>
+      </div>
+    </div>
+</div>

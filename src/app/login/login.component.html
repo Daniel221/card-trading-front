@@ -1,20 +1,38 @@
-<button (click)="onLoginForm()">Iniciar sesion</button><br>
-
 <div *ngIf="displayLoginForm; then showLoginForm; else hideLoginForm" >
 </div>
 
-<ng-template #showLoginForm>
-    <p>Correo</p>
-    <input #email type="text" [value]="exampleEmail"> <br>
 
-    <p>Contraseña</p>
-    <input type="text" pass=""> <br>
-
-    <button (click)="onSubmit(email.value)">Submit</button>
-    <p>{{ status }}</p>
-    <div>
-        <button type="button" id='google-login'>Login with google</button>
+<div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Iniciar Sesión</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="register-form container" >
+            <div class="register-fields">
+                <label>Correo</label><br>
+                <input class="form-control" #email type="text" [placeholder]="exampleEmail"> <br>
+            
+                <label>Contraseña</label><br>
+                <input class="form-control" type="password" pass=""> <br>
+            </div>
+        </div>
+        <div>¿No tienes cuenta? <a href="" data-toggle="modal" data-target="#registerModal" data-dismiss="modal">!Regístrate aquí!</a></div>
+        <!-- <div>{{ status }}</div> -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button (click)="onSubmit(email.value)" class="btn btn-primary">Iniciar sesión</button>
+        <button type="button" class="btn btn-danger" id='google-login'>Continuar con Google</button>
+      </div>
     </div>
+</div>
+
+<ng-template #showLoginForm>
+
 </ng-template>
 
 <ng-template #hideLoginForm>

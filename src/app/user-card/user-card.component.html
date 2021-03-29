@@ -1,0 +1,6 @@
+<div class="userCard">
+    <img [src]="user.img?user.img:'https://i1.sndcdn.com/avatars-000310902564-g2unlt-t240x240.jpg'" alt="" width="15%"/>
+    <h1>{{user.username}}</h1>
+    <div class="spacer"></div>
+    <a [routerLink]="'/user/'+user.userid"><button class="btn btn-primary">detalles</button></a>
+</div>

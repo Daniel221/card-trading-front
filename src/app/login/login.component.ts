@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class LoginComponent implements OnInit {
 
   status = "no se ha enviado";
-  exampleEmail = "example@...";
+  exampleEmail = "ex@mp.le";
   displayLoginForm = false;
   constructor() { }
 
