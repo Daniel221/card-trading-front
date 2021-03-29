@@ -13,39 +13,11 @@ export class AppComponent implements AfterContentInit {
 
   constructor(private http: HttpClient, private userService: UserService) { }
   title = 'adopt-me-front';
-  attributes = {
-    name: { value: '', label: 'Name' },
-    lastname: { value: '', label: 'Last_Name' },
-    email: { value: '', label: 'Email', type: 'email' },
-    username: { value: '', label: 'Username' },
-    password: { value: '', label: 'Password', type: 'password' },
-    password1: { value: '', label: 'Confirm password', type: 'password' },
-  }
-  matchingPassword = false;
-  attributesKeys = Object.keys(this.attributes);
-  isFull = false;
   users = [];
 
   getUsers() {
     this.http.get('http://localhost:3000/u/40000').subscribe((user) => console.log(user));
   }
-
-  createUser() {
-    console.log("posting user...");
-
-    const user = {
-      name: this.attributes.name.value,
-      lastName: this.attributes.lastname.value,
-      username: this.attributes.email.value,
-      email: this.attributes.email.value,
-      password: this.attributes.password.value
-    }
-
-    this.http.post<any>('http://localhost:3000/u', user).subscribe(data => {
-      console.log(data);
-    })
-  }
-
 
   cards = [
     { id: 0, title: 'Calabaza', description: 'Una calabaza naranja.', img: 'https://s03.s3c.es/imag/_v0/770x420/a/b/3/600x400_calabaza-770.jpg', type: 0 },
@@ -88,27 +60,6 @@ export class AppComponent implements AfterContentInit {
 
 
   ngAfterContentInit(): void {
-    const { password, password1 } = this.attributes;
-    this.matchingPassword = password.value === password1.value;
-    this.isFull = this.verifyAllFilled();
-  }
-
-  onChange(property) {
-    console.log(this.isFull);
-    this.isFull = this.verifyAllFilled();
-    if (['Password', 'Confirm password'].includes(property)) {
-      this.verifyMatchingPasswords();
-      console.log(this.matchingPassword);
-    }
-  }
-
-  verifyAllFilled() {
-    return Object.keys(this.attributes).every((key) => this.attributes[key].value.length > 4)
-  }
-
-  verifyMatchingPasswords() {
-    const { password, password1 } = this.attributes;
-    this.matchingPassword = password.value === password1.value;
   }
 
   nnn = 6;
