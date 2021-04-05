@@ -48,7 +48,8 @@ p {
   background-color: #1976d2;
   color: white;
   font-weight: 600;
-  a{
+
+  a {
     color: white;
     text-decoration: none;
   }
@@ -65,7 +66,7 @@ p {
   align-items: center;
 }
 
-body{
+body {
   background-color: #333;
 }
 
@@ -73,7 +74,7 @@ body{
 /* Responsive Styles */
 @media screen and (max-width: 767px) {
 
-  .card-container > *:not(.circle-link) ,
+  .card-container>*:not(.circle-link),
   .terminal {
     width: 100%;
   }
@@ -100,7 +101,14 @@ body{
   }
 }
 
-.navButts{
+.navButts {
   display: flex;
   justify-content: space-evenly;
+}
+
+#chat-box {
+  position: absolute;
+  right: 100px;
+  bottom: 0px;
+  padding: 10px 20px;
 }
