@@ -14,7 +14,7 @@ const routes:Routes=[
     {path:'userlist',component:UserListComponent},
     {path:'catalogue',component:CatalogueComponent},
     {path:'info',component:InfoComponent},
-    {path:'card',component:CardDetailsComponent}
+    {path:'card/:id',component:CardDetailsComponent}
 ];
 
 @NgModule({
