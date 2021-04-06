@@ -14,6 +14,7 @@ export class AppComponent implements AfterContentInit {
   constructor(private http: HttpClient, private userService: UserService) { }
   title = 'adopt-me-front';
   users = [];
+  showChat = false;
 
   getUsers() {
     this.http.get('http://localhost:3000/u/40000').subscribe((user) => console.log(user));
@@ -73,5 +74,9 @@ export class AppComponent implements AfterContentInit {
     let i = this.cards.length / 4, rows = '', f = -2.0 / 19.0 * this.cards.length + 6.0;
     for (let c = 0; c < i; c++) rows += `${f * (i + 0.5)}em `;
     return rows;
+  }
+
+  displayChat() {
+    this.showChat = true;
   }
 }

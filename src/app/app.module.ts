@@ -18,7 +18,7 @@ import { UserListComponent } from './user-list/user-list.component';
 import { UserCardComponent } from './user-card/user-card.component';
 import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
-
+import { ChatInboxComponent } from './chat-inbox/chat-inbox.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +33,8 @@ import { AuthGuard } from './auth.guard';
     InfoComponent,
     CardDetailsComponent,
     UserListComponent,
-    UserCardComponent
+    UserCardComponent,
+    ChatInboxComponent
   ],
   imports: [
     BrowserModule,
