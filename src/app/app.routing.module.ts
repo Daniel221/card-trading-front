@@ -16,7 +16,7 @@ const routes:Routes=[
     {path:'userlist',component:UserListComponent, canActivate: [AuthGuard]},
     {path:'catalogue',component:CatalogueComponent},
     {path:'info',component:InfoComponent},
-    {path:'card',component:CardDetailsComponent},
+    {path:'card/:id',component:CardDetailsComponent},
     {path: 'login', component:LoginComponent}
 ];
 

@@ -1,1 +1,5 @@
-<p>catalogue works!</p>
+<div class="cardsss" [ngStyle]="{'grid-template-columns':genCols(nnn)}">
+    <div *ngFor="let c of cards">
+        <app-card [id]="c.cardid" [title]="c.title" [description]="c.description" [img]="c.img" [type]="c.type"></app-card>
+    </div>
+</div>

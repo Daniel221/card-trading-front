@@ -4,6 +4,8 @@
     background-color: gray;
     img{
         border-radius: 100%;
+        width: 15%;
+        aspect-ratio: 1;
     }
     div{
         justify-content: center;
@@ -18,6 +20,23 @@
 }
 .userCards{
     height: -webkit-fill-available;
-    width: 90%;
-    background-color: red;
+    justify-content: space-evenly;
+    justify-items: center;
+    align-items: center;
+    width: 100%;
+    height: 35em;
+    display: grid;
+    background-color: lightgray;
+    grid-template-rows: auto;
+    overflow-y: scroll;
+    app-card{
+        margin: 1%;
+    }
+}
+.noUserCards{
+    height: -webkit-fill-available;
+    background-color: lightgray;
+    width: 100%;
+    font-weight: bold;
+    text-align: center;
 }

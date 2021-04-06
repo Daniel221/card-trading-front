@@ -23,7 +23,7 @@ export class CardComponent {
   }
 
   hover(e){
-    console.log(e)
+    window.location.href='/card/'+this.id;
   }
 
 }
