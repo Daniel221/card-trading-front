@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService} from '../auth.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -7,18 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  status = "no se ha enviado";
   exampleEmail = "ex@mp.le";
-  displayLoginForm = false;
-  constructor() { }
+  loginUserData:any={};
+  logMsg;
+  constructor(private _auth: AuthService, private _router: Router) { }
 
   ngOnInit(): void {
   }
-  onLoginForm(){
-    this.displayLoginForm = true;
-  }
-  onSubmit(email){
-    console.log(email);
-    this.status = "se ha enviado";
+  LoginUser(){
+    this._auth.loginUser(this.loginUserData).subscribe(
+      data => {
+        console.log(data);
+        localStorage.setItem('token', data.token);
+        this._router.navigate(['/userlist']);
+      },error=>{
+        this.logMsg={msg:"Usuario o contraseña incorrectos.",class:'text-danger'};
+      })
   }
 }

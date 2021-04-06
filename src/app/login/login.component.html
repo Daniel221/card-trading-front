@@ -1,7 +1,3 @@
-<div *ngIf="displayLoginForm; then showLoginForm; else hideLoginForm" >
-</div>
-
-
 <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -14,10 +10,10 @@
         <div class="register-form container" >
             <div class="register-fields">
                 <label>Correo</label><br>
-                <input class="form-control" #email type="text" [placeholder]="exampleEmail"> <br>
+                <input [(ngModel)]='loginUserData .email' name='email' class="form-control" #email type="text" [placeholder]="exampleEmail" required> <br>
             
                 <label>Contraseña</label><br>
-                <input class="form-control" type="password" pass=""> <br>
+                <input  [(ngModel)]='loginUserData .password' name='password' class="form-control" type="password" pass="" required> <br>
             </div>
         </div>
         <div>¿No tienes cuenta? <a href="" data-toggle="modal" data-target="#registerModal" data-dismiss="modal">!Regístrate aquí!</a></div>
@@ -25,16 +21,8 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button (click)="onSubmit(email.value)" class="btn btn-primary">Iniciar sesión</button>
+        <button (click)="LoginUser()" class="btn btn-primary">Iniciar sesión</button>
         <button type="button" class="btn btn-danger" id='google-login'>Continuar con Google</button>
       </div>
     </div>
 </div>
-
-<ng-template #showLoginForm>
-
-</ng-template>
-
-<ng-template #hideLoginForm>
-</ng-template>
-
