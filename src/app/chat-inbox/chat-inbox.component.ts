@@ -1,5 +1,6 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { io } from 'socket.io-client';
+import { Component, Input, OnInit, Output, EventEmitter, OnDestroy, ViewChild } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { SocketService } from '../shared/socket.service';
 
 const SOCKET_ENDPOINT = 'localhost:3000';
 
@@ -8,25 +9,30 @@ const SOCKET_ENDPOINT = 'localhost:3000';
   templateUrl: './chat-inbox.component.html',
   styleUrls: ['./chat-inbox.component.less']
 })
-export class ChatInboxComponent implements OnInit {
+export class ChatInboxComponent implements OnInit, OnDestroy {
   @Input() showChat = true;
   @Output() showChatChange = new EventEmitter<boolean>()
-  socket;
   message: string;
   username: string;
   receiver: string;
-  constructor() { }
+  isLoggedIn: boolean = false;
+  subscription: Subscription;
+  messages: string[] = ["mensajes para todos"];
+
+  constructor(private socketService: SocketService) { }
 
   ngOnInit(): void {
-    //this.setupSocketConnection();
+    this.subscription = this.socketService.getMessage().subscribe(data => {
+      this.messages.push(data)
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   SendMessage() {
-    this.socket.emit('send_message', {
-      content: this.message,
-      senderChatID: this.username,
-      receiverChatID: this.receiver
-    });
+    this.socketService.sendMessage(this.message, this.receiver, this.username);
     const element = document.createElement('li');
     element.innerHTML = this.message;
     element.style.background = 'white';
@@ -39,21 +45,17 @@ export class ChatInboxComponent implements OnInit {
 
   setupSocketConnection() {
     document.getElementById('conn-msg').innerHTML = 'conected';
-    this.socket = io({
-      query: {
-        username: this.username,
-      }
-    });//when building to production, leave the parenthesis in blank, delete SOCKET_ENDPOINT var
-    this.socket.on('receive_message', (data) => {
-      if (data.content) {
-        const element = document.createElement('li');
-        element.innerHTML = data.content;
-        element.style.background = 'white';
-        element.style.padding = '15px 30px';
-        element.style.margin = '10px';
-        document.getElementById('message-list').appendChild(element);
-      }
-    });
+    this.socketService.login('Pedro', this.username);
+    // this.socket.on('receive_message', (data) => {
+    //   if (data.content) {
+    //     const element = document.createElement('li');
+    //     element.innerHTML = data.content;
+    //     element.style.background = 'white';
+    //     element.style.padding = '15px 30px';
+    //     element.style.margin = '10px';
+    //     document.getElementById('message-list').appendChild(element);
+    //   }
+    // });
   }
 
   closeChat() {

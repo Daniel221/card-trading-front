@@ -16,9 +16,11 @@ import { CardDetailsComponent } from './card-details/card-details.component';
 import { AppRoutingModule } from './app.routing.module';
 import { UserListComponent } from './user-list/user-list.component';
 import { UserCardComponent } from './user-card/user-card.component';
+import { ChatInboxComponent } from './chat-inbox/chat-inbox.component';
+
 import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
-import { ChatInboxComponent } from './chat-inbox/chat-inbox.component';
+import { SocketService } from './shared/socket.service';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,7 @@ import { ChatInboxComponent } from './chat-inbox/chat-inbox.component';
     AppRoutingModule,
     FormsModule
   ],
-  providers: [AuthService, AuthGuard],
+  providers: [AuthService, AuthGuard, SocketService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
