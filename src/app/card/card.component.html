@@ -1,6 +1,9 @@
-<div class="cardo" [style.background-image]="fromType(type)" (click)="hover($event)">
-    <div class="title" [style.background-color]="rgbaType(type)">{{title}}</div>
-    <img [src]="img"/>
-    <div class="desc" [style.background-color]="rgbaType(type)">{{description}}</div>
+<div class="cardo" [style.background-image]="fromType(type)">
+    <!-- (click)="hover($event)" -->
+    <a [routerLink]="'/card/'+id">
+        <div class="title" [style.background-color]="rgbaType(type)">{{title}}</div>
+        <img [src]="img"/>
+        <div class="desc" [style.background-color]="rgbaType(type)">{{description}}</div>
+    </a>
     <!--img class="imgback" src="./cardbckg.png" alt=""-->
 </div>

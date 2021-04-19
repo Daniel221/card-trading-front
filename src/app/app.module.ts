@@ -17,6 +17,7 @@ import { AppRoutingModule } from './app.routing.module';
 import { UserListComponent } from './user-list/user-list.component';
 import { UserCardComponent } from './user-card/user-card.component';
 import { ChatInboxComponent } from './chat-inbox/chat-inbox.component';
+import { ContactListComponent } from './contact-list/contact-list.component';
 
 import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
@@ -38,7 +39,8 @@ import { HeaderComponent } from './header/header.component';
     UserListComponent,
     UserCardComponent,
     ChatInboxComponent,
-    HeaderComponent
+    HeaderComponent,
+    ContactListComponent
   ],
   imports: [
     BrowserModule,
