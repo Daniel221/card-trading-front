@@ -1,6 +1,7 @@
 import { AfterContentInit, Component } from '@angular/core';
 import { UserService } from './shared/user.service';
 import { HttpClient } from '@angular/common/http';
+import { AuthService } from  './auth.service';
 
 
 @Component({
@@ -11,7 +12,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AppComponent implements AfterContentInit {
 
-  constructor(private http: HttpClient, private userService: UserService) { }
+  constructor(private http: HttpClient, private userService: UserService, public _authService: AuthService) { }
   title = 'adopt-me-front';
   users = [];
 

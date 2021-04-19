@@ -18,6 +18,9 @@ import { UserListComponent } from './user-list/user-list.component';
 import { UserCardComponent } from './user-card/user-card.component';
 import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
+import { TokenInterceptorService } from './token-interceptor.service'
+import {SocialAuthServiceConfig} from 'angularx-social-login';
+import {SocialLoginModule, GoogleLoginProvider} from 'angularx-social-login';
 
 
 @NgModule({
@@ -39,9 +42,27 @@ import { AuthGuard } from './auth.guard';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    SocialLoginModule
   ],
-  providers: [AuthService, AuthGuard],
+  providers: [AuthService, AuthGuard,
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider('85332580143-t99f1q0ao3577q9d7mqtc0oiqttgrmog.apps.googleusercontent.com')
+          }
+        ]
+      } as SocialAuthServiceConfig,
+    }
+  /*{
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptorService,
+    multi: true
+  }*/],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
