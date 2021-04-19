@@ -12,7 +12,7 @@ import { HttpClient } from '@angular/common/http';
 export class AppComponent implements AfterContentInit {
 
   constructor(private http: HttpClient, private userService: UserService) { }
-  title = 'adopt-me-front';
+  title = 'Card-Trading';
   users = [];
   showChat = false;
 

@@ -1,0 +1,29 @@
+<nav class="navbar navbar-expand-lg navbar-light sticky-top header">
+  <a class="navbar-brand" href="#">Card Trading</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li *ngFor="let item of menuItems" class="nav-item">
+        <a routerLink="{{item.link}}" class="nav-link navbar-link">{{item.name}}</a>
+      </li>
+    </ul>
+
+    </div>
+    <div class="flex-grow-1 text-right ml-auto collapse navbar-collapse justify-content-end">
+      <ul class="navbar-nav mr-3 pr-30">
+        <li class="nav-item" *ngIf="!isLogged">
+          <a class="nav-link navbar-link" data-toggle="modal" data-target="#loginModal"><button class="btn btn-outline-info">Login/Register</button></a>
+        </li>
+        <li class="nav-item" *ngIf="isLogged">
+          <a class="nav-link navbar-link icons" href=""><i class="fas fa-bell"></i></a>
+        </li>
+        <li class="nav-item" *ngIf="isLogged">
+          <a class="nav-link navbar-link icons" href=""><i class="fas fa-user"></i></a>
+        </li>
+      </ul>
+    </div>
+  
+</nav>
+

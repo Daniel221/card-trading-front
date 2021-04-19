@@ -21,6 +21,7 @@ import { ChatInboxComponent } from './chat-inbox/chat-inbox.component';
 import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
 import { SocketService } from './shared/socket.service';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { SocketService } from './shared/socket.service';
     CardDetailsComponent,
     UserListComponent,
     UserCardComponent,
-    ChatInboxComponent
+    ChatInboxComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
