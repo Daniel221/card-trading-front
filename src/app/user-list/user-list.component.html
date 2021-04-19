@@ -1,3 +1,23 @@
-<div *ngFor="let user of users">
-    <app-user-card [user]="user"></app-user-card>
+<nav class="navbar navbar-light bg-light justify-content-center" style="background-color:transparent!important;color:transparent;">
+    <form class="form-inline" >
+        <input class="form-control mr-sm-2" style="width:60vmax;" type="search" placeholder="Usuario" aria-label="Search" (input)="updateFilter($event)" (keyup.enter)="applyFilter()">
+        <button class="btn btn-primary my-2 my-sm-0" type="button" (click)="applyFilter()">Buscar</button>
+    </form>
+</nav>
+<div class="users">
+    <div *ngFor="let user of usersInPage">
+        <app-user-card [user]="user"></app-user-card>
+    </div>
 </div>
+<br>
+<nav aria-label="search items pages">
+  <ul class="pagination justify-content-center">
+    <li [ngClass]="['page-item'+(currPage<1?' disabled':'')]"><a class="page-link" (click)="prevPage(1)" tabindex="-1" aria-disabled="true">Anterior</a></li>
+    <li class="page-item" [ngStyle]="{'display':currPage<2?'none':'initial'}"><a class="page-link" (click)="prevPage(2)">{{currPage-1}}</a></li>
+    <li class="page-item" [ngStyle]="{'display':currPage<1?'none':'initial'}"><a class="page-link" (click)="prevPage(1)">{{currPage}}</a></li>
+    <li class="page-item active" aria-current="page"><a class="page-link">{{currPage+1}}</a></li>
+    <li class="page-item" [ngStyle]="{'display':currPage>users.length/usersPerPage-2?'none':'initial'}"><a class="page-link" (click)="nextPage(1)">{{currPage+2}}</a></li>
+    <li class="page-item" [ngStyle]="{'display':currPage>users.length/usersPerPage-3?'none':'initial'}"><a class="page-link" (click)="nextPage(2)">{{currPage+3}}</a></li>
+    <li [ngClass]="['page-item'+(currPage>users.length/usersPerPage-2?' disabled':'')]"><a class="page-link" (click)="nextPage(1)">Siguiente</a></li>
+  </ul>
+</nav>
