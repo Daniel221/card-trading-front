@@ -22,8 +22,8 @@ import { ContactListComponent } from './contact-list/contact-list.component';
 import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
 import { TokenInterceptorService } from './token-interceptor.service'
-import {SocialAuthServiceConfig} from 'angularx-social-login';
-import {SocialLoginModule, GoogleLoginProvider} from 'angularx-social-login';
+import { SocialAuthServiceConfig } from 'angularx-social-login';
+import { SocialLoginModule, GoogleLoginProvider } from 'angularx-social-login';
 
 import { SocketService } from './shared/socket.service';
 import { HeaderComponent } from './header/header.component';
