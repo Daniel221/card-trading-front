@@ -14,6 +14,9 @@
 <div class="content" role="main">
   
   <router-outlet></router-outlet>
+  <div id="contact-list">
+    <app-contact-list></app-contact-list>
+  </div>
   <div id="chat-box">
     <button (click)="displayChat()" *ngIf="!showChat" type="button" class="btn btn-success">chat</button>
     <app-chat-inbox *ngIf="showChat" [(showChat)]="showChat"></app-chat-inbox>
