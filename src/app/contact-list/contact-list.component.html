@@ -1,6 +1,6 @@
 <div class="contacts">
     <h1>Contactos</h1>
     <div class="contact" *ngFor="let u of users">
-        <app-user-card [user]="u" [removable]="true"></app-user-card>
+        <app-user-card [user]="u" [removable]="id?-1:u.userid" [extra]="token"></app-user-card>
     </div>
 </div>

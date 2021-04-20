@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,10 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class UserCardComponent implements OnInit {
   @Input() user;
-  @Input() removable:boolean=false;
+  @Input() removable:number=-1;
+  @Input() extra;
 
-  constructor() { }
+  constructor(private http:HttpClient) { }
 
   ngOnInit(): void {
   }
@@ -17,6 +19,13 @@ export class UserCardComponent implements OnInit {
   hdrSize(b){
     if(!b) return window.location.href.includes("userlist")?'3em':'smaller';
     return window.location.href.includes("userlist")?'1.5em':'xx-small';
+  }
+
+  remove(){
+    this.http.delete<any>('http://localhost:3000/u/contacts?oid='+this.removable+'&id='+this.extra).subscribe(data=>{
+      alert("Contacto eliminado");
+      location.reload();
+    });
   }
 
 }
