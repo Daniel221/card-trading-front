@@ -8,7 +8,8 @@ import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/cor
 })
 export class ContactListComponent implements OnInit,OnChanges {
   users:any[];
-  @Input() id:number;
+  @Input() id:number=undefined;
+  token;
 
   constructor(private http:HttpClient) { }
 
@@ -21,7 +22,16 @@ export class ContactListComponent implements OnInit,OnChanges {
   }
 
   getContacts(){
-    this.http.get<any>('http://localhost:3000/u/contacts/'+this.id).subscribe(data=>this.users=data);
+    if(!this.id){
+      this.http.get<any>('http://localhost:3000/login?token='+localStorage.getItem("token")).subscribe(res=>{
+        this.http.get<any>('http://localhost:3000/u/contacts/'+res.userid).subscribe(data=>{
+          this.users=data
+          this.token=res.userid;
+        });
+      });
+    }else{
+      this.http.get<any>('http://localhost:3000/u/contacts/'+this.id).subscribe(data=>this.users=data);
+    }
   }
 
 }

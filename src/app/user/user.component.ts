@@ -10,6 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 export class UserComponent implements AfterContentInit {
   user;
   userid;
+  myid;
   password='';
   attributes = {
     name: { value: '', label: 'Name' },
@@ -27,7 +28,9 @@ export class UserComponent implements AfterContentInit {
       this.userid=p.id;
       this.http.get<any>('http://localhost:3000/u/'+this.userid).subscribe(data=>this.user=data);
       this.http.get<any>(`http://localhost:3000/c?user=${this.userid}`).subscribe(data=>this.userCards=data);
-      console.log(localStorage.getItem("token"));
+      this.http.get<any>('http://localhost:3000/login?token='+localStorage.getItem("token")).subscribe(res=>{
+        this.myid=res.userid;
+      });
     });
   }
 
@@ -67,6 +70,15 @@ export class UserComponent implements AfterContentInit {
     let s = '';
     for (let c = 0; c < i; c++)s += `${2 * (i + 0.5)}em `;
     return s;
+  }
+
+  addFrend(){
+    this.http.post<any>('http://localhost:3000/u/contacts/'+this.userid,{id:this.myid}).subscribe(data=>{
+      alert("Contacto añadido");
+      location.reload();
+    },err=>{
+      alert(err.error.error);
+    });
   }
 
 }
