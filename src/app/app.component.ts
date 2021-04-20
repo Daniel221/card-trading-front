@@ -1,8 +1,7 @@
 import { AfterContentInit, Component, OnInit } from '@angular/core';
 import { UserService } from './shared/user.service';
 import { HttpClient } from '@angular/common/http';
-import { AuthService } from './auth.service';
-
+import { AuthService } from  './auth.service';
 
 
 @Component({
@@ -13,7 +12,7 @@ import { AuthService } from './auth.service';
 })
 export class AppComponent implements AfterContentInit, OnInit {
 
-  constructor(private http: HttpClient, private userService: UserService, private _authService: AuthService) { }
+  constructor(private http: HttpClient, private userService: UserService, public _authService: AuthService) { }
   title = 'Card-Trading';
   users = [];
   showChat: boolean = false;

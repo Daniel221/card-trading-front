@@ -7,8 +7,17 @@
     <a routerLink="/userlist"><button class="btn btn-outline-light">Usuarios</button></a>
   </div>
   <div class="spacer"></div>
-  <button type="button" class="btn btn-light" data-toggle="modal" data-target="#loginModal">Iniciar sesión</button> 
+
+  <div *ngIf="!_authService.loggedIn()">
+    <button type="button"  class="btn btn-light" data-toggle="modal" data-target="#loginModal">Iniciar sesión</button>
+  </div>
+  <div *ngIf="_authService.loggedIn()">
+    <button type="button" class="btn btn-light" (click)="_authService.logoutUser()">Cerrar sesión</button>
+  </div>
+  
+  
 </div>-->
+
 
 <app-header></app-header>
 <div class="content" role="main">

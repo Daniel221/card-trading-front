@@ -21,6 +21,10 @@ import { ContactListComponent } from './contact-list/contact-list.component';
 
 import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
+import { TokenInterceptorService } from './token-interceptor.service'
+import {SocialAuthServiceConfig} from 'angularx-social-login';
+import {SocialLoginModule, GoogleLoginProvider} from 'angularx-social-login';
+
 import { SocketService } from './shared/socket.service';
 import { HeaderComponent } from './header/header.component';
 
@@ -46,9 +50,27 @@ import { HeaderComponent } from './header/header.component';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    SocialLoginModule
   ],
-  providers: [AuthService, AuthGuard, SocketService],
+  providers: [AuthService, AuthGuard, SocketService,
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider('85332580143-t99f1q0ao3577q9d7mqtc0oiqttgrmog.apps.googleusercontent.com')
+          }
+        ]
+      } as SocialAuthServiceConfig,
+    }
+  /*{
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptorService,
+    multi: true
+  }*/],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
