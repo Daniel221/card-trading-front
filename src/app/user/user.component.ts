@@ -9,20 +9,25 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class UserComponent implements AfterContentInit {
   user;
+  userid;
   password='';
   attributes = {
     name: { value: '', label: 'Name' },
     lastname: { value: '', label: 'Last_Name' },
     username: { value: '', label: 'Username' },
-    img:{value:'',label:'Image url'}
+    img:{value:'',label:'Image url'},
+    profiletext:{value:'',label:'Description'}
   };
   attributesKeys = Object.keys(this.attributes);
   regMsg;
+  userCards;
 
   constructor(private actRoute:ActivatedRoute, private http:HttpClient) {
     this.actRoute.params.subscribe(p=>{
-      const {id}=p;
-      this.http.get<any>('http://localhost:3000/u/'+id).subscribe(data=>this.user=data);
+      this.userid=p.id;
+      this.http.get<any>('http://localhost:3000/u/'+this.userid).subscribe(data=>this.user=data);
+      this.http.get<any>(`http://localhost:3000/c?user=${this.userid}`).subscribe(data=>this.userCards=data);
+      console.log(localStorage.getItem("token"));
     });
   }
 
@@ -40,7 +45,8 @@ export class UserComponent implements AfterContentInit {
       name: this.attributes.name.value,
       lastName: this.attributes.lastname.value,
       username: this.attributes.username.value,
-      img:this.attributes.img.value
+      img:this.attributes.img.value,
+      profiletext:this.attributes.profiletext.value
     }
     this.http.put<any>('http://localhost:3000/u/'+this.user.userid, user).subscribe(data => {
       console.log(data);
@@ -54,6 +60,13 @@ export class UserComponent implements AfterContentInit {
 
   onChanged(e){
     this.password=e.target.value;
+  }
+
+  nnn = 6;
+  genCols(i) {
+    let s = '';
+    for (let c = 0; c < i; c++)s += `${2 * (i + 0.5)}em `;
+    return s;
   }
 
 }

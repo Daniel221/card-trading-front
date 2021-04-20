@@ -4,10 +4,17 @@
         <h1>Nombre de usuario: {{user.username}}</h1>
         <p>Correo: {{user.email}}</p>
     </div>
+    <button class="btn btn-success">Añadir amigo</button>
     <button class="btn btn-warning" data-toggle="modal" data-target="#editModal">Editar</button>
+    <app-contact-list [id]="userid"></app-contact-list>
 </div>
-<div class="userCards">
-
+<div class="userCards" *ngIf="userCards&&userCards.length>0" [ngStyle]="{'grid-template-columns':genCols(nnn)}">
+  <div *ngFor="let c of userCards">
+    <app-card [id]="c.cardid" [title]="c.title" [description]="c.description" [img]="c.img" [type]="c.type"></app-card>
+  </div>
+</div>
+<div *ngIf="!userCards||userCards.length<1" class="noUserCards">
+  ¡Este usuario no tiene cartas!
 </div>
 
 <div class="modal fade" id="editModal" tabindex="-1">

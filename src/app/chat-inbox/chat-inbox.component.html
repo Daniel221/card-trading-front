@@ -1,0 +1,29 @@
+<div class="chat-messages">
+  <div class="users container">
+    <div class="row">
+      <div class="col-10"></div>
+      <button class="btn btn-danger" (click)="closeChat()">close</button>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <label for="senderID">username:</label><br>
+        <input type="text"  id="senderID" [(ngModel)]="username">
+      </div>
+      <div class="col-6">
+        <label for="receiverID">send to:</label><br>
+        <input type="text" id="receiverID" [(ngModel)]="receiver">
+      </div>
+    </div>
+    <br><button (click)="setupSocketConnection()" type="button" class="btn btn-primary">connect</button>
+    <div id="conn-msg"></div>
+  </div>
+  <div class="chat-messages-show-container">
+    <ul class="chat-messages-show-list" id="message-list">
+      <li *ngFor="let x of messages" class="chat-msg">{{x}}</li>
+    </ul>
+  </div>
+  <div class="chat-messages-create-container"> 
+    <input class="chat-messages-create-input" type="text" [(ngModel)]="message">
+    <button  class="chat-messages-create-button" (click)="SendMessage()"> Send </button>
+  </div>
+</div>
