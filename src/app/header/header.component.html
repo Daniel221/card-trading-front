@@ -4,15 +4,11 @@
     aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
+  <div class="flex-grow-1 text-right ml-auto collapse navbar-collapse justify-content-end" style="margin-right:8%;" id="nabvarNav">
     <ul class="navbar-nav">
       <li *ngFor="let item of menuItems" class="nav-item">
         <a routerLink="{{item.link}}" class="nav-link navbar-link">{{item.name}}</a>
       </li>
-    </ul>
-  </div>
-  <div class="flex-grow-1 text-right ml-auto collapse navbar-collapse justify-content-end" style="margin-right:8%;">
-    <ul class="navbar-nav">
       <li class="nav-item" *ngIf="!isLogged">
         <a class="nav-link navbar-link" data-toggle="modal" data-target="#loginModal"><button
             class="btn btn-outline-info">Login/Register</button></a>
@@ -26,7 +22,8 @@
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="#">Perfil</a>
             <a class="dropdown-item" href="#">Ajustes</a>
-            <!--<div class="dropdown-divider"></div>-->
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item text-danger" (click)="_authService.logoutUser()" href=".">Cerrar sesión</a>
           </div>
       </li>
     </ul>
