@@ -5,8 +5,8 @@
         <p>Correo: {{user.email}}</p>
     </div>
     <button class="btn btn-success" *ngIf="myid!=user.userid" (click)="addFrend()">Añadir amigo</button>
-    <button class="btn btn-warning" data-toggle="modal" data-target="#editModal">Editar</button>
-    <app-contact-list [id]="userid"></app-contact-list>
+    <button class="btn btn-warning" *ngIf="myid==user.userid" data-toggle="modal" data-target="#editModal">Editar</button>
+    <app-contact-list #contactos [id]="userid"></app-contact-list>
 </div>
 <div class="userCards" *ngIf="userCards&&userCards.length>0" [ngStyle]="{'grid-template-columns':genCols(nnn)}">
   <div *ngFor="let c of userCards">
