@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-user-card',
@@ -10,6 +10,7 @@ export class UserCardComponent implements OnInit {
   @Input() user;
   @Input() removable:number=-1;
   @Input() extra;
+  @Output() rer=new EventEmitter<any>();
 
   constructor(private http:HttpClient) { }
 
@@ -23,8 +24,7 @@ export class UserCardComponent implements OnInit {
 
   remove(){
     this.http.delete<any>('http://localhost:3000/u/contacts?oid='+this.removable+'&id='+this.extra).subscribe(data=>{
-      alert("Contacto eliminado");
-      location.reload();
+      this.rer.emit();
     });
   }
 

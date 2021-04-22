@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, AfterContentInit } from '@angular/core';
+import { Component, AfterContentInit, AfterViewInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -22,6 +22,7 @@ export class UserComponent implements AfterContentInit {
   attributesKeys = Object.keys(this.attributes);
   regMsg;
   userCards;
+  @ViewChild('contactos') contactos;
 
   constructor(private actRoute:ActivatedRoute, private http:HttpClient) {
     this.actRoute.params.subscribe(p=>{
@@ -74,8 +75,8 @@ export class UserComponent implements AfterContentInit {
 
   addFrend(){
     this.http.post<any>('http://localhost:3000/u/contacts/'+this.userid,{id:this.myid}).subscribe(data=>{
+      this.contactos.update();
       alert("Contacto añadido");
-      location.reload();
     },err=>{
       alert(err.error.error);
     });
