@@ -1,7 +1,7 @@
 import { AfterContentInit, Component, OnInit } from '@angular/core';
 import { UserService } from './shared/user.service';
 import { HttpClient } from '@angular/common/http';
-import { AuthService } from  './auth.service';
+import { AuthService } from './auth.service';
 
 
 @Component({
@@ -31,5 +31,9 @@ export class AppComponent implements AfterContentInit, OnInit {
 
   displayChat() {
     this.showChat = true;
+  }
+
+  notDisplayChat() {
+    this.showChat = false;
   }
 }

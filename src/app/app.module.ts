@@ -27,6 +27,7 @@ import { SocialLoginModule, GoogleLoginProvider } from 'angularx-social-login';
 
 import { SocketService } from './shared/socket.service';
 import { HeaderComponent } from './header/header.component';
+import { DeleteModalComponent } from './delete-modal/delete-modal.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { HeaderComponent } from './header/header.component';
     UserCardComponent,
     ChatInboxComponent,
     HeaderComponent,
-    ContactListComponent
+    ContactListComponent,
+    DeleteModalComponent
   ],
   imports: [
     BrowserModule,

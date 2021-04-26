@@ -1,9 +1,10 @@
-<nav class="navbar navbar-expand-lg navbar-light sticky-top header">
+<nav class="navbar navbar-expand-lg navbar-light fixed-top header">
   <a class="navbar-brand" href="#">Card Trading</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
     aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
+
   <div class="flex-grow-1 text-right ml-auto collapse navbar-collapse justify-content-end" style="margin-right:8%;" id="nabvarNav">
     <ul class="navbar-nav">
       <li *ngFor="let item of menuItems" class="nav-item">
@@ -16,7 +17,8 @@
       <li class="nav-item" *ngIf="isLogged">
         <a class="nav-link navbar-link icons" href=""><i class="fas fa-bell"></i></a>
       </li>
-      <li class="nav-item dropdown" *ngIf="isLogged">
+      
+      <li class="nav-item dropdown" style="z-index: 2000;" *ngIf="isLogged">
         <a class="nav-link navbar-link icons dropdown-toggle" href="" role="button" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false"><i class="fas fa-user"></i></a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
