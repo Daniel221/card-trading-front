@@ -20,17 +20,15 @@
 
 
 <app-header></app-header>
-<div class="content" role="main">
+<div [ngClass]="isLoggedIn ? 'loggedInContent':'content'" role="main">
   
   <router-outlet></router-outlet>
-  <div id="contact-list">
-    <app-contact-list></app-contact-list>
-  </div>
+  
   <div id="chat-box">
-    <button (click)="displayChat()" *ngIf="!showChat" type="button" class="btn btn-success">chat</button>
+    <button (click)="displayChat()" *ngIf="isLoggedIn" type="button" class="btn btn-success">chat</button>
     <app-chat-inbox *ngIf="showChat" [(showChat)]="showChat"></app-chat-inbox>
   </div>
-
+  
   </div>
   <div class="modal fade" id="loginModal" tabindex="-1">
     <app-login></app-login>
@@ -39,3 +37,6 @@
     <app-register></app-register>
   </div>
 
+  <div class="sidebar">
+      <app-contact-list *ngIf="isLoggedIn"></app-contact-list>
+  </div>
