@@ -66,13 +66,6 @@ export class UserComponent implements AfterContentInit {
     this.password=e.target.value;
   }
 
-  nnn = 6;
-  genCols(i) {
-    let s = '';
-    for (let c = 0; c < i; c++)s += `${2 * (i + 0.5)}em `;
-    return s;
-  }
-
   addFrend(){
     this.http.post<any>('http://localhost:3000/u/contacts/'+this.userid,{id:this.myid}).subscribe(data=>{
       this.contactos.update();

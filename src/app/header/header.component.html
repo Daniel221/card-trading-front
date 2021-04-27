@@ -8,7 +8,8 @@
   <div class="flex-grow-1 text-right ml-auto collapse navbar-collapse justify-content-end" style="margin-right:8%;" id="nabvarNav">
     <ul class="navbar-nav">
       <li *ngFor="let item of menuItems" class="nav-item">
-        <a routerLink="{{item.link}}" class="nav-link navbar-link">{{item.name}}</a>
+        <a *ngIf="item.link.length>0; else elseA" routerLink="{{item.link}}" class="nav-link navbar-link">{{item.name}}</a>
+        <ng-template #elseA><a *ngIf="isLogged" class="nav-link navbar-link" [attr.data-enabled]="canCheckIn" (click)="process()">{{item.name}}</a></ng-template>
       </li>
       <li class="nav-item" *ngIf="!isLogged">
         <a class="nav-link navbar-link" data-toggle="modal" data-target="#loginModal"><button
@@ -31,3 +32,22 @@
     </ul>
   </div>
 </nav>
+
+<div #gotModal class="modal fade" id="gottenCard" tabindex="-1">
+  <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">¡Conseguiste una carta!</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <app-card [id]="card.cardid" [title]="card.title" [description]="card.description" [img]="card.img" [type]="card.type"></app-card>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-warning" [ngStyle]="{'pointer-events':'auto'}" data-dismiss="modal">Ok</button>
+        </div>
+      </div>
+  </div>
+</div>
