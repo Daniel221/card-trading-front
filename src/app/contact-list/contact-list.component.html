@@ -1,6 +1,6 @@
+<h3>Contactos</h3>
 <div class="contacts">
     <ul style="list-style: none;">
-        <li><h3>Contactos</h3></li>
         <li class="contact" *ngFor="let u of users">
             <app-user-card [user]="u" [removable]="id?-1:u.userid" [extra]="token" (rer)="update()"></app-user-card>
         </li> 

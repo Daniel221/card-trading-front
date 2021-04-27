@@ -23,6 +23,16 @@
       font-size: 17px;
     }
 
+    a[data-enabled="false"]{
+      color: rgba(0, 0, 0, 0.2);
+      cursor: default;
+    }
+
+    a[data-enabled="false"]:hover{
+      color: rgba(0, 0, 0, 0.2);
+      cursor: default;
+    }
+
     .icons {
       font-size: 22px;
       margin-left: 10px;
@@ -37,4 +47,9 @@
       z-index: 3000;
     }
   }
+}
+
+.modal-body{
+  display: flex;
+  justify-content: center;
 }

@@ -1,14 +1,17 @@
-<div *ngIf="user" class="userInfo">
-    <img [src]="user.img?user.img:'https://i1.sndcdn.com/avatars-000310902564-g2unlt-t240x240.jpg'"/>
-    <div>
-        <h1>Nombre de usuario: {{user.username}}</h1>
-        <p>Correo: {{user.email}}</p>
+<div *ngIf="user" class="userInfo container">
+  <div class="row">
+    <img class="col-3" [src]="user.img?user.img:'https://i1.sndcdn.com/avatars-000310902564-g2unlt-t240x240.jpg'"/>
+    <div class="col-6">
+        <h1>{{user.username}}</h1>
+        <i>{{user.profiletext}}</i>
+        <br/>
+        <button class="btn btn-success" *ngIf="myid!=user.userid" (click)="addFrend()">Añadir amigo</button>
+        <button class="btn btn-warning" *ngIf="myid==user.userid" data-toggle="modal" data-target="#editModal">Editar</button>
     </div>
-    <button class="btn btn-success" *ngIf="myid!=user.userid" (click)="addFrend()">Añadir amigo</button>
-    <button class="btn btn-warning" *ngIf="myid==user.userid" data-toggle="modal" data-target="#editModal">Editar</button>
-    <app-contact-list #contactos [id]="userid"></app-contact-list>
+    <app-contact-list class="col-3" #contactos [id]="userid"></app-contact-list>
+  </div>
 </div>
-<div class="userCards" *ngIf="userCards&&userCards.length>0" [ngStyle]="{'grid-template-columns':genCols(nnn)}">
+<div class="userCards container" *ngIf="userCards&&userCards.length>0">
   <div *ngFor="let c of userCards">
     <app-card [id]="c.cardid" [title]="c.title" [description]="c.description" [img]="c.img" [type]="c.type"></app-card>
   </div>
