@@ -12,6 +12,8 @@ export class CardComponent {
   @Input() description:string;
   @Input() img:string;
   @Input() type:number;
+  @Input() mini:boolean=false;
+  @Input() smol:boolean=false;
 
   constructor() { }
 
@@ -19,6 +21,7 @@ export class CardComponent {
     return `url('../../assets/bgs/${t}.png')`;
   }
   rgbaType(t){
+    if(t=="tmp")return `rgba(215,215,215,0.75)`;
     return `rgba(${colors[t][0]},${colors[t][1]},${colors[t][2]}, 0.75)`;
   }
 
