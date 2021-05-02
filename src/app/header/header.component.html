@@ -15,8 +15,12 @@
         <a class="nav-link navbar-link" data-toggle="modal" data-target="#loginModal"><button
             class="btn btn-outline-info">Login/Register</button></a>
       </li>
-      <li class="nav-item" *ngIf="isLogged">
-        <a class="nav-link navbar-link icons" href=""><i class="fas fa-bell"></i></a>
+      <li class="nav-item dropdown" *ngIf="isLogged">
+        <a class="nav-link navbar-link icons dropdown-toggle" data-toggle="dropdown" href="">
+          <div class="bell-noti" *ngIf="hasNotis"></div>
+          <i class="fas fa-bell"></i>
+        </a>
+        <app-notis #notis class="dropdown-menu" aria-labelledby="navbarDropdown" (hasTrades)="hasTrades($event)"></app-notis>
       </li>
       
       <li class="nav-item dropdown" style="z-index: 2000;" *ngIf="isLogged">

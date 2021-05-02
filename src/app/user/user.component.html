@@ -5,7 +5,10 @@
         <h1>{{user.username}}</h1>
         <i>{{user.profiletext}}</i>
         <br/>
-        <button class="btn btn-success" *ngIf="myid!=user.userid" (click)="addFrend()">Añadir amigo</button>
+        <button class="btn btn-success" *ngIf="myid!=user.userid" (click)="addFrend()">
+          <div *ngIf="!frens; else yesFrens">Añadir amigo</div>
+          <ng-template #yesFrens>Intercambiar</ng-template>
+        </button>
         <button class="btn btn-warning" *ngIf="myid==user.userid" data-toggle="modal" data-target="#editModal">Editar</button>
     </div>
     <app-contact-list class="col-3" #contactos [id]="userid"></app-contact-list>
@@ -70,4 +73,7 @@
           </div>
         </div>
     </div>
+</div>
+<div class="modal fade" *ngIf="frens" id="tradeModal" tabindex="-1">
+  <app-trade #tradeMod [user1]="myid" [user2]="userid" [username]="user.username"></app-trade>
 </div>

@@ -1,0 +1,40 @@
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title">Intercambiar con usuario</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+        <div class="modal-body">
+            <div class="exchangeHdr">
+                <b>Tus cartas</b>
+                <b>Cartas de {{username}}</b>
+            </div>
+            <div class="exchange" *ngIf="usersCards[0]&&usersCards[1]">
+                <ng-container *ngFor="let cardInvs of usersCards; index as i">
+                    <div class="cardInv">
+                        <div *ngFor="let c of usersCards[i]">
+                            <app-card (click)="selectInv(i,c.cardid)" [smol]="true" [id]="c.cardid" [title]="c.title" [description]="c.description" [img]="c.img" [type]="c.type"></app-card>
+                        </div>
+                    </div>
+                    <div *ngIf="i==0" class="spacer"></div>
+                </ng-container>
+            </div>
+            <br/>
+            <div class="exchange">
+                <div class="spacer"></div>
+                <div class="exchangeDetails"> <!--  *ngIf="selCards[0]!=null && selCards[1]!=null" -->
+                    <app-card [smol]="true" [id]="selCards[0].cardid" [title]="selCards[0].title" [description]="selCards[0].description" [img]="selCards[0].img" [type]="selCards[0].type"></app-card>
+                    <h3><i class="fas fa-sync-alt"></i></h3>
+                    <app-card [smol]="true" [id]="selCards[1].cardid" [title]="selCards[1].title" [description]="selCards[1].description" [img]="selCards[1].img" [type]="selCards[1].type"></app-card>
+                </div>
+                <div class="spacer"></div>
+            </div>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button class="btn btn-success" [ngStyle]="{'pointer-events':'auto'}" id="confirmTrade" (click)="addTrade()">Confirmar</button>
+        </div>
+    </div>
+</div>

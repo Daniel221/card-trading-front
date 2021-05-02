@@ -1,13 +1,16 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, AfterContentInit, AfterViewInit, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { TradeComponent } from '../trade/trade.component';
+
+declare var $:any;
 
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.less']
 })
-export class UserComponent implements AfterContentInit {
+export class UserComponent implements OnInit {
   user;
   userid;
   myid;
@@ -22,20 +25,23 @@ export class UserComponent implements AfterContentInit {
   attributesKeys = Object.keys(this.attributes);
   regMsg;
   userCards;
+  frens:boolean=false;
   @ViewChild('contactos') contactos;
+  @ViewChild('tradeMod') trade:TradeComponent;
 
   constructor(private actRoute:ActivatedRoute, private http:HttpClient) {
+  }
+
+  ngOnInit(): void {
     this.actRoute.params.subscribe(p=>{
       this.userid=p.id;
       this.http.get<any>('http://localhost:3000/u/'+this.userid).subscribe(data=>this.user=data);
       this.http.get<any>(`http://localhost:3000/c?user=${this.userid}`).subscribe(data=>this.userCards=data);
       this.http.get<any>('http://localhost:3000/login?token='+localStorage.getItem("token")).subscribe(res=>{
         this.myid=res.userid;
+        this.http.get<any>(`http://localhost:3000/u/contacts/${this.userid}?otherId=${this.myid}`).subscribe(data=>this.frens=data.length>0);
       });
     });
-  }
-
-  ngAfterContentInit(): void {
   }
 
   createUser() {
@@ -67,6 +73,11 @@ export class UserComponent implements AfterContentInit {
   }
 
   addFrend(){
+    if(this.frens){
+      this.trade.reload();
+      $("#tradeModal").modal("show");
+      return;
+    }
     this.http.post<any>('http://localhost:3000/u/contacts/'+this.userid,{id:this.myid}).subscribe(data=>{
       this.contactos.update();
       alert("Contacto añadido");
