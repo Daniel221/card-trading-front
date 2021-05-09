@@ -28,12 +28,4 @@ export class AppComponent implements AfterContentInit, OnInit {
 
   ngAfterContentInit(): void {
   }
-
-  displayChat() {
-    this.showChat = true;
-  }
-
-  notDisplayChat() {
-    this.showChat = false;
-  }
 }

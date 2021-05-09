@@ -26,9 +26,9 @@ import { SocialLoginModule, GoogleLoginProvider } from 'angularx-social-login';
 
 import { SocketService } from './shared/socket.service';
 import { HeaderComponent } from './header/header.component';
-import { DeleteModalComponent } from './delete-modal/delete-modal.component';
 import { NotisComponent } from './notis/notis.component';
 import { TradeComponent } from './trade/trade.component';
+import { ChatAppComponent } from './chat-app/chat-app.component';
 
 @NgModule({
   declarations: [
@@ -46,9 +46,10 @@ import { TradeComponent } from './trade/trade.component';
     ChatInboxComponent,
     HeaderComponent,
     ContactListComponent,
-    DeleteModalComponent,
     NotisComponent,
-    TradeComponent
+    TradeComponent,
+    ChatAppComponent
+
   ],
   imports: [
     BrowserModule,

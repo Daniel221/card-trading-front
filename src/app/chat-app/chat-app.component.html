@@ -1,0 +1,8 @@
+<div class="container chat-box">
+  <div class="col-3">
+    <app-contact-list (changeAddressee)="addresseeChange($event)" [chat]="true"></app-contact-list>
+  </div>
+  <div class="col-9">
+    <app-chat-inbox *ngIf="addressee" [addressee]="addressee" [userid]="userid"></app-chat-inbox>
+  </div>
+</div>

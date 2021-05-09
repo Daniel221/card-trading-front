@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Input, OnInit, OnChanges, SimpleChanges, Injectable } from '@angular/core';
+import { Component, Input, OnInit, Output, OnChanges, SimpleChanges, Injectable, EventEmitter } from '@angular/core';
 import { Subject } from 'rxjs';
 
 @Injectable()
@@ -10,7 +10,6 @@ export class contactillos {
   static update() {
     contactillos.ay.next(false);
   }
-
 }
 
 @Component({
@@ -25,6 +24,10 @@ export class ContactListComponent implements OnInit, OnChanges {
   @Input() id: number = undefined;
   token;
   deleteAlert: boolean = false;
+  currentUser: any;
+  @Output() changeAddressee = new EventEmitter();
+  @Input() chat: boolean = false;
+
 
   constructor(private http: HttpClient) { }
 
@@ -52,4 +55,12 @@ export class ContactListComponent implements OnInit, OnChanges {
     contactillos.update();
   }
 
+  changeCurrentUser($event) {
+    this.currentUser = {
+      username: $event.username,
+      userid: $event.userid
+    }
+
+    this.changeAddressee.emit(this.currentUser);
+  }
 }

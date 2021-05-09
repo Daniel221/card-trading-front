@@ -10,7 +10,9 @@ export class UserCardComponent implements OnInit {
   @Input() user;
   @Input() removable: number = -1;
   @Input() extra;
+  @Input() chat: boolean;
   @Output() rer = new EventEmitter<any>();
+  @Output() changeChatUser = new EventEmitter<any>();
   deleteAlert: boolean = false;
 
 
@@ -37,5 +39,12 @@ export class UserCardComponent implements OnInit {
 
   deactivateDeleteAlert() {
     this.deleteAlert = false;
+  }
+
+  contactClick() {
+    this.changeChatUser.emit({
+      username: this.user.username,
+      userid: this.user.userid
+    })
   }
 }

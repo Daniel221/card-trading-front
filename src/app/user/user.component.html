@@ -14,13 +14,31 @@
     <app-contact-list class="col-3" #contactos [id]="userid"></app-contact-list>
   </div>
 </div>
-<div class="userCards container" *ngIf="userCards&&userCards.length>0">
-  <div *ngFor="let c of userCards">
-    <app-card [id]="c.cardid" [title]="c.title" [description]="c.description" [img]="c.img" [type]="c.type"></app-card>
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-1">
+      <a class="btn btn-primary" (click)="showCards()">Cartas</a>
+    </div>
+    <div class="col-1">
+      <a class="btn btn-primary" (click)="showChat()">Chat</a>
+    </div>
   </div>
 </div>
-<div *ngIf="!userCards||userCards.length<1" class="noUserCards">
-  ¡Este usuario no tiene cartas!
+<div>
+  <div id="usersCards" *ngIf="showMenu.cards">
+    <div class="userCards container" *ngIf="userCards&&userCards.length>0">
+      <div *ngFor="let c of userCards">
+        <app-card [id]="c.cardid" [title]="c.title" [description]="c.description" [img]="c.img" [type]="c.type"></app-card>
+      </div>
+    </div>
+    <div *ngIf="!userCards||userCards.length<1" class="noUserCards">
+      ¡Este usuario no tiene cartas!
+    </div>
+  </div>
+  <div id="userContacts" *ngIf="showMenu.chat">
+    <app-chat-app [userid]="myid"></app-chat-app>
+  </div>
 </div>
 
 <div class="modal fade" id="editModal" tabindex="-1">
