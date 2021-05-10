@@ -20,7 +20,7 @@
     <div class="col-1">
       <a class="btn btn-primary" (click)="showCards()">Cartas</a>
     </div>
-    <div class="col-1">
+    <div class="col-1" *ngIf="myid==user.userid">
       <a class="btn btn-primary" (click)="showChat()">Chat</a>
     </div>
   </div>
