@@ -1,64 +1,76 @@
-import { Component, Input, OnInit, Output, EventEmitter, OnDestroy, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, OnDestroy, ViewChild, OnChanges } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 import { SocketService } from '../shared/socket.service';
+import * as moment from 'moment';
 
 const SOCKET_ENDPOINT = 'localhost:3000';
+const CHAT_API = 'http://localhost:3000/chat';
+
+
 
 @Component({
   selector: 'app-chat-inbox',
   templateUrl: './chat-inbox.component.html',
   styleUrls: ['./chat-inbox.component.less']
 })
-export class ChatInboxComponent implements OnInit, OnDestroy {
-  @Input() showChat = true;
-  @Output() showChatChange = new EventEmitter<boolean>()
+export class ChatInboxComponent implements OnInit, OnDestroy, OnChanges {
+  @Input() addressee: any;
+  @Input() userid: any;
+  currentRoom: string;
   message: string;
-  username: string;
-  receiver: string;
   isLoggedIn: boolean = false;
-  subscription: Subscription;
-  messages: string[] = ["mensajes para todos"];
+  socketSubscription: Subscription;
+  messages: any[] = ["mensajes para todos"];
 
-  constructor(private socketService: SocketService) { }
+  constructor(private socketService: SocketService, private http: HttpClient,) { }
+
+  ngOnChanges(): void {
+    if (this.addressee) {
+      this.messages.length = 0;
+      this.getStoredMessages();
+      if (this.currentRoom) {
+        this.socketService.logout(this.currentRoom);
+      }
+      this.currentRoom = `${this.userid}_${this.addressee.id}`;
+      this.socketService.login('idk', this.currentRoom);
+    }
+  }
 
   ngOnInit(): void {
-    this.subscription = this.socketService.getMessage().subscribe(data => {
+    this.socketSubscription = this.socketService.getMessage().subscribe(data => {
       this.messages.push(data)
     });
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.socketSubscription.unsubscribe();
   }
 
   SendMessage() {
-    this.socketService.sendMessage(this.message, this.receiver, this.username);
-    const element = document.createElement('li');
-    element.innerHTML = this.message;
-    element.style.background = 'white';
-    element.style.padding = '15px 30px';
-    element.style.margin = '10px';
-    element.style.textAlign = 'right';
-    document.getElementById('message-list').appendChild(element);
-    this.message = '';
+    if (this.message) {
+      let date = moment().format('MMMM Do YYYY, h:mm:ss a');
+      this.socketService.sendMessage(this.message, this.addressee.id, this.userid, date);
+      this.messages.push({
+        msg: this.message,
+        senderid: this.userid,
+        senddate: date
+      });
+      this.http.post<any>(`${CHAT_API}`, {
+        msg: this.message,
+        addresseeid: this.addressee.id,
+        userid: this.userid,
+        date
+      }).subscribe();
+      this.message = '';
+    }
   }
 
-  setupSocketConnection() {
-    document.getElementById('conn-msg').innerHTML = 'conected';
-    this.socketService.login('Pedro', this.username);
-    // this.socket.on('receive_message', (data) => {
-    //   if (data.content) {
-    //     const element = document.createElement('li');
-    //     element.innerHTML = data.content;
-    //     element.style.background = 'white';
-    //     element.style.padding = '15px 30px';
-    //     element.style.margin = '10px';
-    //     document.getElementById('message-list').appendChild(element);
-    //   }
-    // });
-  }
-
-  closeChat() {
-    this.showChatChange.emit(false);
+  getStoredMessages() {
+    this.http.get<any>(`${CHAT_API}?addresseeid=${this.addressee.id}&userid=${this.userid}`).subscribe(res => {
+      res.map(element => {
+        this.messages.push(element);
+      });
+    });
   }
 }

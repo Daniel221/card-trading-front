@@ -1,10 +1,17 @@
 <div class="userCard" *ngIf="!this.deleteAlert">
-    <div [routerLink]="'/user/'+user.userid">
+    <div (click)="contactClick()" *ngIf="chat">
         <img [src]="user.img?user.img:'https://i1.sndcdn.com/avatars-000310902564-g2unlt-t240x240.jpg'" alt=""/>
         <div class="userInfo">
             <h1>{{user.username}}</h1>
             <h5 *ngIf="user.profiletext">{{user.profiletext}}</h5>
         </div>
+    </div>
+    <div [routerLink]="'/user/'+user.userid" *ngIf="!chat">
+      <img [src]="user.img?user.img:'https://i1.sndcdn.com/avatars-000310902564-g2unlt-t240x240.jpg'" alt=""/>
+      <div class="userInfo">
+          <h1>{{user.username}}</h1>
+          <h5 *ngIf="user.profiletext">{{user.profiletext}}</h5>
+      </div>
     </div>
     <button *ngIf="removable>-1" (click)="activateDeleteAlert()" class="btn btn-danger">🗑️</button>
     

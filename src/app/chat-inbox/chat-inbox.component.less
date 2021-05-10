@@ -1,6 +1,11 @@
+.chat-messages {
+  height: 100%;
+
+}
+
 .chat-messages-show-container {
   background: #c3c3c3;
-  height: 40vh;
+  height: 65vh;
   display: flex;
   flex-direction: column;
   overflow: auto;
@@ -31,20 +36,40 @@
   width: 100px;
 }
 
-.chat-messages {
-  z-index: 3000;
-  width: 22vw;
-  height: 58vh;
-
-  .chatUserInfo {
-    background-color: white;
-    margin: 3px solid black;
-  }
+.message-row {
+  width: 100%;
 }
 
 .chat-msg {
-  background-color: white;
+  font-size: 1em;
   padding: 15px 30px;
   margin: 10px;
-  text-align: left;
+  max-width: 78%;
+  border-radius: 25px;
+  color: white;
+  display: inline-block;
+
+}
+
+.receiver {
+
+  li {
+    background-color: grey;
+    text-align: left;
+
+  }
+
+}
+
+
+
+.sender {
+  text-align: right;
+
+  li {
+    text-align: right;
+    background-color: rgb(0, 216, 0);
+
+  }
+
 }

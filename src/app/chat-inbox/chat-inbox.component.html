@@ -1,36 +1,20 @@
 <div class="chat-messages">
   <div class="users container">
-    <div class="row chatUserInfo">
-      <div class="col-8 offset-1">
-        <h4>username</h4>
-      </div>
-      <div class="col-1 mr-1">
-        <button class="btn btn-primary" (click)="closeChat()">-</button>
-      </div>
-      <div class="col-1">
-        <button class="btn btn-danger" (click)="closeChat()">X</button>
-      </div>
+    <div class="col-8 offset-1">
+      <h4>{{this.addressee?.name}}</h4>
     </div>
-    <!--<div class="row">
-      <div class="col-6">
-        <label for="senderID">username:</label><br>
-        <input type="text"  id="senderID" [(ngModel)]="username">
-      </div>
-      <div class="col-6">
-        <label for="receiverID">send to:</label><br>
-        <input type="text" id="receiverID" [(ngModel)]="receiver">
-      </div>
-    </div>
-    <br><button (click)="setupSocketConnection()" type="button" class="btn btn-primary">connect</button>
-    <div id="conn-msg"></div>-->
   </div>
-  <div class="chat-messages-show-container">
+  <div class="chat-messages-show-container"  >
     <ul class="chat-messages-show-list" id="message-list">
-      <li *ngFor="let x of messages" class="chat-msg">{{x}}</li>
+      <div *ngFor="let x of messages" class="message-row" [ngClass]="x.senderid == userid ? 'sender': 'receiver'">
+        <li  [ngClass]="x.senderid == userid ? 'sender': 'receiver'" class="chat-msg">{{x.msg}}
+          <br><small>sended: {{x.senddate}}</small>
+        </li>
+     </div>
     </ul>
   </div>
   <div class="chat-messages-create-container"> 
-    <input class="chat-messages-create-input" type="text" [(ngModel)]="message">
-    <button  class="chat-messages-create-button" (click)="SendMessage()"> Send </button>
+      <input class="chat-messages-create-input" type="text" [(ngModel)]="message">
+      <button  class="chat-messages-create-button btn btn-primary" (click)="SendMessage()"> Send </button>
   </div>
 </div>
