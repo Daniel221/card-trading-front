@@ -1,7 +1,7 @@
 <nav class="navbar navbar-light bg-light justify-content-center" style="background-color:transparent!important;color:transparent;">
     <form class="form-inline" >
-        <input class="form-control mr-sm-2" style="width:60vmax;" type="search" placeholder="Usuario" aria-label="Search" (input)="updateFilter($event)" (keyup.enter)="applyFilter()">
-        <button class="btn btn-primary my-2 my-sm-0" type="button" (click)="applyFilter()">Buscar</button>
+        <input name="search-user" class="form-control mr-sm-2" style="width:60vmax;" type="search" placeholder="Usuario" aria-label="Search" [(ngModel)]="filter" (ngModelChange)="applyFilter()"> <!--(change)="updateFilter($event)"  (change)="applyFilter()"-->
+        <button class="btn btn-primary my-2 my-sm-0" type="button" (click)="applyFilter()" >Buscar</button>
     </form>
 </nav>
 <div class="users">

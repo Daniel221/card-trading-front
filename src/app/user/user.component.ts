@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, ViewChild, OnInit, AfterContentInit } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterContentInit, OnChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TradeComponent } from '../trade/trade.component';
 
@@ -10,7 +10,7 @@ declare var $: any;
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.less']
 })
-export class UserComponent implements OnInit {
+export class UserComponent implements OnInit, OnChanges {
   user;
   userid;
   myid;
@@ -37,16 +37,22 @@ export class UserComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.actRoute.params.subscribe(p => {
       this.userid = p.id;
       this.http.get<any>('http://localhost:3000/u/' + this.userid).subscribe(data => this.user = data);
-      this.http.get<any>(`http://localhost:3000/c?user=${this.userid}`).subscribe(data => this.userCards = data);
+      this.http.get<any>(`http://localhost:3000/c?user=${this.userid}`).subscribe(data => {
+        this.showCards();
+        this.userCards = data;
+      });
       this.http.get<any>('http://localhost:3000/login?token=' + localStorage.getItem("token")).subscribe(res => {
         this.myid = res.userid;
         this.http.get<any>(`http://localhost:3000/u/contacts/${this.userid}?otherId=${this.myid}`).subscribe(data => this.frens = data.length > 0);
       });
     });
+  }
+
+  ngOnChanges() {
+    this.showCards();
   }
 
   createUser() {
