@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, EventEmitter, OnDestroy, ViewChild, OnChanges } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, OnDestroy, ViewChild, OnChanges, AfterViewInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { SocketService } from '../shared/socket.service';
@@ -21,7 +21,8 @@ export class ChatInboxComponent implements OnInit, OnDestroy, OnChanges {
   message: string;
   isLoggedIn: boolean = false;
   socketSubscription: Subscription;
-  messages: any[] = ["mensajes para todos"];
+  messages: any[] = ["hello everyone! test message here"];
+  container: HTMLElement;
 
   constructor(private socketService: SocketService, private http: HttpClient,) { }
 
@@ -63,6 +64,8 @@ export class ChatInboxComponent implements OnInit, OnDestroy, OnChanges {
         date
       }).subscribe();
       this.message = '';
+      this.container = document.getElementById("msg-box");//needs fix, probably making another component
+      this.container.scrollTop = this.container.scrollHeight;
     }
   }
 

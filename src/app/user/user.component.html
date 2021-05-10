@@ -20,8 +20,11 @@
     <div class="col-1">
       <a class="btn btn-primary" (click)="showCards()">Cartas</a>
     </div>
-    <div class="col-1" *ngIf="myid==user.userid">
+    <div class="col-1" *ngIf="myid==user?.userid">
       <a class="btn btn-primary" (click)="showChat()">Chat</a>
+    </div>
+    <div class="col-1">
+      <a class="btn btn-primary" (click)="showEditing()">Edit cards</a>
     </div>
   </div>
 </div>
@@ -36,8 +39,11 @@
       ¡Este usuario no tiene cartas!
     </div>
   </div>
-  <div id="userContacts" *ngIf="showMenu.chat">
+  <div id="chat-app" *ngIf="showMenu.chat">
     <app-chat-app [userid]="myid"></app-chat-app>
+  </div>
+  <div class="card-editing" *ngIf="showMenu.editing">
+    <app-card-editing></app-card-editing>
   </div>
 </div>
 

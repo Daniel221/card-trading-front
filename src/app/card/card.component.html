@@ -1,14 +1,25 @@
 <div class="cardo" [attr.mini]="mini" [attr.smol]="smol" [style.background-image]="fromType(type)">
-    <!-- (click)="hover($event)" -->
-    <a *ngIf="!mini&&!smol; else elseBlock" [routerLink]="'/card/'+id">
-        <div class="title" [style.background-color]="rgbaType(type)">{{title}}</div>
-        <img [src]="img"/>
-        <div class="desc" [style.background-color]="rgbaType(type)">{{description}}</div>
-    </a>
-    <ng-template #elseBlock>
-        <div class="title" [style.background-color]="rgbaType(type)">{{title}}</div>
-        <img [src]='img==""?"../../assets/bgs/4.png":img'/>
-        <div class="desc" [style.background-color]="rgbaType(type)">{{description}}</div>
-    </ng-template>
-    <!--img class="imgback" src="./cardbckg.png" alt=""-->
+  <!-- (click)="hover($event)" -->
+  <a *ngIf="edit" (click)="changeCurrentCard()" data-toggle="modal" data-target="#editCardModal">
+    <div class="title" [style.background-color]="rgbaType(type)">{{title}}</div>
+    <img [src]="img" alt="" />
+    <div class="desc" [style.background-color]="rgbaType(type)">{{description}}</div>
+  </a>
+
+  <a *ngIf="!mini&&!smol&&!edit; else elseBlock" [routerLink]="'/card/'+id">
+    <div class="title" [style.background-color]="rgbaType(type)">{{title}}</div>
+    <img [src]="img" alt="" />
+    <div class="desc" [style.background-color]="rgbaType(type)">{{description}}</div>
+
+  </a>
+
+  <ng-template #elseBlock>
+    <div *ngIf="!edit">
+      <div class="title" [style.background-color]="rgbaType(type)">{{title}}</div>
+      <img [src]='img==""?"../../assets/bgs/4.png":img' alt="" />
+      <div class="desc" [style.background-color]="rgbaType(type)">{{description}}</div>
+    </div>
+  </ng-template>
+
+  <!--img class="imgback" src="./cardbckg.png" alt=""-->
 </div>

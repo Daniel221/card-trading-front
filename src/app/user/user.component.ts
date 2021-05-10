@@ -30,7 +30,8 @@ export class UserComponent implements OnInit, OnChanges {
   @ViewChild('tradeMod') trade: TradeComponent;
   showMenu = {
     cards: true,
-    chat: false
+    chat: false,
+    editing: false,
   }
 
   constructor(private actRoute: ActivatedRoute, private http: HttpClient) {
@@ -101,13 +102,23 @@ export class UserComponent implements OnInit, OnChanges {
   }
 
   showCards() {
-    this.showMenu.chat = false;
+    this.menusToFalse();
     this.showMenu.cards = true;
-
   }
 
   showChat() {
-    this.showMenu.cards = false;
+    this.menusToFalse();
     this.showMenu.chat = true;
+  }
+
+  showEditing() {
+    this.menusToFalse();
+    this.showMenu.editing = true;
+  }
+
+  menusToFalse() {
+    this.showMenu.chat = false;
+    this.showMenu.editing = false;
+    this.showMenu.cards = false;
   }
 }

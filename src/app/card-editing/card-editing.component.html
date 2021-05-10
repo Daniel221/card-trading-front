@@ -1,0 +1,126 @@
+<div class="container">
+  <ul>
+    <li *ngFor="let card of cards">
+      <app-card [id]="card.cardid" [title]="card.title" [description]="card.description" [img]="card .img"
+        [type]="card.type" [edit]="true" (updateCurrentCard)="updateCard($event)" [modalid]="'cardEditModal'">
+      </app-card>
+    </li>
+  </ul>
+  <button class="btn btn-info" data-toggle="modal" data-target="#createCardModal" (click)="defaultCard()">Crear
+    Carta</button>
+</div>
+<br>
+
+<div class="modal  fade" id="editCardModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Editar Carta</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body container">
+        <form>
+
+          <div class="form-group">
+            <label for="title">Título: </label>
+            <input type="text" [(ngModel)]="title" name="title" id="cardTitleEdit">
+
+          </div>
+          <div class="form-group">
+            <label form="description">Descripción: </label>
+            <textarea type="" [(ngModel)]="description" name="description" rows="3" cols="75"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="img">Imagen</label>
+            <input type="url" [(ngModel)]="img" name="img">
+          </div>
+          <div class="form-group">
+            <label for="type">Tipo(Color): </label>
+            <select class="form-control" id="typeSelect" [(ngModel)]="type" name="type" cardTypeEdit>
+              <option>0</option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+            </select>
+          </div>
+        </form>
+
+        <div class="liveCard">
+          <h3 class="text-align-center">Vista Previa</h3>
+          <app-card *ngIf="currentCard" [id]="currentCard.id" [title]="title" [description]="description" [img]="img"
+            [type]="type">
+          </app-card>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" (click)="updateCardApi()">Guardar cambios</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal  fade" id="createCardModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Crear Carta</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body container">
+        <form>
+
+          <div class="form-group">
+            <label for="title">Título: </label>
+            <input type="text" [(ngModel)]="title" name="title" id="cardTitleEdit">
+
+          </div>
+          <div class="form-group">
+            <label form="description">Descripción: </label>
+            <textarea type="" [(ngModel)]="description" name="description" rows="3" cols="75"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="img">Imagen</label>
+            <input type="url" [(ngModel)]="img" name="img">
+          </div>
+          <div class="form-group">
+            <label for="type">Tipo(Color): </label>
+            <select class="form-control" id="typeSelect" [(ngModel)]="type" name="type" cardTypeEdit>
+              <option>0</option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+            </select>
+          </div>
+        </form>
+
+        <div class="liveCard">
+          <h3 class="text-align-center">Vista Previa</h3>
+          <app-card [title]="title" [description]="description" [img]="img" [type]="type" [edit]="true">
+          </app-card>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" (click)="addCardApi()">Guardar cambios</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- <div *ngIf=" currentCard">
+          <app-card-edit-modal [id]="currentCard.id" [title]="currentCard.title" [description]="currentCard.description"
+            [img]="currentCard.img" [type]="currentCard.type">
+          </app-card-edit-modal>
+      </div> -->
