@@ -8,40 +8,40 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class NotisComponent implements OnInit {
   user;
-  @Output() hasTrades=new EventEmitter<boolean>();
-  trades:any[];
+  @Output() hasTrades = new EventEmitter<boolean>();
+  trades: any[];
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
   }
 
-  updateTrades(){
-    this.http.get<any>('http://localhost:3000/u/trades/'+this.user).subscribe(data=>{
-      this.trades=data;
-      this.hasTrades.emit(this.trades.length>0);
+  updateTrades() {
+    this.http.get<any>('https://card-trading-api-dev.herokuapp.com/u/trades/' + this.user).subscribe(data => {
+      this.trades = data;
+      this.hasTrades.emit(this.trades.length > 0);
     });
   }
 
-  init(userid){
-    this.user=userid;
+  init(userid) {
+    this.user = userid;
     this.updateTrades();
   }
 
-  trade(trade,mode){
-    console.log(trade,mode);
-    const body={
-      c1:trade.card1.cardid,
-      c2:trade.card2.cardid,
-      u1:trade.userid,
-      u2:this.user,
-      date:trade.date,
-      mode:mode?1:2
+  trade(trade, mode) {
+    console.log(trade, mode);
+    const body = {
+      c1: trade.card1.cardid,
+      c2: trade.card2.cardid,
+      u1: trade.userid,
+      u2: this.user,
+      date: trade.date,
+      mode: mode ? 1 : 2
     }
-    this.http.post<any>('http://localhost:3000/u/trades',body).subscribe(data=>{
+    this.http.post<any>('https://card-trading-api-dev.herokuapp.com/u/trades', body).subscribe(data => {
       alert("Intercambio exitoso");
       this.updateTrades();
-    },err=>{
+    }, err => {
       alert(err);
       this.updateTrades()
     });

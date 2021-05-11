@@ -9,11 +9,11 @@ import { Component, OnInit } from '@angular/core';
 export class CatalogueComponent implements OnInit {
   cards;
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
-    this.http.get<any>('http://localhost:3000/c').subscribe(data=>{
-      this.cards=data;
+    this.http.get<any>('https://card-trading-api-dev.herokuapp.com/c').subscribe(data => {
+      this.cards = data;
     });
   }
 

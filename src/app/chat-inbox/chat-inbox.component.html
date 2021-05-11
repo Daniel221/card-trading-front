@@ -1,20 +1,20 @@
 <div class="chat-messages">
-  <div class="users container">
-    <div class="col-8 offset-1">
+  <div class="users">
+    <div class="username-holder">
       <h4>{{this.addressee?.name}}</h4>
     </div>
   </div>
-  <div class="chat-messages-show-container"  >
+  <div class="chat-messages-show-container">
     <ul class="chat-messages-show-list" id="message-list">
       <div *ngFor="let x of messages" class="message-row" [ngClass]="x.senderid == userid ? 'sender': 'receiver'">
-        <li  [ngClass]="x.senderid == userid ? 'sender': 'receiver'" class="chat-msg">{{x.msg}}
-          <br><small>sent: {{x.senddate}}</small>
+        <li [ngClass]="x.senderid == userid ? 'sender': 'receiver'" class="chat-msg">
+          <app-message [message]="x.msg" [date]="x.senddate"></app-message>
         </li>
-     </div>
+      </div>
     </ul>
   </div>
-  <div class="chat-messages-create-container"> 
-      <input class="chat-messages-create-input" type="text" [(ngModel)]="message">
-      <button  class="chat-messages-create-button btn btn-primary" (click)="SendMessage()"> Send </button>
+  <div class="chat-messages-create-container">
+    <input class="chat-messages-create-input" type="text" [(ngModel)]="message">
+    <button class="chat-messages-create-button btn btn-primary" (click)="SendMessage()"> Send </button>
   </div>
 </div>

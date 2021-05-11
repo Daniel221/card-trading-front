@@ -44,11 +44,11 @@ export class ContactListComponent implements OnInit, OnChanges {
 
   getContacts() {
     if (!this.id)
-      this.http.get<any>('http://localhost:3000/login?token=' + localStorage.getItem("token")).subscribe(res =>
-        this.http.get<any>('http://localhost:3000/u/contacts/' + (this.token = res.userid)).subscribe(data => this.users = data)
+      this.http.get<any>('https://card-trading-api-dev.herokuapp.com/login?token=' + localStorage.getItem("token")).subscribe(res =>
+        this.http.get<any>('https://card-trading-api-dev.herokuapp.com/u/contacts/' + (this.token = res.userid)).subscribe(data => this.users = data)
       );
     else
-      this.http.get<any>('http://localhost:3000/u/contacts/' + this.id).subscribe(data => this.users = data);
+      this.http.get<any>('https://card-trading-api-dev.herokuapp.com/u/contacts/' + this.id).subscribe(data => this.users = data);
   }
 
   update() {

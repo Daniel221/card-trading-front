@@ -1,24 +1,24 @@
 import { Injectable } from '@angular/core';
-import { HttpClient} from '@angular/common/http';
-import {Router} from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private _loginUrl = "http://localhost:3000/login"
+  private _loginUrl = "https://card-trading-api-dev.herokuapp.com/login"
   constructor(private http: HttpClient, private _router: Router) { }
 
-  loginUser(user){
+  loginUser(user) {
     return this.http.post<any>(this._loginUrl, user)
   }
-  loggedIn(){
+  loggedIn() {
     return !!localStorage.getItem('token');
   }
-  getToken(){
+  getToken() {
     return localStorage.getItem('token');
   }
-  logoutUser(){
+  logoutUser() {
     localStorage.removeItem('token');
     this._router.navigate(['']);
   }

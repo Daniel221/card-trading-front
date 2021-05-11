@@ -27,7 +27,7 @@ export class UserCardComponent implements OnInit {
   }
 
   remove() {
-    this.http.delete<any>('http://localhost:3000/u/contacts?oid=' + this.removable + '&id=' + this.extra).subscribe(data => {
+    this.http.delete<any>('https://card-trading-api-dev.herokuapp.com/u/contacts?oid=' + this.removable + '&id=' + this.extra).subscribe(data => {
       this.rer.emit();
     });
   }

@@ -1,5 +1,5 @@
-import {NgModule} from '@angular/core'
-import {Routes,RouterModule} from '@angular/router'
+import { NgModule } from '@angular/core'
+import { Routes, RouterModule } from '@angular/router'
 import { AdminComponent } from './admin/admin.component';
 import { AuthGuard } from './auth.guard';
 import { CardDetailsComponent } from './card-details/card-details.component';
@@ -8,22 +8,24 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { UserComponent } from './user/user.component';
+import { ErrorPageComponent } from './error-page/error-page.component';
 
-
-const routes:Routes=[
-    {path:'',component:HomeComponent},
-    {path:'user/:id',component:UserComponent},
-    {path:'userlist',component:UserListComponent, canActivate: [AuthGuard]},
-    {path:'catalogue',component:CatalogueComponent},
-    {path:'card/:id',component:CardDetailsComponent},
-    {path:'admin',component:AdminComponent},
-    {path: 'login', component:LoginComponent}
+const routes: Routes = [
+    { path: '', component: HomeComponent },
+    { path: 'user/:id', component: UserComponent },
+    { path: 'userlist', component: UserListComponent, canActivate: [AuthGuard] },
+    { path: 'catalogue', component: CatalogueComponent },
+    { path: 'card/:id', component: CardDetailsComponent },
+    { path: 'admin', component: AdminComponent },
+    { path: 'login', component: LoginComponent },
+    { path: '404', component: ErrorPageComponent },
+    { path: "**", redirectTo: '404' }
 ];
 
 @NgModule({
-    imports:[RouterModule.forRoot(routes, {useHash: true})],
-    exports:[RouterModule]
+    imports: [RouterModule.forRoot(routes, { useHash: true })],
+    exports: [RouterModule]
 })
-export class AppRoutingModule{
+export class AppRoutingModule {
 
 }

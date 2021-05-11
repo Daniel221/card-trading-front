@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs';
 import { Socket, io } from 'socket.io-client'
 
-const SOCKET_ENDPOINT = 'ws://localhost:3000';
+const SOCKET_ENDPOINT = 'ws://https://card-trading-api-dev.herokuapp.com/';
 
 @Injectable()
 export class SocketService {

@@ -30,6 +30,8 @@ import { NotisComponent } from './notis/notis.component';
 import { TradeComponent } from './trade/trade.component';
 import { ChatAppComponent } from './chat-app/chat-app.component';
 import { AdminComponent } from './admin/admin.component';
+import { MessageComponent } from './message/message.component';
+import { ErrorPageComponent } from './error-page/error-page.component';
 
 @NgModule({
   declarations: [
@@ -50,8 +52,9 @@ import { AdminComponent } from './admin/admin.component';
     NotisComponent,
     TradeComponent,
     ChatAppComponent,
-    AdminComponent
-
+    AdminComponent,
+    MessageComponent,
+    ErrorPageComponent
   ],
   imports: [
     BrowserModule,

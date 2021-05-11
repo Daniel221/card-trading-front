@@ -8,7 +8,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   styleUrls: ['./register.component.less'],
   providers: [UserService]
 })
-export class RegisterComponent implements AfterContentInit{
+export class RegisterComponent implements AfterContentInit {
   attributes = {
     name: { value: '', label: 'Name' },
     lastname: { value: '', label: 'Last_Name' },
@@ -40,11 +40,11 @@ export class RegisterComponent implements AfterContentInit{
       email: this.attributes.email.value,
       password: this.attributes.password.value
     }
-    this.http.post<any>('http://localhost:3000/u', user).subscribe(data => {
+    this.http.post<any>('https://card-trading-api-dev.herokuapp.com//u', user).subscribe(data => {
       console.log(data);
-      this.regMsg={msg:"Usuario registrado exitosamente.",class:'text-success'};
-    },error=>{
-      this.regMsg={msg:"Usuario existente.",class:'text-danger'};
+      this.regMsg = { msg: "Usuario registrado exitosamente.", class: 'text-success' };
+    }, error => {
+      this.regMsg = { msg: "Usuario existente.", class: 'text-danger' };
     })
   }
 

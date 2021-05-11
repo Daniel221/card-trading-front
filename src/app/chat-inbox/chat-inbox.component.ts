@@ -4,8 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { SocketService } from '../shared/socket.service';
 import * as moment from 'moment';
 
-const SOCKET_ENDPOINT = 'localhost:3000';
-const CHAT_API = 'http://localhost:3000/chat';
+const CHAT_API = 'https://card-trading-api-dev.herokuapp.com//chat';
 
 
 

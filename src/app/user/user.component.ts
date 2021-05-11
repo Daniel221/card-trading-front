@@ -39,14 +39,14 @@ export class UserComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this.actRoute.params.subscribe(p => {
       this.userid = p.id;
-      this.http.get<any>('http://localhost:3000/u/' + this.userid).subscribe(data => this.user = data);
-      this.http.get<any>(`http://localhost:3000/c?user=${this.userid}`).subscribe(data => {
+      this.http.get<any>('https://card-trading-api-dev.herokuapp.com/u/' + this.userid).subscribe(data => this.user = data);
+      this.http.get<any>(`https://card-trading-api-dev.herokuapp.com/c?user=${this.userid}`).subscribe(data => {
         this.showCards();
         this.userCards = data;
       });
-      this.http.get<any>('http://localhost:3000/login?token=' + localStorage.getItem("token")).subscribe(res => {
+      this.http.get<any>('https://card-trading-api-dev.herokuapp.com/login?token=' + localStorage.getItem("token")).subscribe(res => {
         this.myid = res.userid;
-        this.http.get<any>(`http://localhost:3000/u/contacts/${this.userid}?otherId=${this.myid}`).subscribe(data => this.frens = data.length > 0);
+        this.http.get<any>(`https://card-trading-api-dev.herokuapp.com/u/contacts/${this.userid}?otherId=${this.myid}`).subscribe(data => this.frens = data.length > 0);
       });
     });
   }
@@ -70,7 +70,7 @@ export class UserComponent implements OnInit, OnChanges {
       img: this.attributes.img.value,
       profiletext: this.attributes.profiletext.value
     }
-    this.http.put<any>('http://localhost:3000/u/' + this.user.userid, user).subscribe(data => {
+    this.http.put<any>('https://card-trading-api-dev.herokuapp.com/u/' + this.user.userid, user).subscribe(data => {
       console.log(data);
       this.regMsg = { msg: "Usuario actualizado exitosamente.", class: 'text-success' };
       window.location.reload();
@@ -92,9 +92,9 @@ export class UserComponent implements OnInit, OnChanges {
       $("#tradeModal").modal("show");
       return;
     }
-    this.http.post<any>('http://localhost:3000/u/contacts/' + this.userid, { id: this.myid }).subscribe(data => {
+    this.http.post<any>('https://card-trading-api-dev.herokuapp.com/u/contacts/' + this.userid, { id: this.myid }).subscribe(data => {
       this.contactos.update();
-      this.frens=true;
+      this.frens = true;
       alert("Contacto añadido");
     }, err => {
       alert(err.error.error);
