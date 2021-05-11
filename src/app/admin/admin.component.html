@@ -16,7 +16,7 @@
             <label>description</label><br>
             <input type="text" class="form-control" [value]="newCard.description" (input)="onChange('description',$event)"/>
             <label>img</label><br>
-            <input type="file" (change)="fileChanged($event)" accept="image/*"/>
+            <input id="fileInput" type="file" (change)="fileChanged($event)" accept="image/*"/>
             <div class="together">
                 <label>type</label>
                 <input type="range" class="form-control" [value]="newCard.type" (input)="onChange('type',$event)" min="0" max="5"/>
@@ -27,7 +27,6 @@
                 <button class="btn btn-secondary" (click)="clear()">Clear</button>
                 <button disabled id="saveCard" class="btn btn-success" (click)="createCard()"><i class="fas fa-check-circle"></i></button>
             </div>
-            <button (click)="uploadImg()">upooad</button>
         </div>
     </div>
 </div>
