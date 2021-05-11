@@ -13,8 +13,8 @@ export class TradeComponent implements OnInit {
   @Input() user2:number;
   @Input() username:string;
   usersCards:any[]=[null,null];
-  //cardid | title | description | img | type
-  selCards:any[]=[{cardid:-1,title:"",description:"",img:"",type:"tmp"},{cardid:-1,title:"",description:"",img:"",type:"tmp"}];
+  static defaultCard={cardid:-1,title:"",description:"",img:"",type:"tmp"};
+  selCards:any[]=[TradeComponent.defaultCard,TradeComponent.defaultCard];
 
   constructor(private http:HttpClient) { }
 
@@ -27,6 +27,8 @@ export class TradeComponent implements OnInit {
     $("#confirmTrade").prop('disabled', true);
     this.http.get<any>(`http://localhost:3000/c?user=${this.user1}`).subscribe(data=>this.usersCards[0]=data);
     this.http.get<any>(`http://localhost:3000/c?user=${this.user2}`).subscribe(data=>this.usersCards[1]=data);
+    this.selCards[0]=TradeComponent.defaultCard;
+    this.selCards[1]=TradeComponent.defaultCard;
   }
 
   selectInv(inv,card){

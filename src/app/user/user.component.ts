@@ -94,6 +94,7 @@ export class UserComponent implements OnInit, OnChanges {
     }
     this.http.post<any>('http://localhost:3000/u/contacts/' + this.userid, { id: this.myid }).subscribe(data => {
       this.contactos.update();
+      this.frens=true;
       alert("Contacto añadido");
     }, err => {
       alert(err.error.error);
