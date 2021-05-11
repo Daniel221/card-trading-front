@@ -19,9 +19,9 @@ import { UserCardComponent } from './user-card/user-card.component';
 import { ChatInboxComponent } from './chat-inbox/chat-inbox.component';
 import { ContactListComponent } from './contact-list/contact-list.component';
 
-import { AuthService } from './auth.service';
-import { AuthGuard } from './auth.guard';
-import { TokenInterceptorService } from './token-interceptor.service'
+import { AuthService } from './shared/auth.service';
+import { AuthGuard } from './shared/auth.guard';
+import { TokenInterceptorService } from './shared/token-interceptor.service'
 import {SocialAuthServiceConfig} from 'angularx-social-login';
 import {SocialLoginModule, GoogleLoginProvider} from 'angularx-social-login';
 

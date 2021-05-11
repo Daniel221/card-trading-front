@@ -1,6 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService} from '../shared/auth.service';
 
 @Component({
   selector: 'app-user-list',
@@ -15,10 +16,15 @@ export class UserListComponent implements OnInit {
   usersPerPage:number=24;
   filter:string='';
 
-  constructor(private http:HttpClient, private _router: Router) { }
+  constructor(private http:HttpClient, private _router: Router, private authServie: AuthService) { }
 
   ngOnInit(): void {
-    this.http.get<any>('http://localhost:3000/u').subscribe(data=>{
+    this.http.get<any>('http://localhost:3000/u', {
+      headers: {
+        'Authorization': `Bearer ${this.authServie.user$.value?.idToken}`
+      }
+    }).subscribe(data=>{
+      console.log(this.authServie.user$.value?.idToken);
       this.users=data;
       this.usuarios=data;
       this.usersInPage=this.usuarios.slice(0,this.usersPerPage);

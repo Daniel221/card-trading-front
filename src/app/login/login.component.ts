@@ -1,8 +1,9 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { AuthService} from '../auth.service';
+import { AuthService} from '../shared/auth.service';
 import {Router} from '@angular/router';
-import {SocialAuthService} from 'angularx-social-login';
-import {SocialUser, GoogleLoginProvider} from 'angularx-social-login';
+import { GoogleLoginProvider, SocialAuthService, SocialUser } from 'angularx-social-login';
+import { from, Subscription } from 'rxjs'
 
 @Component({
   selector: 'app-login',
@@ -10,6 +11,7 @@ import {SocialUser, GoogleLoginProvider} from 'angularx-social-login';
   styleUrls: ['./login.component.less']
 })
 export class LoginComponent implements OnInit {
+  user: SocialUser | null;
 
   exampleEmail = "ex@mp.le";
   loginUserData:any={};
@@ -19,22 +21,36 @@ export class LoginComponent implements OnInit {
   constructor(private _auth: AuthService, private _router: Router, private socialAuthService: SocialAuthService) { }
 
   ngOnInit(): void {
+    this.user = null;
+
     this.socialAuthService.authState.subscribe((user) => {
       this.socialUser = user;
       this.isLoggedin = (user != null);
       console.log(this.socialUser);
       localStorage.setItem('token', this.socialUser.idToken);
-      this._router.navigate(['/userlist']);
+      //this._router.navigate(['']);
     });
   }
 
-  loginWithGoogle(): void {
+  signWithGoogle() {
+    from(this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID)).subscribe({
+      next: (user: SocialUser) => {
+        this._auth.login(user);
+        this._router.navigate(['/userlist']);
+      },
+      error: (error) => {
+        console.error(error)
+      }
+    })
+  }
+
+  /*loginWithGoogle(): void {
     this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID);
   }
 
   logOutGoogle(): void {
     this.socialAuthService.signOut();
-  }
+  }*/
 
   LoginUser(){
     this._auth.loginUser(this.loginUserData).subscribe(
