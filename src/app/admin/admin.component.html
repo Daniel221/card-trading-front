@@ -1,0 +1,32 @@
+<div class="row container">
+    <div class="cards col-3">
+        <div *ngFor="let c of cartas">
+            <app-card [smol]="true" (click)="selectCard(c)" [id]="c.cardid" [title]="c.title" [description]="c.description" [img]="c.img" [type]="c.type"></app-card>
+        </div>
+    </div>
+    <div style="align-self: center;">
+        <app-card  [id]="newCard.cardid" [title]="newCard.title" [description]="newCard.description" [img]="newCard.img" [type]="newCard.type"></app-card>
+    </div>
+    <div class="col-6 register-form container">
+        <div class="register-fields">
+            <label>card id</label><br>
+            <input type="number" class="form-control" [value]="newCard.cardid" (input)="onChange('cardid',$event)" [ngStyle]="{'border-color':this.newCard.cardid>=0&&this.newCard.cardid<=this.cartas.length?'green':'red'}"/>
+            <label>title</label><br>
+            <input type="text" class="form-control" [value]="newCard.title" (input)="onChange('title',$event)"/>
+            <label>description</label><br>
+            <input type="text" class="form-control" [value]="newCard.description" (input)="onChange('description',$event)"/>
+            <label>img</label><br>
+            <input id="fileInput" type="file" (change)="fileChanged($event)" accept="image/*"/>
+            <div class="together">
+                <label>type</label>
+                <input type="range" class="form-control" [value]="newCard.type" (input)="onChange('type',$event)" min="0" max="5"/>
+                <div class="spacer"></div>
+            </div>
+            <div class="together">
+                <button id="deletus" class="btn btn-danger" (click)="deleteCard()">🗑️</button>
+                <button class="btn btn-secondary" (click)="clear()">Clear</button>
+                <button disabled id="saveCard" class="btn btn-success" (click)="createCard()"><i class="fas fa-check-circle"></i></button>
+            </div>
+        </div>
+    </div>
+</div>

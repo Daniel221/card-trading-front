@@ -55,9 +55,9 @@ export class LoginComponent implements OnInit {
   LoginUser(){
     this._auth.loginUser(this.loginUserData).subscribe(
       data => {
-        console.log(data);
         localStorage.setItem('token', data.token);
         this._router.navigate(['/userlist']);
+        location.reload();
       },error=>{
         this.logMsg={msg:"Usuario o contraseña incorrectos.",class:'text-danger'};
       })

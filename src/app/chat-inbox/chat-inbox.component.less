@@ -1,9 +1,15 @@
+.chat-messages {
+  height: 100%;
+
+}
+
 .chat-messages-show-container {
   background: #c3c3c3;
-  height: 400px;
+  height: 65vh;
   display: flex;
   flex-direction: column;
   overflow: auto;
+  margin-top: 0;
 }
 
 .chat-messages-show-list {
@@ -31,14 +37,54 @@
   width: 100px;
 }
 
-.chat-messages {
-  z-index: 1000;
-
+.message-row {
+  width: 100%;
 }
 
 .chat-msg {
-  background-color: white;
+  font-size: 1em;
   padding: 15px 30px;
   margin: 10px;
-  text-align: left;
+  max-width: 78%;
+  color: white;
+  display: inline-block;
+
+}
+
+.receiver {
+  border-radius: 25px 25px 25px 0;
+
+  li {
+    background-color: grey;
+    text-align: left;
+
+  }
+
+}
+
+.sender {
+  text-align: right;
+  border-radius: 25px 25px 0 25px;
+
+  li {
+    text-align: right;
+    background-color: rgb(0, 216, 0);
+
+  }
+
+}
+
+.username-holder {
+  width: 100%;
+  background-color: rgb(161, 161, 161);
+  text-align: center;
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 10px 10px 0px 0px;
+  border-radius: 10px 10px 0px 0px;
+  border-bottom: 1px solid white;
+
+  h4 {
+    margin-bottom: 0;
+    font-size: 2em;
+  }
 }

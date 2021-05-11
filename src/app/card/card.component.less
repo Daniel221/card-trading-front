@@ -31,11 +31,9 @@
         border: 2px ridge gray;
     }
     .title{
-        //padding-top: 1.5%;
-        //font-size: large;
         font-weight: bold;
-        overflow-y: unset;
-        overflow-x: scroll;
+        overflow-y: hidden;
+        overflow-x: hidden;
     }
     .title,.desc{
         color: black;
@@ -43,17 +41,46 @@
         width: 95%;
         margin: 0% 2.5% 1% 1.5%;
         padding-left: 0.5%;
-        //border: 1px solid black;
     }
     .desc{
         font-size: small;
         height: 35%;
-        overflow-y: scroll;
+        overflow-y: hidden;
         word-wrap: break-word;
     }
     ::-webkit-scrollbar{
         width: 0px;
         height: 0px;
         background: transparent;
+    }
+}
+.cardo[mini="true"]{
+    width: 2em;
+    height: 3em;
+    .title,.desc{
+        margin: 0% 2.5% 1% 1.5%;
+        padding-left: 0.5%;
+    }
+    .desc{
+        font-size: 0.1%;
+        line-height: 1;
+    }
+}
+.cardo[smol="true"]:hover{
+    cursor: pointer;
+}
+.cardo[smol="true"]{
+    width: 4em;
+    height: 6em;
+    .title{
+        font-size: 5%;
+    }
+    .title,.desc{
+        margin: 0% 2.5% 1% 1.5%;
+        padding-left: 0.5%;
+    }
+    .desc{
+        font-size: 0.1%;
+        line-height: 1;
     }
 }

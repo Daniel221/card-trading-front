@@ -1,20 +1,44 @@
-<div *ngIf="user" class="userInfo">
-    <img [src]="user.img?user.img:'https://i1.sndcdn.com/avatars-000310902564-g2unlt-t240x240.jpg'"/>
-    <div>
-        <h1>Nombre de usuario: {{user.username}}</h1>
-        <p>Correo: {{user.email}}</p>
+<div *ngIf="user" class="userInfo container">
+  <div class="row">
+    <img class="col-3" [src]="user.img?user.img:'https://i1.sndcdn.com/avatars-000310902564-g2unlt-t240x240.jpg'"/>
+    <div class="col-6">
+        <h1>{{user.username}}</h1>
+        <i>{{user.profiletext}}</i>
+        <br/>
+        <button class="btn btn-success" *ngIf="myid!=user.userid" (click)="addFrend()">
+          <div *ngIf="!frens; else yesFrens">Añadir amigo</div>
+          <ng-template #yesFrens>Intercambiar</ng-template>
+        </button>
+        <button class="btn btn-warning" *ngIf="myid==user.userid" data-toggle="modal" data-target="#editModal">Editar</button>
     </div>
-    <button class="btn btn-success">Añadir amigo</button>
-    <button class="btn btn-warning" data-toggle="modal" data-target="#editModal">Editar</button>
-    <app-contact-list [id]="userid"></app-contact-list>
-</div>
-<div class="userCards" *ngIf="userCards&&userCards.length>0" [ngStyle]="{'grid-template-columns':genCols(nnn)}">
-  <div *ngFor="let c of userCards">
-    <app-card [id]="c.cardid" [title]="c.title" [description]="c.description" [img]="c.img" [type]="c.type"></app-card>
+    <app-contact-list class="col-3" #contactos [id]="userid"></app-contact-list>
   </div>
 </div>
-<div *ngIf="!userCards||userCards.length<1" class="noUserCards">
-  ¡Este usuario no tiene cartas!
+<div>
+  <div id="usersCards" *ngIf="showMenu.cards">
+    <div class="userCards container" *ngIf="userCards&&userCards.length>0">
+      <div *ngFor="let c of userCards">
+        <app-card [id]="c.cardid" [title]="c.title" [description]="c.description" [img]="c.img" [type]="c.type"></app-card>
+      </div>
+    </div>
+    <div *ngIf="!userCards||userCards.length<1" class="noUserCards">
+      ¡Este usuario no tiene cartas!
+    </div>
+  </div>
+  <div id="userContacts" *ngIf="showMenu.chat">
+    <app-chat-app [userid]="myid"></app-chat-app>
+  </div>
+</div>
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-1">
+      <a class="btn btn-primary" (click)="showCards()">Cartas</a>
+    </div>
+    <div class="col-1" *ngIf="user&&myid==user.userid">
+      <a class="btn btn-primary" (click)="showChat()">Chat</a>
+    </div>
+  </div>
 </div>
 
 <div class="modal fade" id="editModal" tabindex="-1">
@@ -67,4 +91,7 @@
           </div>
         </div>
     </div>
+</div>
+<div class="modal fade" *ngIf="frens" id="tradeModal" tabindex="-1">
+  <app-trade #tradeMod [user1]="myid" [user2]="userid" [username]="user.username"></app-trade>
 </div>

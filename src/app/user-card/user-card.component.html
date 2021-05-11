@@ -1,10 +1,50 @@
-<div class="userCard">
-    <div [routerLink]="'/user/'+user.userid">
+<div class="userCard" *ngIf="!this.deleteAlert">
+    <div (click)="contactClick()" *ngIf="chat">
         <img [src]="user.img?user.img:'https://i1.sndcdn.com/avatars-000310902564-g2unlt-t240x240.jpg'" alt=""/>
         <div class="userInfo">
             <h1>{{user.username}}</h1>
             <h5 *ngIf="user.profiletext">{{user.profiletext}}</h5>
         </div>
     </div>
-    <button *ngIf="removable" class="btn btn-danger">🗑️</button>
+    <div [routerLink]="'/user/'+user.userid" *ngIf="!chat">
+      <img [src]="user.img?user.img:'https://i1.sndcdn.com/avatars-000310902564-g2unlt-t240x240.jpg'" alt=""/>
+      <div class="userInfo">
+          <h1>{{user.username}}</h1>
+          <h5 *ngIf="user.profiletext">{{user.profiletext}}</h5>
+      </div>
+    </div>
+    <button *ngIf="removable>-1" (click)="activateDeleteAlert()" class="btn btn-danger">🗑️</button>
+    
 </div>
+
+<div class="deleteAlert" id="{{user.userid+removable}}" *ngIf="this.deleteAlert">
+  ¿Desea eliminar contacto "{{user.username}}"?
+  <div class="buttons">
+    <a (click)="deactivateDeleteAlert()" class="btn btn-outline-info deleteAlertBtn">No</a>
+    <a (click)="remove()" class="btn btn-outline-danger deleteAlertBtn">Yes</a>
+  </div>
+</div>
+
+<!--<div class="modal fade" [id]="'confirmDelConModal'+user.userid+removable" tabindex="-1">
+  <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Eliminar contacto</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="register-form container" >
+            <div class="register-fields">
+              <h3>¿Seguro que desea eliminar a "{{user.username}}" de su lista de contactos?</h3>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button class="btn btn-danger" (click)="remove()" [ngStyle]="{'pointer-events':'auto'}" data-dismiss="modal">Confirmar</button>
+        </div>
+      </div>
+  </div>
+</div>-->

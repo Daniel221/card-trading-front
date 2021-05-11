@@ -1,0 +1,18 @@
+<h5 class="dropdown-item">Intercambios pendientes</h5>
+<div class="trades">
+    <div *ngFor="let t of trades">
+        <div class="dropdown-divider"></div>
+        <div class="trade dropdown-item" href="#">
+            <div><h5>{{t.username}}</h5><div class="spacer"></div><h5>Tú</h5></div>
+            <div>
+                <app-card [mini]="true" [id]="t.card1.cardid" [title]="t.card1.title" [description]="t.card1.description" [img]="t.card1.img" [type]="t.card1.type"></app-card>
+                <h3><i class="fas fa-sync-alt"></i></h3>
+                <app-card [mini]="true" [id]="t.card2.cardid" [title]="t.card2.title" [description]="t.card2.description" [img]="t.card2.img" [type]="t.card2.type"></app-card>
+            </div>
+            <div class="butts">
+                <button class="btn btn-danger" (click)="trade(t,false)">Rechazar</button>
+                <button class="btn btn-success" (click)="trade(t,true)">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>

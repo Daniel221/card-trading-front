@@ -48,7 +48,16 @@ p {
 
 .content {
   display: flex;
-  margin: 82px 8% 32px 8%;
+  margin: 20vh 8% 32px 8%;
+  flex-direction: column;
+  align-items: center;
+  width: 84%;
+}
+
+.loggedInContent {
+  margin: 20vh 5% 0px 0px;
+  width: 100%;
+  display: flex;
   flex-direction: column;
   align-items: center;
 }
@@ -91,17 +100,4 @@ body {
 .navButts {
   display: flex;
   justify-content: space-evenly;
-}
-
-#chat-box {
-  position: fixed;
-  right: 100px;
-  bottom: 0px;
-  padding: 10px 20px;
-}
-
-#contact-list {
-  position: fixed;
-  right: 0px;
-  top: 50vw;
 }

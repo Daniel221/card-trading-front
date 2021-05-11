@@ -11,7 +11,6 @@ import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { UserComponent } from './user/user.component';
 import { CatalogueComponent } from './catalogue/catalogue.component';
-import { InfoComponent } from './info/info.component';
 import { CardDetailsComponent } from './card-details/card-details.component';
 import { AppRoutingModule } from './app.routing.module';
 import { UserListComponent } from './user-list/user-list.component';
@@ -27,6 +26,12 @@ import {SocialLoginModule, GoogleLoginProvider} from 'angularx-social-login';
 
 import { SocketService } from './shared/socket.service';
 import { HeaderComponent } from './header/header.component';
+import { NotisComponent } from './notis/notis.component';
+import { TradeComponent } from './trade/trade.component';
+import { ChatAppComponent } from './chat-app/chat-app.component';
+import { AdminComponent } from './admin/admin.component';
+import { MessageComponent } from './message/message.component';
+import { ErrorPageComponent } from './error-page/error-page.component';
 
 @NgModule({
   declarations: [
@@ -38,13 +43,18 @@ import { HeaderComponent } from './header/header.component';
     HomeComponent,
     UserComponent,
     CatalogueComponent,
-    InfoComponent,
     CardDetailsComponent,
     UserListComponent,
     UserCardComponent,
     ChatInboxComponent,
     HeaderComponent,
-    ContactListComponent
+    ContactListComponent,
+    NotisComponent,
+    TradeComponent,
+    ChatAppComponent,
+    AdminComponent,
+    MessageComponent,
+    ErrorPageComponent
   ],
   imports: [
     BrowserModule,

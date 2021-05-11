@@ -2,6 +2,7 @@
   background-color: white;
   padding-bottom: 10px;
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.397);
+  height: 12vh;
 
   .navbar-brand {
     padding: 5px;
@@ -22,6 +23,20 @@
       font-size: 17px;
     }
 
+    a[data-enabled="true"]{
+      cursor: pointer;
+    }
+
+    a[data-enabled="false"]{
+      color: rgba(0, 0, 0, 0.2);
+      cursor: default;
+    }
+
+    a[data-enabled="false"]:hover{
+      color: rgba(0, 0, 0, 0.2);
+      cursor: default;
+    }
+
     .icons {
       font-size: 22px;
       margin-left: 10px;
@@ -31,5 +46,23 @@
       color: rgb(0, 0, 0);
 
     }
+
+    .dropdown-menu {
+      z-index: 3000;
+    }
   }
+}
+
+.bell-noti{
+  background-color: red;
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  margin-left: 16%;
+}
+
+.modal-body{
+  display: flex;
+  justify-content: center;
 }

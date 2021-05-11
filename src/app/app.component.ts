@@ -21,7 +21,7 @@ export class AppComponent implements AfterContentInit, OnInit {
   //isLoggedIn: boolean = false;
 
   getUsers() {
-    this.http.get('http://localhost:3000/u/40000').subscribe((user) => console.log(user));
+    this.http.get('https://card-trading-api-dev.herokuapp.com/u/40000').subscribe((user) => console.log(user));
   }
 
   ngOnInit() {
@@ -30,9 +30,5 @@ export class AppComponent implements AfterContentInit, OnInit {
   }
 
   ngAfterContentInit(): void {
-  }
-
-  displayChat() {
-    this.showChat = true;
   }
 }
