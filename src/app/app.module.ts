@@ -29,6 +29,7 @@ import { HeaderComponent } from './header/header.component';
 import { NotisComponent } from './notis/notis.component';
 import { TradeComponent } from './trade/trade.component';
 import { ChatAppComponent } from './chat-app/chat-app.component';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { ChatAppComponent } from './chat-app/chat-app.component';
     ContactListComponent,
     NotisComponent,
     TradeComponent,
-    ChatAppComponent
+    ChatAppComponent,
+    AdminComponent
 
   ],
   imports: [

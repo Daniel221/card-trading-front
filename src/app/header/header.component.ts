@@ -4,6 +4,7 @@ import { AuthService } from '../auth.service';
 import { NotisComponent } from '../notis/notis.component';
 
 declare var $:any;
+const API_URL='http://localhost:3000';
 
 @Component({
   selector: 'app-header',
@@ -16,6 +17,7 @@ declare var $:any;
 export class HeaderComponent implements OnInit {
   @ViewChild("notis") notis:NotisComponent;
   isLogged: boolean = false;
+  isAdmin: boolean = false;
   canCheckIn: boolean = false;
   hasNotis: boolean = false;
   userid: number;
@@ -30,30 +32,32 @@ export class HeaderComponent implements OnInit {
   constructor(private _authService: AuthService, private http: HttpClient) { }
 
   ngOnInit(): void {
-    if(this.isLogged = this._authService.loggedIn()){
-      this.http.get<any>('http://localhost:3000/login?token='+localStorage.getItem("token")).subscribe(res=>{
-        this.userid=res.userid;
-        this.notis.init(this.userid);
-        if(!res.checkin){
-          this.canCheckIn=true;
-        }else{
-          let todayStart=new Date();
-          todayStart.setUTCHours(0,0,0,0);
-          this.canCheckIn=todayStart.getTime()-res.checkin>0;
-        }
+    if(!(this.isLogged = this._authService.loggedIn()))return;
+    this.http.get<any>(`${API_URL}/login?token=${localStorage.getItem("token")}`).subscribe(res=>{
+      this.userid=res.userid;
+      this.http.get<any>(`${API_URL}/u/${this.userid}`).subscribe(res=>{
+        this.isAdmin=res.role==="admin";
       });
-    }
+      this.notis.init(this.userid);
+      if(!res.checkin){
+        this.canCheckIn=true;
+      }else{
+        let todayStart=new Date();
+        todayStart.setUTCHours(0,0,0,0);
+        this.canCheckIn=todayStart.getTime()-res.checkin>0;
+      }
+    });
   }
 
   process(){
     if(!this.canCheckIn)return;
     this.canCheckIn=false;
-    this.http.put<any>('http://localhost:3000/u/'+this.userid,{checkin:""+Date.now()}).subscribe(data=>{
-      this.http.get<any>('http://localhost:3000/c').subscribe(cards=>{
+    this.http.put<any>(`${API_URL}/u/`+this.userid,{checkin:""+Date.now()}).subscribe(data=>{
+      this.http.get<any>(`${API_URL}/c`).subscribe(cards=>{
         const cardid=Math.floor(Math.random()*cards.length);
         console.log(cardid);
-        this.http.post<any>('http://localhost:3000/c/'+this.userid,{cardid}).subscribe(_=>{
-          this.http.get<any>('http://localhost:3000/c/'+cardid).subscribe(card=>{
+        this.http.post<any>(`${API_URL}/c/`+this.userid,{cardid}).subscribe(_=>{
+          this.http.get<any>(`${API_URL}/c/`+cardid).subscribe(card=>{
             this.card=card;
             localStorage.setItem('token', data.token);
             $("#gottenCard").modal("show");

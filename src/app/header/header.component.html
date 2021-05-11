@@ -5,7 +5,7 @@
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="flex-grow-1 text-right ml-auto collapse navbar-collapse justify-content-end" style="margin-right:8%;" id="nabvarNav">
+  <div class="flex-grow-1 text-right ml-auto collapse navbar-collapse justify-content-end" style="margin-right:8%;" id="navbarNav">
     <ul class="navbar-nav">
       <li *ngFor="let item of menuItems" class="nav-item">
         <a *ngIf="item.link.length>0; else elseA" routerLink="{{item.link}}" class="nav-link navbar-link">{{item.name}}</a>
@@ -27,8 +27,8 @@
         <a class="nav-link navbar-link icons dropdown-toggle" href="" role="button" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false"><i class="fas fa-user"></i></a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" routerLink="user/100015">Perfil</a>
-            <a class="dropdown-item" href="#">Ajustes</a>
+            <a class="dropdown-item" [routerLink]="'user/'+userid">Perfil</a>
+            <a class="dropdown-item" routerLink="admin" *ngIf="isAdmin">Admin</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item text-danger" (click)="_authService.logoutUser()" href=".">Cerrar sesión</a>
           </div>

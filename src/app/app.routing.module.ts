@@ -1,5 +1,6 @@
 import {NgModule} from '@angular/core'
 import {Routes,RouterModule} from '@angular/router'
+import { AdminComponent } from './admin/admin.component';
 import { AuthGuard } from './auth.guard';
 import { CardDetailsComponent } from './card-details/card-details.component';
 import { CatalogueComponent } from './catalogue/catalogue.component';
@@ -15,6 +16,7 @@ const routes:Routes=[
     {path:'userlist',component:UserListComponent, canActivate: [AuthGuard]},
     {path:'catalogue',component:CatalogueComponent},
     {path:'card/:id',component:CardDetailsComponent},
+    {path:'admin',component:AdminComponent},
     {path: 'login', component:LoginComponent}
 ];
 

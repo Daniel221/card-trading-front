@@ -14,17 +14,6 @@
     <app-contact-list class="col-3" #contactos [id]="userid"></app-contact-list>
   </div>
 </div>
-<br>
-<div class="container">
-  <div class="row">
-    <div class="col-1">
-      <a class="btn btn-primary" (click)="showCards()">Cartas</a>
-    </div>
-    <div class="col-1" *ngIf="myid==user.userid">
-      <a class="btn btn-primary" (click)="showChat()">Chat</a>
-    </div>
-  </div>
-</div>
 <div>
   <div id="usersCards" *ngIf="showMenu.cards">
     <div class="userCards container" *ngIf="userCards&&userCards.length>0">
@@ -38,6 +27,17 @@
   </div>
   <div id="userContacts" *ngIf="showMenu.chat">
     <app-chat-app [userid]="myid"></app-chat-app>
+  </div>
+</div>
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-1">
+      <a class="btn btn-primary" (click)="showCards()">Cartas</a>
+    </div>
+    <div class="col-1" *ngIf="user&&myid==user.userid">
+      <a class="btn btn-primary" (click)="showChat()">Chat</a>
+    </div>
   </div>
 </div>
 
