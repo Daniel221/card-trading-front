@@ -6,7 +6,7 @@ import { TradeComponent } from '../trade/trade.component';
 import { catchError, map, tap } from 'rxjs/operators';
 
 declare var $: any;
-const API_URL = 'https://card-trading-api-dev.herokuapp.com/';
+const API_URL = 'https://card-trading-api-dev.herokuapp.com';
 
 @Component({
   selector: 'app-admin',

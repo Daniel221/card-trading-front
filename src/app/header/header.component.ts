@@ -4,7 +4,7 @@ import { AuthService } from '../auth.service';
 import { NotisComponent } from '../notis/notis.component';
 
 declare var $: any;
-const API_URL = 'https://card-trading-api-dev.herokuapp.com/';
+const API_URL = 'https://card-trading-api-dev.herokuapp.com';
 
 @Component({
   selector: 'app-header',
