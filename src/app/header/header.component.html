@@ -5,11 +5,14 @@
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="flex-grow-1 text-right ml-auto collapse navbar-collapse justify-content-end" style="margin-right:8%;" id="navbarNav">
+  <div class="flex-grow-1 text-right ml-auto collapse navbar-collapse justify-content-end" style="margin-right:8%;"
+    id="navbarNav">
     <ul class="navbar-nav">
       <li *ngFor="let item of menuItems" class="nav-item">
-        <a *ngIf="item.link.length>0; else elseA" routerLink="{{item.link}}" class="nav-link navbar-link">{{item.name}}</a>
-        <ng-template #elseA><a *ngIf="isLogged" class="nav-link navbar-link" [attr.data-enabled]="canCheckIn" (click)="process()">{{item.name}}</a></ng-template>
+        <a *ngIf="item.link.length>0; else elseA" routerLink="{{item.link}}"
+          class="nav-link navbar-link">{{item.name}}</a>
+        <ng-template #elseA><a *ngIf="isLogged" class="nav-link navbar-link" [attr.data-enabled]="canCheckIn"
+            (click)="process()">{{item.name}}</a></ng-template>
       </li>
       <li class="nav-item" *ngIf="!isLogged">
         <a class="nav-link navbar-link" data-toggle="modal" data-target="#loginModal"><button
@@ -22,16 +25,16 @@
         </a>
         <app-notis #notis class="dropdown-menu" (click)="menuClick($event)" aria-labelledby="navbarDropdown" (hasTrades)="hasTrades($event)"></app-notis>
       </li>
-      
+
       <li class="nav-item dropdown" style="z-index: 2000;" *ngIf="isLogged">
         <a class="nav-link navbar-link icons dropdown-toggle" href="" role="button" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false"><i class="fas fa-user"></i></a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" [routerLink]="'user/'+userid">Perfil</a>
-            <a class="dropdown-item" routerLink="admin" *ngIf="isAdmin">Admin</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item text-danger" (click)="_authService.logoutUser()" href=".">Cerrar sesión</a>
-          </div>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" [routerLink]="'user/'+userid">Perfil</a>
+          <a class="dropdown-item" routerLink="admin" *ngIf="isAdmin">Admin</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item text-danger" (click)="_authService.logoutUser()" href=".">Cerrar sesión</a>
+        </div>
       </li>
     </ul>
   </div>
@@ -39,19 +42,20 @@
 
 <div #gotModal class="modal fade" id="gottenCard" tabindex="-1">
   <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">¡Conseguiste una carta!</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <app-card [id]="card.cardid" [title]="card.title" [description]="card.description" [img]="card.img" [type]="card.type"></app-card>
-        </div>
-        <div class="modal-footer">
-          <button class="btn btn-warning" [ngStyle]="{'pointer-events':'auto'}" data-dismiss="modal">Ok</button>
-        </div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">¡Conseguiste una carta!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
+      <div class="modal-body">
+        <app-card [id]="card.cardid" [title]="card.title" [description]="card.description" [img]="card.img"
+          [type]="card.type"></app-card>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-warning" [ngStyle]="{'pointer-events':'auto'}" data-dismiss="modal">Ok</button>
+      </div>
+    </div>
   </div>
 </div>

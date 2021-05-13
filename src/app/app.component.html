@@ -20,13 +20,16 @@
 
 
 <app-header></app-header>
-<div [ngClass]="isLoggedIn ? 'loggedInContent':'content'" role="main"> 
+<div [ngClass]="isLoggedIn ? 'loggedInContent':'content'" role="main">
   <router-outlet></router-outlet>
 </div>
+<div class="">
+  <app-footer></app-footer>
+</div>
+
 <div class="modal fade" id="loginModal" tabindex="-1">
   <app-login></app-login>
 </div>
 <div class="modal fade" id="registerModal" tabindex="-1">
   <app-register></app-register>
 </div>
-

@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { SocketService } from '../shared/socket.service';
 import * as moment from 'moment';
 
-const CHAT_API = 'https://card-trading-api-dev.herokuapp.com//chat';
+const CHAT_API = 'https://card-trading-api-dev.herokuapp.com/chat';
 
 
 
@@ -32,7 +32,7 @@ export class ChatInboxComponent implements OnInit, OnDestroy, OnChanges {
         this.socketService.logout(this.currentRoom);
       }
       this.currentRoom = `${this.userid}_${this.addressee.id}`;
-      this.socketService.login('idk', this.currentRoom);
+      this.socketService.login(`${this.userid}`, this.currentRoom);
     }
   }
 

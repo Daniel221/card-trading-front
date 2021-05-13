@@ -1,99 +1,127 @@
-<div *ngIf="user" class="userInfo container">
-  <div class="row">
-    <img class="col-3" [src]="user.img?user.img:'https://i1.sndcdn.com/avatars-000310902564-g2unlt-t240x240.jpg'"/>
-    <div class="col-6">
-        <h1>{{user.username}}</h1>
-        <i>{{user.profiletext}}</i>
-        <br/>
-        <button class="btn btn-success" *ngIf="myid!=user.userid" (click)="addFrend()">
-          <div *ngIf="!frens; else yesFrens">Añadir amigo</div>
-          <ng-template #yesFrens>Intercambiar</ng-template>
-        </button>
-        <button class="btn btn-warning" *ngIf="myid==user.userid" data-toggle="modal" data-target="#editModal">Editar</button>
-    </div>
-    <app-contact-list class="col-3" #contactos [id]="userid"></app-contact-list>
-  </div>
-</div>
-<div>
-  <div id="usersCards" *ngIf="showMenu.cards">
-    <div class="userCards container" *ngIf="userCards&&userCards.length>0">
-      <div *ngFor="let c of userCards">
-        <app-card [id]="c.cardid" [title]="c.title" [description]="c.description" [img]="c.img" [type]="c.type"></app-card>
+<div *ngIf="myid == user?.userid">
+  <div class="userApps container-fluid">
+    <h1 class="text-center">{{appTitle}}</h1>
+    <div class="row">
+      <div class="col-md-1 ">
+        <ul class="sidebar">
+          <li [ngClass]="showMenu.edit? 'linkActive' : ''">
+            <a type="button" (click)="showEdit()">Editar</a>
+          </li>
+          <li [ngClass]="showMenu.cards? 'linkActive' : ''">
+            <a type="button" (click)="showCards()">Cartas</a>
+          </li>
+          <li *ngIf="user&&myid==user.userid" [ngClass]="showMenu.chat? 'linkActive' : ''">
+            <a type="button" (click)="showChat()">Chat</a>
+          </li>
+        </ul>
       </div>
-    </div>
-    <div *ngIf="!userCards||userCards.length<1" class="noUserCards">
-      ¡Este usuario no tiene cartas!
-    </div>
-  </div>
-  <div id="userContacts" *ngIf="showMenu.chat">
-    <app-chat-app [userid]="myid"></app-chat-app>
-  </div>
-</div>
-<br>
-<div class="container">
-  <div class="row">
-    <div class="col-1">
-      <a class="btn btn-primary" (click)="showCards()">Cartas</a>
-    </div>
-    <div class="col-1" *ngIf="user&&myid==user.userid">
-      <a class="btn btn-primary" (click)="showChat()">Chat</a>
+      <div class="col-md-11">
+        <div class="editUser" *ngIf="showMenu.edit">
+          <app-edicion-usuario [user]="user"></app-edicion-usuario>
+        </div>
+        <div id="usersCards" *ngIf="showMenu.cards">
+          <div class="userCards pl-3" *ngIf="userCards&&userCards.length>0">
+            <div *ngFor="let c of userCards" class="card-container">
+              <app-card [id]="c.cardid" [title]="c.title" [description]="c.description" [img]="c.img" [type]="c.type">
+              </app-card>
+            </div>
+          </div>
+          <div *ngIf="!userCards||userCards.length<1" class="noUserCards">
+            ¡Este usuario no tiene cartas!
+          </div>
+        </div>
+        <div id="userContacts" *ngIf="showMenu.chat">
+          <app-chat-app [userid]="myid"></app-chat-app>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
-<div class="modal fade" id="editModal" tabindex="-1">
+<div *ngIf="user && myid !=user.userid">
+  <div class="userInfo container">
+    <div class="row">
+      <img class="col-3" [src]="user.img?user.img:'https://i1.sndcdn.com/avatars-000310902564-g2unlt-t240x240.jpg'" />
+      <div class="col-6">
+        <h1>{{user.username}}</h1>
+        <i>{{user.profiletext}}</i>
+        <br />
+        <button class="btn btn-success" *ngIf="myid!=user.userid" (click)="addFrend()">
+          <div *ngIf="!frens; else yesFrens">Añadir amigo</div>
+          <ng-template #yesFrens>Intercambiar</ng-template>
+        </button>
+        <button class="btn btn-warning" *ngIf="myid==user.userid" data-toggle="modal"
+          data-target="#editModal">Editar</button>
+      </div>
+      <app-contact-list class="col-3" #contactos [id]="userid"></app-contact-list>
+    </div>
+  </div>
+  <div id="usersCards" *ngIf="showMenu.cards">
+    <div class="userCards pl-3 ml-3 mr-3" *ngIf="userCards&&userCards.length>0">
+      <div *ngFor="let c of userCards" class="card-container">
+        <app-card [id]="c.cardid" [title]="c.title" [description]="c.description" [img]="c.img" [type]="c.type">
+        </app-card>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="editModal" tabindex="-1">
     <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Editar usuario</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <div class="register-form container" >
-              <div class="register-fields">
-                <div *ngFor="let a of attributesKeys" >
-                <app-register-form [(value)]="attributes[a].value" [type]="attributes[a].type" [label]="attributes[a].label"></app-register-form>
-                </div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Editar usuario</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="register-form container">
+            <div class="register-fields">
+              <div *ngFor="let a of attributesKeys">
+                <app-register-form [(value)]="attributes[a].value" [type]="attributes[a].type"
+                  [label]="attributes[a].label"></app-register-form>
               </div>
-              <div *ngIf="regMsg" [ngClass]="regMsg.class">{{regMsg.msg}}</div>
             </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-danger" (click)="toggleDel(true)" data-toggle="modal" data-target="#confirmModal">Eliminar cuenta</button>
-            <div class="spacer"></div>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-            <button class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#confirmModal" [ngStyle]="{'pointer-events':'auto'}">Confirmar</button>
+            <div *ngIf="regMsg" [ngClass]="regMsg.class">{{regMsg.msg}}</div>
           </div>
         </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" (click)="toggleDel(true)" data-toggle="modal" data-target="#confirmModal">Eliminar cuenta</button>
+          <div class="spacer"></div>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#confirmModal"
+            [ngStyle]="{'pointer-events':'auto'}">Confirmar</button>
+        </div>
+      </div>
     </div>
-</div>
-<div class="modal fade" id="confirmModal" tabindex="-1">
+  </div>
+
+  <div class="modal fade" id="confirmModal" tabindex="-1">
     <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Editar usuario</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <div class="register-form container" >
-              <div class="register-fields">
-                <h3>Introduzca su contraseña para continuar</h3>
-                <input type="password" (input)="onChanged($event)"/>
-              </div>
-              <div *ngIf="regMsg" [ngClass]="regMsg.class">{{regMsg.msg}}</div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Editar usuario</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="register-form container">
+            <div class="register-fields">
+              <h3>Introduzca su contraseña para continuar</h3>
+              <input type="password" (input)="onChanged($event)" />
             </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" (click)="toggleDel(false)" data-dismiss="modal">Cancelar</button>
-            <button class="btn btn-primary" (click)="createUser()" [ngStyle]="{'pointer-events':'auto'}">Confirmar</button>
+            <div *ngIf="regMsg" [ngClass]="regMsg.class">{{regMsg.msg}}</div>
           </div>
         </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button class="btn btn-primary" (click)="createUser()"
+            [ngStyle]="{'pointer-events':'auto'}">Confirmar</button>
+        </div>
+      </div>
     </div>
-</div>
-<div class="modal fade" *ngIf="frens" id="tradeModal" tabindex="-1">
-  <app-trade #tradeMod [user1]="myid" [user2]="userid" [username]="user.username"></app-trade>
-</div>
+  </div>
+  <div class="modal fade" *ngIf="frens" id="tradeModal" tabindex="-1">
+    <app-trade #tradeMod [user1]="myid" [user2]="userid" [username]="user.username"></app-trade>
+  </div>
