@@ -32,6 +32,8 @@ import { ChatAppComponent } from './chat-app/chat-app.component';
 import { AdminComponent } from './admin/admin.component';
 import { MessageComponent } from './message/message.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
+import { FooterComponent } from './footer/footer.component';
+import { EdicionUsuarioComponent } from './edicion-usuario/edicion-usuario.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +56,9 @@ import { ErrorPageComponent } from './error-page/error-page.component';
     ChatAppComponent,
     AdminComponent,
     MessageComponent,
-    ErrorPageComponent
+    ErrorPageComponent,
+    FooterComponent,
+    EdicionUsuarioComponent
   ],
   imports: [
     BrowserModule,
