@@ -46,7 +46,7 @@ export class AdminComponent implements OnInit {
 
   apiData(e){
     this.apiDatos=[];
-    this.http.get<any>("http://localhost:3000/api?hundos="+(this.apiOffset=parseInt(e.target.value))).subscribe(data => this.apiDatos=data);
+    this.http.get<any>(`${API_URL}/api?hundos=${(this.apiOffset=parseInt(e.target.value))}`).subscribe(data => this.apiDatos=data);
   }
 
   selPoke(poke){
