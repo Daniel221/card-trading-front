@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="col-4 text-center">
+    <img [src]="user.img?user.img:'https://i1.sndcdn.com/avatars-000310902564-g2unlt-t240x240.jpg'" />
+    <br>
+    <input type="file" [value]="user.img">
+  </div>
+  <div class="col-8">
+    <div *ngFor="let key of attributesKeys">
+      <app-register-form [(value)]="attributes[key].value" [type]="attributes[key].type"
+        [label]="attributes[key].label">
+      </app-register-form>
+    </div>
+    <label for="profiletext">Text de Perfil</label><br>
+    <textarea [value]="this.user.profiletext" rows="3" cols="75" name="profiletext"></textarea>
+    <div class="btn-updateUser">
+      <button class="btn btn-success ">Actualizar</button>
+    </div>
+  </div>
+
+</div>

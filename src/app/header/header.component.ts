@@ -24,7 +24,7 @@ export class HeaderComponent implements OnInit {
   card = { cardid: "ERROR", title: "ERR_0", description: "An unexpected error has ocurred", img: "", type: 2 };
 
   menuItems = [
-    { linkid: 0, name: "FreeCard", link: "" },
+    { linkid: 0, name: "Reclamar Carta", link: "" },
     { linkid: 1, name: "Cartas", link: "catalogue" },
     { linkid: 2, name: "Usuarios", link: "userlist" }
   ];
