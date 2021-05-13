@@ -1,5 +1,5 @@
 <div class="form-group">
   <label for={{label}}>{{label}}</label><br>
   <input type={{type}} class="form-control" (input)="onAdd($event)"
-    [ngStyle]="{'color': value.length > 4 ? 'green' : 'red', 'border': value.length > 4 ? '1px solid green' : '1px solid red'}" />
+    [ngStyle]="{'color': value.length > 1 ? 'green' : 'red', 'border': value.length > 1 ? '1px solid green' : '1px solid red'}" />
 </div>

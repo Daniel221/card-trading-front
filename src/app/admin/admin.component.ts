@@ -17,6 +17,8 @@ export class AdminComponent implements OnInit {
   cartas: any[] = [];
   newCard: any = {};
   newImg: string = "";
+  apiOffset: number = 0;
+  apiDatos: any[];
   attributesKeys: any[];
   reader = new FileReader();
   cardComplete: boolean = false;
@@ -34,15 +36,26 @@ export class AdminComponent implements OnInit {
     if (!this.authService.loggedIn()) this.router.navigate(["/"]);
     this.http.get<any>(`${API_URL}/login?token=${localStorage.getItem("token")}`).subscribe(res => {
       this.http.get<any>(`${API_URL}/u/${res.userid}`).subscribe(data => {
-        if (data.role != "admin") this.router.navigate(["/"]);
-      });
+        if (!data.role || data.role != "admin") this.router.navigate(["/"]);
+      }, err => this.router.navigate(["/"]));
     });
     this.http.get<any>(`${API_URL}/c`).pipe(tap(a => { })).subscribe(data => this.cartas = data);
     $('#deletus').hide();
+    this.apiData({target:{value:1}});
+  }
+
+  apiData(e){
+    this.apiDatos=[];
+    this.http.get<any>("http://localhost:3000/api?hundos="+(this.apiOffset=parseInt(e.target.value))).subscribe(data => this.apiDatos=data);
+  }
+
+  selPoke(poke){
+    this.newCard.title=poke.name;
+    this.newCard.img=poke.img;
   }
 
   refreshCards(died) {
-    alert("updated");
+    //alert("updated");
     this.http.get<any>(`${API_URL}/c`).pipe(tap(a => { })).subscribe(data => this.cartas = data);
     /*const card=this.cartas.findIndex(c=>c.cardid==this.newCard.cardid);
     if(card<0) this.cartas.push(this.newCard);
@@ -58,12 +71,12 @@ export class AdminComponent implements OnInit {
   }
 
   verify() {
-    $('#saveCard').prop('disabled', !(this.newCard.cardid >= 0 && this.newCard.cardid <= this.cartas.length && this.newCard.type > -1 && this.attributesKeys.slice(1, 4).every(k => this.newCard[k].length > 0)));
+    $('#saveCard').prop('disabled', !(this.newCard.cardid > -1 && this.newCard.type > -1 && this.attributesKeys.slice(1, 4).every(k => this.newCard[k].length > 0)));
     this.checkDeletus();
   }
 
   checkDeletus() {
-    if (this.newCard.cardid < this.cartas.length) $('#deletus').show();
+    if (this.cartas.find(c => c.cardid == this.newCard.cardid)) $('#deletus').show();
     else $('#deletus').hide();
   }
 
@@ -87,7 +100,7 @@ export class AdminComponent implements OnInit {
       this.http.put<any>(`${API_URL}/c`, this.newCard).subscribe(_ => this.refreshCards(false));
     else
       this.http.post<any>(`${API_URL}/c`, this.newCard).subscribe(_ => this.refreshCards(false));
-    this.http.get<any>(`${API_URL}/${this.newCard.cardid}.png`).subscribe(_ => { }, err => console.log("Este error es a propósito"));
+    this.http.get<any>(`${API_URL}/${this.newCard.cardid}.png`).subscribe(_ => { }, err => console.log("Error: Este error es a propósito"));
   }
 
   deleteCard() {

@@ -21,6 +21,7 @@ export class HeaderComponent implements OnInit {
   canCheckIn: boolean = false;
   hasNotis: boolean = false;
   userid: number;
+  interval:any;
   card = { cardid: "ERROR", title: "ERR_0", description: "An unexpected error has ocurred", img: "", type: 2 };
 
   menuItems = [
@@ -32,7 +33,18 @@ export class HeaderComponent implements OnInit {
   constructor(private _authService: AuthService, private http: HttpClient) { }
 
   ngOnInit(): void {
-    if (!(this.isLogged = this._authService.loggedIn())) return;
+    if (!(this.isLogged = this._authService.loggedIn())) {
+      this.interval=setInterval(() => {
+        if(this.isLogged = this._authService.loggedIn()){
+          clearInterval(this.interval);
+          this.updateHeader();
+        }
+      }, 2000);
+      return;
+    }
+  }
+
+  updateHeader(){
     this.http.get<any>(`${API_URL}/login?token=${localStorage.getItem("token")}`).subscribe(res => {
       this.userid = res.userid;
       this.http.get<any>(`${API_URL}/u/${this.userid}`).subscribe(res => {
@@ -54,10 +66,10 @@ export class HeaderComponent implements OnInit {
     this.canCheckIn = false;
     this.http.put<any>(`${API_URL}/u/` + this.userid, { checkin: "" + Date.now() }).subscribe(data => {
       this.http.get<any>(`${API_URL}/c`).subscribe(cards => {
-        const cardid = Math.floor(Math.random() * cards.length);
-        console.log(cardid);
-        this.http.post<any>(`${API_URL}/c/` + this.userid, { cardid }).subscribe(_ => {
-          this.http.get<any>(`${API_URL}/c/` + cardid).subscribe(card => {
+        const cardids = cards.map(c=>c.cardid);
+        const cardid = Math.floor(Math.random() * cardids.length);
+        this.http.post<any>(`${API_URL}/c/` + this.userid, { cardid: cardids[cardid] }).subscribe(_ => {
+          this.http.get<any>(`${API_URL}/c/` + cardids[cardid]).subscribe(card => {
             this.card = card;
             localStorage.setItem('token', data.token);
             $("#gottenCard").modal("show");
@@ -65,6 +77,10 @@ export class HeaderComponent implements OnInit {
         });
       });
     }, err => console.error(err));
+  }
+
+  menuClick(e){
+    e.stopPropagation();
   }
 
   hasTrades(b) {

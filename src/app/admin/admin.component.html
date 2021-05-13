@@ -10,7 +10,7 @@
     <div class="col-6 register-form container">
         <div class="register-fields">
             <label>card id</label><br>
-            <input type="number" class="form-control" [value]="newCard.cardid" (input)="onChange('cardid',$event)" [ngStyle]="{'border-color':this.newCard.cardid>=0&&this.newCard.cardid<=this.cartas.length?'green':'red'}"/>
+            <input type="number" class="form-control" [value]="newCard.cardid" (input)="onChange('cardid',$event)" [ngStyle]="{'border-color':this.newCard.cardid>-1?'green':'red'}"/>
             <label>title</label><br>
             <input type="text" class="form-control" [value]="newCard.title" (input)="onChange('title',$event)"/>
             <label>description</label><br>
@@ -27,6 +27,18 @@
                 <button class="btn btn-secondary" (click)="clear()">Clear</button>
                 <button disabled id="saveCard" class="btn btn-success" (click)="createCard()"><i class="fas fa-check-circle"></i></button>
             </div>
+        </div>
+    </div>
+</div>
+<br/><br/>
+<div class="apipi">
+    <div>
+        <input type="number" [value]="apiOffset" (change)="apiData($event)" min="1" max="8"/>
+    </div>
+    <div class="pokimons">
+        <div class="poke" (click)="selPoke(p)" *ngFor="let p of apiDatos">
+            <img [src]="p.img" alt=""/>
+            <h5>{{p.name}}</h5>
         </div>
     </div>
 </div>

@@ -20,7 +20,7 @@
           <div class="bell-noti" *ngIf="hasNotis"></div>
           <i class="fas fa-bell"></i>
         </a>
-        <app-notis #notis class="dropdown-menu" aria-labelledby="navbarDropdown" (hasTrades)="hasTrades($event)"></app-notis>
+        <app-notis #notis class="dropdown-menu" (click)="menuClick($event)" aria-labelledby="navbarDropdown" (hasTrades)="hasTrades($event)"></app-notis>
       </li>
       
       <li class="nav-item dropdown" style="z-index: 2000;" *ngIf="isLogged">

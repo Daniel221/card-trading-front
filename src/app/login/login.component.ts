@@ -4,6 +4,8 @@ import {Router} from '@angular/router';
 import {SocialAuthService} from 'angularx-social-login';
 import {SocialUser, GoogleLoginProvider} from 'angularx-social-login';
 
+declare var $:any;
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -41,7 +43,7 @@ export class LoginComponent implements OnInit {
       data => {
         localStorage.setItem('token', data.token);
         this._router.navigate(['/userlist']);
-        location.reload();
+        $("#loginModal").modal("hide");
       },error=>{
         this.logMsg={msg:"Usuario o contraseña incorrectos.",class:'text-danger'};
       })
