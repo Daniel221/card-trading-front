@@ -11,9 +11,6 @@ const API_URL = 'https://card-trading-api-dev.herokuapp.com';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.less']
 })
-
-
-
 export class HeaderComponent implements OnInit {
   @ViewChild("notis") notis: NotisComponent;
   isLogged: boolean = false;
@@ -42,6 +39,7 @@ export class HeaderComponent implements OnInit {
       }, 2000);
       return;
     }
+    this.updateHeader();
   }
 
   updateHeader(){

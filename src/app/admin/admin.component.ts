@@ -18,7 +18,7 @@ export class AdminComponent implements OnInit {
   newCard: any = {};
   newImg: string = "";
   apiOffset: number = 0;
-  apiDatos: any[];
+  apiDatos: any[] = [];
   attributesKeys: any[];
   reader = new FileReader();
   cardComplete: boolean = false;
@@ -41,7 +41,7 @@ export class AdminComponent implements OnInit {
     });
     this.http.get<any>(`${API_URL}/c`).pipe(tap(a => { })).subscribe(data => this.cartas = data);
     $('#deletus').hide();
-    this.apiData({target:{value:1}});
+    this.apiData({target:{value:0}});
   }
 
   apiData(e){
@@ -51,7 +51,11 @@ export class AdminComponent implements OnInit {
 
   selPoke(poke){
     this.newCard.title=poke.name;
+    this.newCard.cardid=poke.id;
+    this.newCard.description="A "+poke.types.map(type=>`${type.type.name}-`).join("")+"pokémon";
     this.newCard.img=poke.img;
+    this.newCard.type=Math.floor(Math.random()*6);
+    this.verify();
   }
 
   refreshCards(died) {
@@ -91,16 +95,19 @@ export class AdminComponent implements OnInit {
       const formData = new FormData();
       formData.append('file', this.file);
       this.http.post(`${API_URL}/file`, formData).subscribe();
-      this.file = undefined;
       $("#fileInput").val("");
+      this.newCard.img = `${API_URL}/${this.newCard.cardid}.png`;
     }
-    this.newCard.img = `${API_URL}/${this.newCard.cardid}.png`;
 
     if (this.cartas.find(c => c.cardid == this.newCard.cardid))
       this.http.put<any>(`${API_URL}/c`, this.newCard).subscribe(_ => this.refreshCards(false));
     else
       this.http.post<any>(`${API_URL}/c`, this.newCard).subscribe(_ => this.refreshCards(false));
-    this.http.get<any>(`${API_URL}/${this.newCard.cardid}.png`).subscribe(_ => { }, err => console.log("Error: Este error es a propósito"));
+
+    if(this.file){
+      this.file = undefined;
+      this.http.get<any>(`${API_URL}/${this.newCard.cardid}.png`).subscribe(_ => { }, err => console.log("Error: Este error es a propósito"));
+    }
   }
 
   deleteCard() {

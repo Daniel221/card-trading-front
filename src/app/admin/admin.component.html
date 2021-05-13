@@ -31,14 +31,20 @@
     </div>
 </div>
 <br/><br/>
-<div class="apipi">
-    <div>
-        <input type="number" [value]="apiOffset" (change)="apiData($event)" min="1" max="8"/>
+<div class="row container">
+    <div style="margin: 1% auto">
+        <input type="number" [value]="apiOffset" (change)="apiData($event)" min="0" max="9"/>
+        <br/>
     </div>
-    <div class="pokimons">
+    <div class="pokimons" *ngIf="apiDatos.length>0; else elsePokis">
         <div class="poke" (click)="selPoke(p)" *ngFor="let p of apiDatos">
             <img [src]="p.img" alt=""/>
             <h5>{{p.name}}</h5>
         </div>
     </div>
+    <ng-template #elsePokis>
+        <div class="noPokimons row">
+            <i class="spinner">§</i> Loading...
+        </div>
+    </ng-template>
 </div>
