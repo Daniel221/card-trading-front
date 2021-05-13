@@ -1,3 +1,5 @@
+@background: #D3D3D3;
+
 .userInfo {
   display: flex;
   padding: 1%;
@@ -30,9 +32,6 @@
   }
 }
 
-.row{
-  justify-content: flex-end;
-}
 
 .userCards {
   justify-content: space-evenly;
@@ -53,4 +52,50 @@
   width: 100%;
   font-weight: bold;
   text-align: center;
+}
+
+.userApps {
+  .container-fluid {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .col-md-1 {
+    padding-right: 0;
+  }
+
+  .col-md-11 {
+    padding-left: 0;
+  }
+
+  ul,
+  li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    color: rgb(119, 119, 119);
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    border-bottom: 1px solid black;
+  }
+
+  ul,
+  li:hover {
+    color: black;
+  }
+
+  .linkActive {
+    background-color: @background;
+    color: black;
+    font-weight: bold;
+  }
+
+  a {
+    display: block;
+    padding: 10px 20px;
+  }
+}
+
+.card-container {
+  width: 20%;
 }

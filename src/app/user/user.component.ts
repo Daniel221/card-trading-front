@@ -11,6 +11,7 @@ declare var $: any;
   styleUrls: ['./user.component.less']
 })
 export class UserComponent implements OnInit, OnChanges {
+  appTitle: string;
   user;
   userid;
   myid;
@@ -30,18 +31,20 @@ export class UserComponent implements OnInit, OnChanges {
   @ViewChild('tradeMod') trade: TradeComponent;
   showMenu = {
     cards: true,
-    chat: false
+    chat: false,
+    edit: false
   }
 
   constructor(private actRoute: ActivatedRoute, private http: HttpClient) {
   }
 
   ngOnInit(): void {
+
     this.actRoute.params.subscribe(p => {
       this.userid = p.id;
       this.http.get<any>('https://card-trading-api-dev.herokuapp.com/u/' + this.userid).subscribe(data => this.user = data);
       this.http.get<any>(`https://card-trading-api-dev.herokuapp.com/c?user=${this.userid}`).subscribe(data => {
-        this.showCards();
+        this.showEdit();
         this.userCards = data;
       });
       this.http.get<any>('https://card-trading-api-dev.herokuapp.com/login?token=' + localStorage.getItem("token")).subscribe(res => {
@@ -56,7 +59,6 @@ export class UserComponent implements OnInit, OnChanges {
   }
 
   createUser() {
-
     if (this.password != this.user.password) {
       this.regMsg = { msg: "Contraseña incorrecta.", class: 'text-danger' };
       return;
@@ -102,13 +104,26 @@ export class UserComponent implements OnInit, OnChanges {
   }
 
   showCards() {
-    this.showMenu.chat = false;
+    this.appTitle = 'Inventario';
+    this.closeAll();
     this.showMenu.cards = true;
-
   }
 
   showChat() {
-    this.showMenu.cards = false;
+    this.appTitle = 'Chat';
+    this.closeAll();
     this.showMenu.chat = true;
   }
+
+  showEdit() {
+    this.appTitle = 'Usuario';
+    this.closeAll();
+    this.showMenu.edit = true;
+  }
+  closeAll() {
+    this.showMenu.cards = false;
+    this.showMenu.chat = false;
+    this.showMenu.edit = false;
+  }
+
 }
