@@ -1,6 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService} from '../shared/auth.service';
 
 @Component({
   selector: 'app-user-list',
@@ -15,13 +16,14 @@ export class UserListComponent implements OnInit {
   usersPerPage: number = 24;
   filter: string = '';
 
-  constructor(private http: HttpClient, private _router: Router) { }
+  constructor(private http:HttpClient, private _router: Router, private authServie: AuthService) { }
 
   ngOnInit(): void {
-    this.http.get<any>('https://card-trading-api-dev.herokuapp.com/u').subscribe(data => {
-      this.users = data;
-      this.usuarios = data;
-      this.usersInPage = this.usuarios.slice(0, this.usersPerPage);
+    this.http.get<any>('https://card-trading-api-dev.herokuapp.com/u').subscribe(data=>{
+      //console.log(this.authServie.user$.value?.idToken);
+      this.users=data;
+      this.usuarios=data;
+      this.usersInPage=this.usuarios.slice(0,this.usersPerPage);
     },
       err => {
         if (err instanceof HttpErrorResponse) {

@@ -1,10 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../shared/auth.service';
+import { Router } from '@angular/router';
+import { SocialUser } from 'angularx-social-login';
 import { NotisComponent } from '../notis/notis.component';
 
 declare var $: any;
 const API_URL = 'https://card-trading-api-dev.herokuapp.com';
+//'https://card-trading-api-dev.herokuapp.com';
 
 @Component({
   selector: 'app-header',
@@ -12,9 +15,10 @@ const API_URL = 'https://card-trading-api-dev.herokuapp.com';
   styleUrls: ['./header.component.less']
 })
 
-
-
 export class HeaderComponent implements OnInit {
+  user: SocialUser | null;
+  loggedIn: boolean = this._authService.isLoggedIn();
+  
   @ViewChild("notis") notis: NotisComponent;
   isLogged: boolean = false;
   isAdmin: boolean = false;
@@ -29,10 +33,17 @@ export class HeaderComponent implements OnInit {
     { linkid: 2, name: "Usuarios", link: "userlist" }
   ];
 
-  constructor(private _authService: AuthService, private http: HttpClient) { }
+  constructor(public _authService: AuthService, private router: Router,  private http: HttpClient) { }
 
   ngOnInit(): void {
-    if (!(this.isLogged = this._authService.loggedIn())) return;
+    //this.isLogged = this._authService.loggedIn();
+    this._authService.user$.subscribe((user) => {
+      this.user = user
+      this.loggedIn = this._authService.isLoggedIn()
+      //console.log(this.loggedIn);
+    });
+
+    if (!this.loggedIn) return;
     this.http.get<any>(`${API_URL}/login?token=${localStorage.getItem("token")}`).subscribe(res => {
       this.userid = res.userid;
       this.http.get<any>(`${API_URL}/u/${this.userid}`).subscribe(res => {
@@ -69,6 +80,11 @@ export class HeaderComponent implements OnInit {
 
   hasTrades(b) {
     this.hasNotis = b;
+  }
+  
+  onLogout() {
+    this._authService.logout();
+    this.router.navigate(['/login']);
   }
 
 }

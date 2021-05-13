@@ -11,14 +11,14 @@
       <li *ngFor="let item of menuItems" class="nav-item">
         <a *ngIf="item.link.length>0; else elseA" routerLink="{{item.link}}"
           class="nav-link navbar-link">{{item.name}}</a>
-        <ng-template #elseA><a *ngIf="isLogged" class="nav-link navbar-link" [attr.data-enabled]="canCheckIn"
+        <ng-template #elseA><a *ngIf="loggedIn" class="nav-link navbar-link" [attr.data-enabled]="canCheckIn"
             (click)="process()">{{item.name}}</a></ng-template>
       </li>
-      <li class="nav-item" *ngIf="!isLogged">
+      <li class="nav-item" *ngIf="!loggedIn">
         <a class="nav-link navbar-link" data-toggle="modal" data-target="#loginModal"><button
             class="btn btn-outline-info">Login/Register</button></a>
       </li>
-      <li class="nav-item dropdown" *ngIf="isLogged">
+      <li class="nav-item dropdown" *ngIf="loggedIn">
         <a class="nav-link navbar-link icons dropdown-toggle" data-toggle="dropdown" href="">
           <div class="bell-noti" *ngIf="hasNotis"></div>
           <i class="fas fa-bell"></i>
@@ -26,16 +26,16 @@
         <app-notis #notis class="dropdown-menu" aria-labelledby="navbarDropdown" (hasTrades)="hasTrades($event)">
         </app-notis>
       </li>
-
-      <li class="nav-item dropdown" style="z-index: 2000;" *ngIf="isLogged">
+      
+      <li class="nav-item dropdown" style="z-index: 2000;" *ngIf="loggedIn">
         <a class="nav-link navbar-link icons dropdown-toggle" href="" role="button" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false"><i class="fas fa-user"></i></a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" [routerLink]="'user/'+userid">Perfil</a>
-          <a class="dropdown-item" routerLink="admin" *ngIf="isAdmin">Admin</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item text-danger" (click)="_authService.logoutUser()" href=".">Cerrar sesión</a>
-        </div>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" [routerLink]="'user/'+userid">Perfil</a>
+            <a class="dropdown-item" routerLink="admin" *ngIf="isAdmin">Admin</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item text-danger" (click)="onLogout()" href=".">Cerrar sesión</a>
+          </div>
       </li>
     </ul>
   </div>

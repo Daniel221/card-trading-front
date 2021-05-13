@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { CardComponent } from './card/card.component';
@@ -18,11 +18,11 @@ import { UserCardComponent } from './user-card/user-card.component';
 import { ChatInboxComponent } from './chat-inbox/chat-inbox.component';
 import { ContactListComponent } from './contact-list/contact-list.component';
 
-import { AuthService } from './auth.service';
-import { AuthGuard } from './auth.guard';
-import { TokenInterceptorService } from './token-interceptor.service'
-import { SocialAuthServiceConfig } from 'angularx-social-login';
-import { SocialLoginModule, GoogleLoginProvider } from 'angularx-social-login';
+import { AuthService } from './shared/auth.service';
+import { AuthGuard } from './shared/auth.guard';
+import { TokenInterceptorService } from './shared/token-interceptor.service'
+import {SocialAuthServiceConfig} from 'angularx-social-login';
+import {SocialLoginModule, GoogleLoginProvider} from 'angularx-social-login';
 
 import { SocketService } from './shared/socket.service';
 import { HeaderComponent } from './header/header.component';
@@ -65,6 +65,7 @@ import { EdicionUsuarioComponent } from './edicion-usuario/edicion-usuario.compo
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     SocialLoginModule
   ],
   providers: [AuthService, AuthGuard, SocketService,

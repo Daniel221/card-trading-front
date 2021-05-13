@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core'
-import { Routes, RouterModule } from '@angular/router'
+import {NgModule} from '@angular/core'
+import {Routes,RouterModule} from '@angular/router'
 import { AdminComponent } from './admin/admin.component';
-import { AuthGuard } from './auth.guard';
+import { AuthGuard } from './shared/auth.guard';
 import { CardDetailsComponent } from './card-details/card-details.component';
 import { CatalogueComponent } from './catalogue/catalogue.component';
 import { HomeComponent } from './home/home.component';
