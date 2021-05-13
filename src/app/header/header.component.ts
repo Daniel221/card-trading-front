@@ -6,7 +6,8 @@ import { SocialUser } from 'angularx-social-login';
 import { NotisComponent } from '../notis/notis.component';
 
 declare var $: any;
-const API_URL = 'https://card-trading-api-dev.herokuapp.com';
+const API_URL = 'http://localhost:3000';
+//'https://card-trading-api-dev.herokuapp.com';
 
 @Component({
   selector: 'app-header',
@@ -15,7 +16,6 @@ const API_URL = 'https://card-trading-api-dev.herokuapp.com';
 })
 
 export class HeaderComponent implements OnInit {
-  //isLogged: boolean = false;
   user: SocialUser | null;
   loggedIn: boolean = this._authService.isLoggedIn();
   
@@ -40,9 +40,10 @@ export class HeaderComponent implements OnInit {
     this._authService.user$.subscribe((user) => {
       this.user = user
       this.loggedIn = this._authService.isLoggedIn()
+      //console.log(this.loggedIn);
     });
 
-    if (!(this.isLogged = this._authService.loggedIn())) return;
+    if (!this.loggedIn) return;
     this.http.get<any>(`${API_URL}/login?token=${localStorage.getItem("token")}`).subscribe(res => {
       this.userid = res.userid;
       this.http.get<any>(`${API_URL}/u/${this.userid}`).subscribe(res => {

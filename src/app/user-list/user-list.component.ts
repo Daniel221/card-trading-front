@@ -19,12 +19,8 @@ export class UserListComponent implements OnInit {
   constructor(private http:HttpClient, private _router: Router, private authServie: AuthService) { }
 
   ngOnInit(): void {
-    this.http.get<any>('https://card-trading-api-dev.herokuapp.com/u', {
-      headers: {
-        'Authorization': `Bearer ${this.authServie.user$.value?.idToken}`
-      }
-    }).subscribe(data=>{
-      console.log(this.authServie.user$.value?.idToken);
+    this.http.get<any>('https://card-trading-api-dev.herokuapp.com/u').subscribe(data=>{
+      //console.log(this.authServie.user$.value?.idToken);
       this.users=data;
       this.usuarios=data;
       this.usersInPage=this.usuarios.slice(0,this.usersPerPage);

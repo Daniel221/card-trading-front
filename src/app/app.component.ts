@@ -18,15 +18,14 @@ export class AppComponent implements AfterContentInit, OnInit {
   title = 'Card-Trading';
   users = [];
   showChat: boolean = false;
-  //isLoggedIn: boolean = false;
+  isLoggedIn: boolean = false;
 
   getUsers() {
     this.http.get('https://card-trading-api-dev.herokuapp.com/u/40000').subscribe((user) => console.log(user));
   }
 
   ngOnInit() {
-    //this.isLoggedIn = this._authService.loggedIn();
-    
+    this.isLoggedIn = this._authService.loggedIn();
   }
 
   ngAfterContentInit(): void {
