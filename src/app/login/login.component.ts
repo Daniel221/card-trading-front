@@ -7,7 +7,7 @@ import { from, Subscription } from 'rxjs'
 import { FormGroup, FormControl, Validators} from '@angular/forms';
 import { first } from 'rxjs/operators';
 
-const API_URL = 'http://localhost:3000';
+const API_URL = 'https://card-trading-api-dev.herokuapp.com';
 
 @Component({
   selector: 'app-login',

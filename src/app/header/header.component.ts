@@ -6,7 +6,7 @@ import { SocialUser } from 'angularx-social-login';
 import { NotisComponent } from '../notis/notis.component';
 
 declare var $: any;
-const API_URL = 'http://localhost:3000';
+const API_URL = 'https://card-trading-api-dev.herokuapp.com';
 //'https://card-trading-api-dev.herokuapp.com';
 
 @Component({

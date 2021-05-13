@@ -6,7 +6,7 @@ import { BehaviorSubject, from, Subject } from "rxjs";
 import {Observable} from 'rxjs';
 import {environment} from 'src/environments/environment'
 
-const API_URL = 'http://localhost:3000';
+const API_URL = 'https://card-trading-api-dev.herokuapp.com';
 
 @Injectable()
 export class AuthService {
@@ -17,7 +17,7 @@ export class AuthService {
     private socialService: SocialAuthService, 
     private _router: Router
   ) {}
-  private _loginUrl = "http://localhost:3000/login";
+  private _loginUrl = "https://card-trading-api-dev.herokuapp.com/login";
 
   loginUser(user) {
     //console.log(user);
@@ -52,7 +52,7 @@ export class AuthService {
   login(user: SocialUser) {
     this.user$.next(user);
     //console.log("token de login con google", `Bearer ${user?.idToken}`);
-    this.http.get<any>('http://localhost:3000/login', {
+    this.http.get<any>(this._loginUrl, {
       headers: {
         'Authorization': `Bearer ${user?.idToken}`
       }
