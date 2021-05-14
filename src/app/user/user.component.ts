@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, ViewChild, OnInit, AfterContentInit, OnChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../shared/auth.service';
 import { TradeComponent } from '../trade/trade.component';
 
 declare var $: any;

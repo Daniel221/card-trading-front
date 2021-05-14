@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../shared/auth.service';
 import { TradeComponent } from '../trade/trade.component';
 import { catchError, map, tap } from 'rxjs/operators';
 
