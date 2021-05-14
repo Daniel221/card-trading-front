@@ -27,7 +27,6 @@ export class UserComponent implements OnInit, OnChanges {
   attributesKeys = Object.keys(this.attributes);
   regMsg;
   userCards;
-  deletesUser:boolean=false;
   frens: boolean = false;
   @ViewChild('contactos') contactos;
   @ViewChild('tradeMod') trade: TradeComponent;
@@ -37,7 +36,7 @@ export class UserComponent implements OnInit, OnChanges {
     edit: false
   }
 
-  constructor(private actRoute: ActivatedRoute, private http: HttpClient, private auth: AuthService) {
+  constructor(private actRoute: ActivatedRoute, private http: HttpClient) {
   }
 
   ngOnInit(): void {
@@ -66,15 +65,6 @@ export class UserComponent implements OnInit, OnChanges {
       return;
     }
     console.log("updating user...");
-    if(this.deletesUser){
-      this.http.delete('https://card-trading-api-dev.herokuapp.com/u/'+this.user.userid).subscribe(data=>{
-        $("#confirmModal").modal("hide");
-        this.auth.logoutUser();
-      }, error => {
-        this.regMsg = { msg: "Error, intente de nuevo más tarde.", class: 'text-danger' };
-      });
-      return;
-    }
 
     const user = {
       name: this.attributes.name.value,
@@ -101,10 +91,6 @@ export class UserComponent implements OnInit, OnChanges {
     this.password = e.target.value;
   }
 
-  toggleDel(b){
-    this.deletesUser=b;
-  }
-
   addFrend() {
     if (this.frens) {
       this.trade.reload();
@@ -123,6 +109,9 @@ export class UserComponent implements OnInit, OnChanges {
   showCards() {
     this.appTitle = 'Inventario';
     this.closeAll();
+    this.http.get<any>(`https://card-trading-api-dev.herokuapp.com/c?user=${this.userid}`).subscribe(data => {
+      this.userCards = data.sort((a,b) => a.cardid - b.cardid);
+    });
     this.showMenu.cards = true;
   }
 

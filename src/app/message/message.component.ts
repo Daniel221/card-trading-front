@@ -15,8 +15,8 @@ export class MessageComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.container = document.getElementById("message-list");
-    this.container.scrollTop = this.container.scrollHeight;
+    let chatBox=document.querySelector(".chat-messages-show-container");
+    chatBox.scrollTo(0, chatBox.scrollHeight);
   }
 
 }

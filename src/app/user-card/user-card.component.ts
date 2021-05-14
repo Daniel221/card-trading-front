@@ -26,8 +26,8 @@ export class UserCardComponent implements OnInit {
     return window.location.href.includes("userlist") ? '1.5em' : 'xx-small';
   }
 
-  remove() {
-    this.http.delete<any>('https://card-trading-api-dev.herokuapp.com/u/contacts?oid=' + this.removable + '&id=' + this.extra).subscribe(data => {
+  remove() {//https://card-trading-api-dev.herokuapp.com
+    this.http.delete<any>(`http://localhost:3000/u/contacts/?oid=${this.removable}&id=${this.extra}`).subscribe(data => {
       this.rer.emit();
     });
   }

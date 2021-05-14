@@ -8,6 +8,7 @@ import { FormGroup, FormControl, Validators} from '@angular/forms';
 import { first } from 'rxjs/operators';
 
 const API_URL = 'https://card-trading-api-dev.herokuapp.com';
+declare var $:any;
 
 @Component({
   selector: 'app-login',
@@ -53,6 +54,7 @@ export class LoginComponent implements OnInit {
         this.http.get<any>(`${API_URL}/login?token=${localStorage.getItem("token")}`).subscribe(res => {
           this.userid = res.userid;
           this._router.navigate(['/user/'+this.userid]);
+          $("#loginModal").modal("hide");
         });  
       },error=>{
         this.logMsg={msg:"Usuario o contraseña incorrectos.",class:'text-danger'};
