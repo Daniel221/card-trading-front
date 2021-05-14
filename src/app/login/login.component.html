@@ -13,11 +13,11 @@
                 <input [(ngModel)]='loginUserData .email' name='email' class="form-control" #email type="text" [placeholder]="exampleEmail" required> <br>
             
                 <label>Contraseña</label><br>
-                <input  [(ngModel)]='loginUserData .password' name='password' class="form-control" type="password" pass="" required> <br>
+                <input  [(ngModel)]='loginUserData .password' name='password' class="form-control" type="password" pass="" (keyup.enter)="LoginUser()" required> <br>
               </div>
           </div>
           <div>¿No tienes cuenta? <a href="" data-toggle="modal" data-target="#registerModal" data-dismiss="modal">!Regístrate aquí!</a></div>
-          <!-- <div>{{ status }}</div> -->
+          <div *ngIf="logMsg" [class]="logMsg.class">{{ logMsg.msg }}</div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>

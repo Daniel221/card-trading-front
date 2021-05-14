@@ -22,3 +22,40 @@ input[type="range"]{
     margin-left: 1%;
     width: 75%;
 }
+.pokimons{
+    display: flex;
+    flex-flow: wrap;
+    justify-content: space-evenly;
+    overflow-y: scroll;
+    max-height: 20em;
+    margin: 0 5%;
+    .poke{
+        background-image: linear-gradient(#b97979, #F0F0F0, #F0F0F0);
+        cursor: pointer;
+        border-radius: 5px;
+        border: 2px solid black;
+        margin: 0.2%;
+        h5{
+            font-size: 100%;
+            text-align: center;
+            width: min-content;
+            margin: auto;
+        }
+    }
+}
+.noPokimons{
+    justify-content: center;
+    height: 5em;
+    align-content: center;
+    width: 100%;
+    margin: 0 5%;
+}
+@keyframes spinner {
+    to {transform: rotate(360deg);}
+}
+.spinner{
+    animation: spinner .9s ease infinite;
+}
+div.row.container{
+    margin: auto;
+}

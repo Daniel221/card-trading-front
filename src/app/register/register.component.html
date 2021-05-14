@@ -20,7 +20,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button class="btn btn-primary" (click)="createUser()" [ngStyle]="{'pointer-events':matchingPassword && isFull? 'auto' : 'none'}">Registrarse</button>
+        <button id="registerBtn" disabled class="btn btn-primary" (click)="createUser()" [ngStyle]="{'pointer-events':matchingPassword && isFull? 'auto' : 'none'}">Registrarse</button>
       </div>
     </div>
 </div>

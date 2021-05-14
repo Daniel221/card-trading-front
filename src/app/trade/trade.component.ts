@@ -25,8 +25,8 @@ export class TradeComponent implements OnInit {
   reload() {
     this.usersCards = [null, null];
     $("#confirmTrade").prop('disabled', true);
-    this.http.get<any>(`https://card-trading-api-dev.herokuapp.com/c?user=${this.user1}`).subscribe(data => this.usersCards[0] = data);
-    this.http.get<any>(`https://card-trading-api-dev.herokuapp.com/c?user=${this.user2}`).subscribe(data => this.usersCards[1] = data);
+    this.http.get<any>(`https://card-trading-api-dev.herokuapp.com/c?user=${this.user1}`).subscribe(data => this.usersCards[0] = data.sort((a,b) => a.cardid - b.cardid));
+    this.http.get<any>(`https://card-trading-api-dev.herokuapp.com/c?user=${this.user2}`).subscribe(data => this.usersCards[1] = data.sort((a,b) => a.cardid - b.cardid));
     this.selCards[0] = TradeComponent.defaultCard;
     this.selCards[1] = TradeComponent.defaultCard;
   }

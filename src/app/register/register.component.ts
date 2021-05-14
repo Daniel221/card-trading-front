@@ -2,6 +2,8 @@ import { AfterContentInit, Component, OnInit } from '@angular/core';
 import { UserService } from '../shared/user.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
+declare var $:any;
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -40,25 +42,26 @@ export class RegisterComponent implements AfterContentInit {
       email: this.attributes.email.value,
       password: this.attributes.password.value
     }
-    this.http.post<any>('https://card-trading-api-dev.herokuapp.com//u', user).subscribe(data => {
-      console.log(data);
+    this.http.post<any>('https://card-trading-api-dev.herokuapp.com/u', user).subscribe(data => {
       this.regMsg = { msg: "Usuario registrado exitosamente.", class: 'text-success' };
+      $("#registerModal").modal("hide");
     }, error => {
+      console.log(error);
       this.regMsg = { msg: "Usuario existente.", class: 'text-danger' };
     })
   }
 
   onChange(property) {
-    console.log(this.isFull);
+    //console.log(this.isFull);
     this.isFull = this.verifyAllFilled();
     if (['Password', 'Confirm password'].includes(property)) {
       this.verifyMatchingPasswords();
-      console.log(this.matchingPassword);
     }
+    $("#registerBtn").attr("disabled",!this.isFull||!this.matchingPassword);
   }
 
   verifyAllFilled() {
-    return Object.keys(this.attributes).every((key) => this.attributes[key].value.length > 4)
+    return Object.keys(this.attributes).every((key) => this.attributes[key].value.length > 1)
   }
 
   verifyMatchingPasswords() {
