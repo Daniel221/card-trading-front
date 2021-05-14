@@ -18,9 +18,7 @@ export class EdicionUsuarioComponent implements OnInit {
 
   constructor() { }
   ngOnInit(): void {
-    this.attributes.name.value = this.user.name;
-    this.attributes.lastname.value = this.user.lastname;
-    this.attributes.birthday.value = this.user.birthday;
-    this.user.img = this.user.img ? this.user.img : 'https://i1.sndcdn.com/avatars-000310902564-g2unlt-t240x240.jpg';
+    this.user.birthday = '23/03/2000';
+    console.log(this.user);
   }
 }

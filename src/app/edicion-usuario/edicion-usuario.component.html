@@ -1,17 +1,41 @@
-<div class="row">
+<div class="row edit-user">
   <div class="col-4 text-center">
     <img [src]="user.img?user.img:'https://i1.sndcdn.com/avatars-000310902564-g2unlt-t240x240.jpg'" />
-    <br>
-    <input type="file" [value]="user.img">
+    <br><br>
+    <div class="fileUpload">
+      <input type="file" [value]="user.img">
+    </div>
+
   </div>
   <div class="col-8">
-    <div *ngFor="let key of attributesKeys">
-      <app-register-form [(value)]="attributes[key].value" [type]="attributes[key].type"
-        [label]="attributes[key].label">
-      </app-register-form>
-    </div>
-    <label for="profiletext">Text de Perfil</label><br>
-    <textarea [value]="this.user.profiletext" rows="3" cols="75" name="profiletext"></textarea>
+    <form>
+      <div class="row">
+        <div class="form-group namesInput">
+          <div class="col-6">
+            <label for="name" class="namesLabels">Nombre </label>
+            <input type="text" [value]="this.user?.name" class="form-control mr-3">
+          </div>
+          <div class="col-6">
+            <label for="name" class="namesLabels">Apellidos</label><br>
+            <input type="text" [value]="this.user?.lastname" class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group">
+          <div class="col-12">
+            <label for="bday">Cumpleaños </label>
+            <input type="date" [value]="this.user.birthday" name="bday" class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-7">
+          <label for="profiletext">Texto de Perfil</label><br>
+          <textarea [value]="this.user.profiletext" name="profiletext" class="form-control"></textarea>
+        </div>
+      </div>
+    </form>
     <div class="btn-updateUser">
       <button class="btn btn-success ">Actualizar</button>
     </div>

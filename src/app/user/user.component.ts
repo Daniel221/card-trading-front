@@ -110,13 +110,13 @@ export class UserComponent implements OnInit, OnChanges {
   }
 
   showChat() {
-    this.appTitle = 'Chat';
+    this.appTitle = 'Mensajería';
     this.closeAll();
     this.showMenu.chat = true;
   }
 
   showEdit() {
-    this.appTitle = 'Usuario';
+    this.appTitle = this.user?.username;
     this.closeAll();
     this.showMenu.edit = true;
   }
