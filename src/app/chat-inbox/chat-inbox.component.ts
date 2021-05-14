@@ -47,6 +47,7 @@ export class ChatInboxComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   SendMessage() {
+    console.log(this.messages);
     if (this.message) {
       let date = moment().format('MMMM Do YYYY, h:mm:ss a');
       this.socketService.sendMessage(this.message, this.addressee.id, this.userid, date);

@@ -1,9 +1,9 @@
 <div *ngIf="myid == user?.userid">
   <div class="userApps container-fluid">
-    <h1 class="text-center">{{appTitle}}</h1>
     <div class="row">
-      <div class="col-md-1 ">
+      <div class="col-md-1">
         <ul class="sidebar">
+
           <li [ngClass]="showMenu.edit? 'linkActive' : ''">
             <a type="button" (click)="showEdit()">Editar</a>
           </li>
@@ -15,12 +15,18 @@
           </li>
         </ul>
       </div>
-      <div class="col-md-11">
+      <div class="col-md-11 apps">
+        <div class="row">
+          <div class="offset-1 col-11">
+            <h1 class="text-center">{{appTitle}}</h1>
+          </div>
+        </div>
+
         <div class="editUser" *ngIf="showMenu.edit">
           <app-edicion-usuario [user]="user"></app-edicion-usuario>
         </div>
         <div id="usersCards" *ngIf="showMenu.cards">
-          <div class="userCards pl-3" *ngIf="userCards&&userCards.length>0">
+          <div class="userCards" *ngIf="userCards&&userCards.length>0">
             <div *ngFor="let c of userCards" class="card-container">
               <app-card [id]="c.cardid" [title]="c.title" [description]="c.description" [img]="c.img" [type]="c.type">
               </app-card>
@@ -38,7 +44,7 @@
   </div>
 </div>
 
-<div *ngIf="user && myid !=user.userid">
+<div *ngIf="user && myid !=user?.userid">
   <div class="userInfo container">
     <div class="row">
       <img class="col-3" [src]="user.img?user.img:'https://i1.sndcdn.com/avatars-000310902564-g2unlt-t240x240.jpg'" />
@@ -56,8 +62,9 @@
       <app-contact-list class="col-3" #contactos [id]="userid"></app-contact-list>
     </div>
   </div>
-  <div id="usersCards" *ngIf="showMenu.cards">
-    <div class="userCards pl-3 ml-3 mr-3" *ngIf="userCards&&userCards.length>0">
+  <div id="usersCards" class="container">
+    <h2 class="text-center">Inventario</h2>
+    <div class=" userCards pl-3 pr-3" *ngIf=" userCards&&userCards.length>0">
       <div *ngFor="let c of userCards" class="card-container">
         <app-card [id]="c.cardid" [title]="c.title" [description]="c.description" [img]="c.img" [type]="c.type">
         </app-card>

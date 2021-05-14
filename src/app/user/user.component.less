@@ -1,5 +1,10 @@
 @background: #D3D3D3;
 
+.apps {
+  background-color: @background;
+  padding-top: 20px;
+}
+
 .userInfo {
   display: flex;
   padding: 1%;
@@ -34,16 +39,33 @@
 
 
 .userCards {
-  justify-content: space-evenly;
-  height: 35em;
   display: flex;
   flex-flow: wrap;
+  height: 35em;
+  width: 100%;
   background-color: lightgray;
   overflow-y: scroll;
+  margin-bottom: 20px;
+  padding-left: 4%;
 
   app-card {
     margin: 1%;
   }
+
+  .card-container {
+    width: 16%;
+  }
+
+  h2 {
+    width: 100%;
+    height: 20px;
+  }
+}
+
+h2 {
+  padding-bottom: 5px;
+  margin-bottom: 0px;
+  background-color: @background;
 }
 
 .noUserCards {
@@ -55,6 +77,8 @@
 }
 
 .userApps {
+  margin-top: 0px !important;
+
   .container-fluid {
     padding-left: 0;
     padding-right: 0;
@@ -62,6 +86,7 @@
 
   .col-md-1 {
     padding-right: 0;
+    padding-left: 0;
   }
 
   .col-md-11 {
@@ -74,9 +99,8 @@
     padding: 0;
     list-style: none;
     color: rgb(119, 119, 119);
-    border-top: 1px solid black;
-    border-left: 1px solid black;
-    border-bottom: 1px solid black;
+    height: 60px;
+    font-size: 1.2em;
   }
 
   ul,
@@ -94,8 +118,4 @@
     display: block;
     padding: 10px 20px;
   }
-}
-
-.card-container {
-  width: 20%;
 }
