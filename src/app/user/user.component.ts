@@ -30,7 +30,7 @@ export class UserComponent implements OnInit, OnChanges {
   userCards;
   frens: boolean = false;
   @ViewChild('contactos') contactos;
-  @ViewChildren('tradeMod') trade: TradeComponent;
+  @ViewChild('tradeMod') trade: TradeComponent;
   showMenu = {
     cards: false,
     chat: false,
