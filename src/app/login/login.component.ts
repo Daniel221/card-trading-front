@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { AuthService} from '../shared/auth.service';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 import { GoogleLoginProvider, SocialAuthService, SocialUser } from 'angularx-social-login';
 import { from, Subscription } from 'rxjs'
 import { FormGroup, FormControl, Validators} from '@angular/forms';
@@ -34,9 +34,6 @@ export class LoginComponent implements OnInit {
     this.socialAuthService.authState.subscribe((user) => {
       this.socialUser = user;
       this.isLoggedin = (user != null);
-      //console.log(this.socialUser);
-      //localStorage.setItem('token', this.socialUser.idToken);
-      //this._router.navigate(['']);
     });
   }
 
@@ -55,10 +52,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('token', data.token);
         this.http.get<any>(`${API_URL}/login?token=${localStorage.getItem("token")}`).subscribe(res => {
           this.userid = res.userid;
-          //console.log(this.userid);
-          //console.log('/user/'+this.userid);
           this._router.navigate(['/user/'+this.userid]);
-          //location.reload();
         });  
       },error=>{
         this.logMsg={msg:"Usuario o contraseña incorrectos.",class:'text-danger'};

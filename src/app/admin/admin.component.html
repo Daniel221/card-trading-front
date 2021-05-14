@@ -10,7 +10,7 @@
     <div class="col-6 register-form container">
         <div class="register-fields">
             <label>card id</label><br>
-            <input type="number" class="form-control" [value]="newCard.cardid" (input)="onChange('cardid',$event)" [ngStyle]="{'border-color':this.newCard.cardid>=0&&this.newCard.cardid<=this.cartas.length?'green':'red'}"/>
+            <input type="number" class="form-control" [value]="newCard.cardid" (input)="onChange('cardid',$event)" [ngStyle]="{'border-color':this.newCard.cardid>-1?'green':'red'}"/>
             <label>title</label><br>
             <input type="text" class="form-control" [value]="newCard.title" (input)="onChange('title',$event)"/>
             <label>description</label><br>
@@ -29,4 +29,22 @@
             </div>
         </div>
     </div>
+</div>
+<br/><br/>
+<div class="row container">
+    <div style="margin: 1% auto">
+        <input type="number" [value]="apiOffset" (change)="apiData($event)" min="0" max="9"/>
+        <br/>
+    </div>
+    <div class="pokimons" *ngIf="apiDatos.length>0; else elsePokis">
+        <div class="poke" (click)="selPoke(p)" *ngFor="let p of apiDatos">
+            <img [src]="p.img" alt=""/>
+            <h5>{{p.name}}</h5>
+        </div>
+    </div>
+    <ng-template #elsePokis>
+        <div class="noPokimons row">
+            <i class="spinner">§</i> Loading...
+        </div>
+    </ng-template>
 </div>

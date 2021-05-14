@@ -86,6 +86,8 @@
           </div>
         </div>
         <div class="modal-footer">
+          <button type="button" class="btn btn-danger" (click)="toggleDel(true)" data-toggle="modal" data-target="#confirmModal">Eliminar cuenta</button>
+          <div class="spacer"></div>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
           <button class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#confirmModal"
             [ngStyle]="{'pointer-events':'auto'}">Confirmar</button>

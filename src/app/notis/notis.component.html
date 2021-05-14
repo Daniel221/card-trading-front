@@ -2,7 +2,7 @@
 <div class="trades">
     <div *ngFor="let t of trades">
         <div class="dropdown-divider"></div>
-        <div class="trade dropdown-item" href="#">
+        <div class="trade dropdown-item" href="#" *ngIf="t.tmsg == null; else elseBlock">
             <div><h5>{{t.username}}</h5><div class="spacer"></div><h5>Tú</h5></div>
             <div>
                 <app-card [mini]="true" [id]="t.card1.cardid" [title]="t.card1.title" [description]="t.card1.description" [img]="t.card1.img" [type]="t.card1.type"></app-card>
@@ -14,5 +14,8 @@
                 <button class="btn btn-success" (click)="trade(t,true)">Aceptar</button>
             </div>
         </div>
+        <ng-template #elseBlock>
+            <h5 [class]="t.tmsg.class">{{t.tmsg.msg}}</h5>
+        </ng-template>
     </div>
 </div>

@@ -29,7 +29,6 @@ export class NotisComponent implements OnInit {
   }
 
   trade(trade, mode) {
-    console.log(trade, mode);
     const body = {
       c1: trade.card1.cardid,
       c2: trade.card2.cardid,
@@ -39,11 +38,14 @@ export class NotisComponent implements OnInit {
       mode: mode ? 1 : 2
     }
     this.http.post<any>('https://card-trading-api-dev.herokuapp.com/u/trades', body).subscribe(data => {
-      alert("Intercambio exitoso");
-      this.updateTrades();
+      const tradeo=this.trades.find(t=>t.userid===trade.userid&&t.date===trade.date);
+      if(tradeo) tradeo.tmsg = { msg: `Intercambio ${mode?"aceptado":"rechazado"}`, class: "success" };
+      setTimeout(()=>this.updateTrades(),1000);
     }, err => {
-      alert(err);
-      this.updateTrades()
+      const tradeo=this.trades.find(t=>t.userid===trade.userid&&t.date===trade.date);
+      console.log(err);
+      if(tradeo) tradeo.tmsg = { msg: err.error.error, class: "error" };
+      setTimeout(()=>this.updateTrades(),1000);
     });
   }
 
