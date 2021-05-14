@@ -3,7 +3,7 @@
     <img [src]="user.img?user.img:'https://i1.sndcdn.com/avatars-000310902564-g2unlt-t240x240.jpg'" />
     <br><br>
     <div class="fileUpload">
-      <input type="file" [value]="user.img">
+      <input type="file">
     </div>
 
   </div>
@@ -37,6 +37,7 @@
       </div>
     </form>
     <div class="btn-updateUser">
+      <button type="button" class="btn btn-danger" (click)="toggleDel()" data-toggle="modal">Eliminar cuenta</button>
       <button class="btn btn-success ">Actualizar</button>
     </div>
   </div>

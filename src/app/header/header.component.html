@@ -18,12 +18,12 @@
         <a class="nav-link navbar-link" data-toggle="modal" data-target="#loginModal"><button
             class="btn btn-outline-info">Login/Register</button></a>
       </li>
-      <li class="nav-item dropdown" *ngIf="loggedIn">
+      <li class="nav-item dropdown" *ngIf="loggedIn" id="lasChecas">
         <a class="nav-link navbar-link icons dropdown-toggle" data-toggle="dropdown" href="">
           <div class="bell-noti" *ngIf="hasNotis"></div>
           <i class="fas fa-bell"></i>
         </a>
-        <app-notis #notis class="dropdown-menu" (click)="menuClick($event)" aria-labelledby="navbarDropdown" (hasTrades)="hasTrades($event)"></app-notis>
+        <app-notis #notis class="dropdown-menu" (click)="menuClick($event)" aria-labelledby="navbarDropdown" (hasTrades)="hasTrades($event)" (cartita)="showCard($event)"></app-notis>
       </li>
       
       <li class="nav-item dropdown" style="z-index: 2000;" *ngIf="loggedIn">
@@ -52,6 +52,26 @@
       <div class="modal-body">
         <app-card [id]="card.cardid" [title]="card.title" [description]="card.description" [img]="card.img"
           [type]="card.type"></app-card>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-warning" [ngStyle]="{'pointer-events':'auto'}" data-dismiss="modal">Ok</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div #gotModal class="modal fade" id="cardDetail" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Detalles de carta</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <app-card [id]="cartita.cardid" [title]="cartita.title" [description]="cartita.description" [img]="cartita.img"
+          [type]="cartita.type"></app-card>
       </div>
       <div class="modal-footer">
         <button class="btn btn-warning" [ngStyle]="{'pointer-events':'auto'}" data-dismiss="modal">Ok</button>

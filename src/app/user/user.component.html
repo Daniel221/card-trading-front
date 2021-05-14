@@ -23,7 +23,7 @@
         </div>
 
         <div class="editUser" *ngIf="showMenu.edit">
-          <app-edicion-usuario [user]="user"></app-edicion-usuario>
+          <app-edicion-usuario *ngIf="user" [user]="user"></app-edicion-usuario>
         </div>
         <div id="usersCards" *ngIf="showMenu.cards">
           <div class="userCards" *ngIf="userCards&&userCards.length>0">

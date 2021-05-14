@@ -10,6 +10,7 @@ export class NotisComponent implements OnInit {
   user;
   @Output() hasTrades = new EventEmitter<boolean>();
   trades: any[];
+  @Output() cartita=new EventEmitter<any>();
 
   constructor(private http: HttpClient) { }
 
@@ -47,6 +48,10 @@ export class NotisComponent implements OnInit {
       if(tradeo) tradeo.tmsg = { msg: err.error.error, class: "error" };
       setTimeout(()=>this.updateTrades(),1000);
     });
+  }
+
+  showBig(card){
+    this.cartita.emit(card);
   }
 
 }

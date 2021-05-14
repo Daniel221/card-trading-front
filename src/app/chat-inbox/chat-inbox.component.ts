@@ -6,7 +6,7 @@ import * as moment from 'moment';
 
 const CHAT_API = 'https://card-trading-api-dev.herokuapp.com/chat';
 
-
+declare var $:any;
 
 @Component({
   selector: 'app-chat-inbox',
@@ -47,7 +47,7 @@ export class ChatInboxComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   SendMessage() {
-    console.log(this.messages);
+    //console.log(this.messages);
     if (this.message) {
       let date = moment().format('MMMM Do YYYY, h:mm:ss a');
       this.socketService.sendMessage(this.message, this.addressee.id, this.userid, date);

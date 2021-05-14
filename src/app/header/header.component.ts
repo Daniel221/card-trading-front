@@ -24,6 +24,7 @@ export class HeaderComponent implements OnInit {
   canCheckIn: boolean = false;
   hasNotis: boolean = false;
   userid: number;
+  cartita = { cardid: "ERROR", title: "ERR_0", description: "An unexpected error has ocurred", img: "", type: 2 };
   interval:any;
   card = { cardid: "ERROR", title: "ERR_0", description: "An unexpected error has ocurred", img: "", type: 2 };
 
@@ -40,7 +41,7 @@ export class HeaderComponent implements OnInit {
       this.user = user
       if(!(this.loggedIn = this._authService.isLoggedIn())) {
         this.interval=setInterval(() => {
-          if(this.isLogged = this._authService.loggedIn()){
+          if(this.loggedIn = this._authService.isLoggedIn()){
             clearInterval(this.interval);
             this.updateHeader();
           }
@@ -96,7 +97,12 @@ export class HeaderComponent implements OnInit {
   
   onLogout() {
     this._authService.logout();
-    this.router.navigate(['/login']);
+    this.updateHeader();
+  }
+
+  showCard(e){
+    this.cartita=e;
+    $("#cardDetail").modal("show");
   }
 
 }
