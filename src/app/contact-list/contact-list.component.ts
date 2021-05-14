@@ -20,7 +20,7 @@ export class contactillos {
 
 })
 export class ContactListComponent implements OnInit, OnChanges {
-  users: any[];
+  users: any[] = [];
   @Input() id: number = undefined;
   token;
   deleteAlert: boolean = false;

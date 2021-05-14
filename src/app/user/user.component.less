@@ -1,5 +1,11 @@
 @background: #D3D3D3;
 
+@media (max-width: 1280px) {
+  .card-container {
+    width: 20%;
+  }
+}
+
 .apps {
   background-color: @background;
   padding-top: 20px;
@@ -62,6 +68,8 @@
   }
 }
 
+
+
 h2 {
   padding-bottom: 5px;
   margin-bottom: 0px;
@@ -71,9 +79,9 @@ h2 {
 .noUserCards {
   height: -webkit-fill-available;
   //background-color: lightgray;
-  width: 100%;
   font-weight: bold;
   text-align: center;
+  margin-left: 100px;
 }
 
 .userApps {
@@ -118,4 +126,8 @@ h2 {
     display: block;
     padding: 10px 20px;
   }
+}
+
+.appTittle {
+  border-bottom: 1px solid black;
 }

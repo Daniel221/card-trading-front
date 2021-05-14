@@ -1,44 +1,53 @@
 <div class="row edit-user">
   <div class="col-4 text-center">
-    <img [src]="user.img?user.img:'https://i1.sndcdn.com/avatars-000310902564-g2unlt-t240x240.jpg'" />
+    <img [src]="img?img:'https://i1.sndcdn.com/avatars-000310902564-g2unlt-t240x240.jpg'" />
     <br><br>
-    <div class="fileUpload">
+    <!-- <div class="fileUpload">
       <input type="file">
-    </div>
+    </div> -->
 
   </div>
   <div class="col-8">
+    <div class="row">
+      <p class="{{regMsg?.class}}">{{regMsg?.msg}}</p>
+    </div>
     <form>
       <div class="row">
         <div class="form-group namesInput">
           <div class="col-6">
             <label for="name" class="namesLabels">Nombre </label>
-            <input type="text" [value]="this.user?.name" class="form-control mr-3">
+            <input type="text" [(ngModel)]="this.name" class="form-control mr-3" name="name">
           </div>
           <div class="col-6">
-            <label for="name" class="namesLabels">Apellidos</label><br>
-            <input type="text" [value]="this.user?.lastname" class="form-control">
+            <label for="lastname" class="namesLabels">Apellidos</label><br>
+            <input type="text" [(ngModel)]="this.lastname" class="form-control" name="lastname">
           </div>
         </div>
       </div>
-      <div class="row">
+      <div class="form-group">
+        <div class="">
+          <label for="username">Nombre de usuario</label>
+          <input type="text" [(ngModel)]="this.username" class="form-control" name="username" style="width:455px;">
+        </div>
+      </div>
+      <!-- <div class="row">
         <div class="form-group">
           <div class="col-12">
-            <label for="bday">Cumpleaños </label>
-            <input type="date" [value]="this.user.birthday" name="bday" class="form-control">
+            <label for="bday">Cumpleaños </label>{{birthday}}
+            <input type="date" [(ngModel)]="this.birthday" name="bday" class="form-control">
           </div>
         </div>
-      </div>
+      </div> -->
       <div class="row">
         <div class="col-7">
           <label for="profiletext">Texto de Perfil</label><br>
-          <textarea [value]="this.user.profiletext" name="profiletext" class="form-control"></textarea>
+          <textarea [(ngModel)]="this.profileText" name="profiletext" class="form-control"></textarea>
         </div>
       </div>
     </form>
     <div class="btn-updateUser">
       <button type="button" class="btn btn-danger" (click)="toggleDel()" data-toggle="modal">Eliminar cuenta</button>
-      <button class="btn btn-success ">Actualizar</button>
+      &nbsp;&nbsp;<button class="btn btn-success " (click)="createUser()">Actualizar</button>
     </div>
   </div>
 

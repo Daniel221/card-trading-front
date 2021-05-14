@@ -1,8 +1,12 @@
 <h3>Contactos</h3>
-<div class="contacts">
-    <ul style="list-style: none;">
-        <li class="contact" *ngFor="let u of users">
-            <app-user-card [user]="u" [removable]="id?-1:u.userid" [extra]="token" (rer)="update()" (changeChatUser)="changeCurrentUser($event)" [chat]="chat"></app-user-card>
-        </li> 
-    </ul>
+<div class="contacts" *ngIf="users?.length > 0">
+  <ul style="list-style: none;">
+    <li class="contact" *ngFor="let u of users">
+      <app-user-card [user]="u" [removable]="id?-1:u.userid" [extra]="token" (rer)="update()"
+        (changeChatUser)="changeCurrentUser($event)" [chat]="chat"></app-user-card>
+    </li>
+  </ul>
+</div>
+<div *ngIf="users?.length == 0" class="text-center">
+  <h4>Sin contactos</h4>
 </div>

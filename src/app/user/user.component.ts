@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, ViewChild, OnInit, AfterContentInit, OnChanges } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterContentInit, OnChanges, ViewChildren } from '@angular/core';
+import { __core_private_testing_placeholder__ } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../shared/auth.service';
 import { TradeComponent } from '../trade/trade.component';
@@ -29,11 +30,11 @@ export class UserComponent implements OnInit, OnChanges {
   userCards;
   frens: boolean = false;
   @ViewChild('contactos') contactos;
-  @ViewChild('tradeMod') trade: TradeComponent;
+  @ViewChildren('tradeMod') trade: TradeComponent;
   showMenu = {
-    cards: true,
+    cards: false,
     chat: false,
-    edit: false
+    edit: true
   }
 
   constructor(private actRoute: ActivatedRoute, private http: HttpClient) {
@@ -45,8 +46,8 @@ export class UserComponent implements OnInit, OnChanges {
       this.userid = p.id;
       this.http.get<any>('https://card-trading-api-dev.herokuapp.com/u/' + this.userid).subscribe(data => this.user = data);
       this.http.get<any>(`https://card-trading-api-dev.herokuapp.com/c?user=${this.userid}`).subscribe(data => {
-        this.showCards();
-        this.userCards = data.sort((a,b) => a.cardid - b.cardid);
+        this.showEdit();
+        this.userCards = data.sort((a, b) => a.cardid - b.cardid);
       });
       this.http.get<any>('https://card-trading-api-dev.herokuapp.com/login?token=' + localStorage.getItem("token")).subscribe(res => {
         this.myid = res.userid;
@@ -59,33 +60,7 @@ export class UserComponent implements OnInit, OnChanges {
     this.showCards();
   }
 
-  createUser() {
-    if (this.password != this.user.password) {
-      this.regMsg = { msg: "Contraseña incorrecta.", class: 'text-danger' };
-      return;
-    }
-    console.log("updating user...");
 
-    const user = {
-      name: this.attributes.name.value,
-      lastName: this.attributes.lastname.value,
-      username: this.attributes.username.value,
-      img: this.attributes.img.value,
-      profiletext: this.attributes.profiletext.value
-    }
-    this.http.put<any>('https://card-trading-api-dev.herokuapp.com/u/' + this.user.userid, user).subscribe(data => {
-      this.regMsg = { msg: "Usuario actualizado exitosamente.", class: 'text-success' };
-      Object.keys(user).forEach(k => {
-        if(user[k] != undefined && user[k].length > 0)
-        this.user[k] = user[k];
-      });
-      $("#confirmModal").modal("hide");
-    }, error => {
-      this.regMsg = { msg: "Error, intente de nuevo más tarde.", class: 'text-danger' };
-    })
-
-
-  }
 
   onChanged(e) {
     this.password = e.target.value;
@@ -110,7 +85,7 @@ export class UserComponent implements OnInit, OnChanges {
     this.appTitle = 'Inventario';
     this.closeAll();
     this.http.get<any>(`https://card-trading-api-dev.herokuapp.com/c?user=${this.userid}`).subscribe(data => {
-      this.userCards = data.sort((a,b) => a.cardid - b.cardid);
+      this.userCards = data.sort((a, b) => a.cardid - b.cardid);
     });
     this.showMenu.cards = true;
   }
@@ -122,7 +97,7 @@ export class UserComponent implements OnInit, OnChanges {
   }
 
   showEdit() {
-    this.appTitle = this.user?.username;
+    this.appTitle = 'Perfil';
     this.closeAll();
     this.showMenu.edit = true;
   }
