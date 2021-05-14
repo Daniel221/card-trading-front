@@ -14,15 +14,15 @@
             
                 <label>Contraseña</label><br>
                 <input  [(ngModel)]='loginUserData .password' name='password' class="form-control" type="password" pass="" (keyup.enter)="LoginUser()" required> <br>
-            </div>
+              </div>
+          </div>
+          <div>¿No tienes cuenta? <a href="" data-toggle="modal" data-target="#registerModal" data-dismiss="modal">!Regístrate aquí!</a></div>
+          <div *ngIf="logMsg" [class]="logMsg.class">{{ logMsg.msg }}</div>
         </div>
-        <div>¿No tienes cuenta? <a href="" data-toggle="modal" data-target="#registerModal" data-dismiss="modal">!Regístrate aquí!</a></div>
-        <div *ngIf="logMsg" [class]="logMsg.class">{{ logMsg.msg }}</div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button (click)="LoginUser()" class="btn btn-primary">Iniciar sesión</button>
-        <button type="button" (click)="signWithGoogle()" class="btn btn-danger" id='google-login'>Continuar con Google</button>
-      </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button (click)="LoginUser()" class="btn btn-primary"  data-dismiss="modal">Iniciar sesión</button>
+          <button type="button" class="btn btn-danger" (click)="signWithGoogle()" data-dismiss="modal" id='google-login'>Continuar con Google</button>
+        </div>
     </div>
 </div>

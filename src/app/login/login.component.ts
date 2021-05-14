@@ -3,12 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService} from '../shared/auth.service';
 import { Router } from '@angular/router';
 import { GoogleLoginProvider, SocialAuthService, SocialUser } from 'angularx-social-login';
-import { from } from 'rxjs'
+import { from, Subscription } from 'rxjs'
 import { FormGroup, FormControl, Validators} from '@angular/forms';
+import { first } from 'rxjs/operators';
 
 const API_URL = 'https://card-trading-api-dev.herokuapp.com';
-
-declare var $:any;
 
 @Component({
   selector: 'app-login',
@@ -46,13 +45,14 @@ export class LoginComponent implements OnInit {
   }
 
   LoginUser(){
+    //console.log(this.loginUserData);
     this._auth.loginUser(this.loginUserData).subscribe(
       data => {
+        //console.log(data);
         localStorage.setItem('token', data.token);
         this.http.get<any>(`${API_URL}/login?token=${localStorage.getItem("token")}`).subscribe(res => {
           this.userid = res.userid;
           this._router.navigate(['/user/'+this.userid]);
-          $("#loginModal").modal("hide");
         });  
       },error=>{
         this.logMsg={msg:"Usuario o contraseña incorrectos.",class:'text-danger'};
@@ -69,4 +69,12 @@ export class LoginComponent implements OnInit {
       }
     })
   }
+
+  /*loginWithGoogle(): void {
+    this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID);
+  }
+
+  logOutGoogle(): void {
+    this.socialAuthService.signOut();
+  }*/
 }
