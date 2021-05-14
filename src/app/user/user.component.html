@@ -49,7 +49,7 @@
 </div>
 
 <div *ngIf="user && myid !=user?.userid">
-  <div class="userInfo container">
+  <div class="userInfo container-fluid">
     <div class="row">
       <img class="col-3" [src]="user.img?user.img:'https://i1.sndcdn.com/avatars-000310902564-g2unlt-t240x240.jpg'" />
       <div class="col-6">
@@ -66,9 +66,9 @@
       <app-contact-list class="col-3" #contactos [id]="userid"></app-contact-list>
     </div>
   </div>
-  <div id="usersCards" class="container">
+  <div class=" cardInventory ">
     <h2 class="text-center">Inventario</h2>
-    <div class=" userCards pl-3 pr-3" *ngIf=" userCards&&userCards.length>0">
+    <div class=" userCards" *ngIf=" userCards&&userCards.length>0" style="padding-left: 6%;">
       <div *ngFor="let c of userCards" class="card-container">
         <app-card [id]="c.cardid" [title]="c.title" [description]="c.description" [img]="c.img" [type]="c.type">
         </app-card>
